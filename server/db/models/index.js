@@ -1,24 +1,31 @@
-const User = require('./user');
-const Brand = require('./Brand');
-const Drink = require('./Drink');
-const Category = require('./Category');
-const Order = require('./Order');
-const Address = require('./Address');
+const User = require('./user')
+const Brand = require('./Brand')
+const Drink = require('./Drink')
+const Category = require('./Category')
+const Order = require('./Order')
+const Address = require('./Address')
+const Item = require('./Item')
 
-Drink.belongsTo(Brand);
-Brand.hasMany(Drink);
+Drink.belongsTo(Brand)
+Brand.hasMany(Drink)
 
-Drink.belongsToMany(Category, { through: 'drinkType' });
-Category.belongsToMany(Drink, { through: 'drinkType' });
+Drink.belongsToMany(Category, { through: 'drinkType' })
+Category.belongsToMany(Drink, { through: 'drinkType' })
 
-Order.belongsTo(User);
-User.hasMany(Order);
+Order.belongsTo(User)
+User.hasMany(Order)
 
-User.belongsTo(Address);
-Address.hasMany(User);
+User.belongsTo(Address)
+Address.hasMany(User)
 
-Order.belongsTo(Address);
-Address.hasMany(Order);
+Order.belongsTo(Address)
+Address.hasMany(Order)
+
+Item.belongsTo(Drink)
+Drink.hasMany(Item)
+
+Item.belongsToMany(Order)
+Order.belongsToMany(Item)
 
 module.exports = {
   User,
@@ -27,4 +34,5 @@ module.exports = {
   Category,
   Order,
   Address,
-};
+  Item
+}

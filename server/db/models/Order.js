@@ -1,23 +1,19 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+const Sequelize = require('sequelize')
+const db = require('../db')
 
 const Order = db.define('order', {
-  items: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER),
-    allowNull: false,
-  },
   total: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    allowNull: false
   },
   shippingMethod: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   status: {
     type: Sequelize.STRING,
-    allowNull: false,
-  },
-});
+    allowNull: false
+  }
+})
 
-module.exports = Order;
+module.exports = Order
