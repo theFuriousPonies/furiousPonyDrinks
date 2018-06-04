@@ -12,7 +12,7 @@ const Brand = db.define('brand', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: '/img/defaultbrand.jpg',
+    defaultValue: '/img/defaultbrand.png',
   },
 });
 
