@@ -1,4 +1,4 @@
-# Boilermaker
+# FURIOUS PONIES
 
 *Good things come in pairs*
 
