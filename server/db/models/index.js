@@ -9,7 +9,7 @@ Drink.belongsTo(Brand);
 Brand.hasMany(Drink);
 
 Drink.belongsToMany(Category, { through: 'drinkType' });
-Category.hasMany(Drink, { through: 'drinkType' });
+Category.belongsToMany(Drink, { through: 'drinkType' });
 
 Order.belongsTo(User);
 User.hasMany(Order);
