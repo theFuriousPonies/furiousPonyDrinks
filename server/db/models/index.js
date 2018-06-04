@@ -1,4 +1,4 @@
-const User = require('./user')
+const User = require('./User')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
