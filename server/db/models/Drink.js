@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const Drink = db.define('drinks', {
   name: {
@@ -28,7 +28,7 @@ const Drink = db.define('drinks', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   inventory: {
     type: Sequelize.INTEGER
@@ -37,6 +37,6 @@ const Drink = db.define('drinks', {
     type: Sequelize.INTEGER,
     allowNull: false
   }
-})
+});
 
 module.export = Drink;
