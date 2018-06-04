@@ -1,18 +1,30 @@
 const User = require('./user');
+const Brand = require('./Brand');
+const Drink = require('./Drink');
+const Category = require('./Category');
+const Order = require('./Order');
+const Address = require('./Address');
 
-/**
- * If we had any associations to make, this would be a great place to put them!
- * ex. if we had another model called BlogPost, we might say:
- *
- *    BlogPost.belongsTo(User)
- */
+Drink.belongsTo(Brand);
+Brand.hasMany(Drink);
 
-/**
- * We'll export all of our models here, so that any time a module needs a model,
- * we can just require it from 'db/models'
- * for example, we can say: const {User} = require('../db/models')
- * instead of: const User = require('../db/models/user')
- */
+Drink.belongsToMany(Category, { through: 'drinkType' });
+Category.belongsToMany(Drink, { through: 'drinkType' });
+
+Order.belongsTo(User);
+User.hasMany(Order);
+
+User.belongsTo(Address);
+Address.hasMany(User);
+
+Order.belongsTo(Address);
+Address.hasMany(Order);
+
 module.exports = {
   User,
+  Brand,
+  Drink,
+  Category,
+  Order,
+  Address,
 };
