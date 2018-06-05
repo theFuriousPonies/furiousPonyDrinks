@@ -1,5 +1,15 @@
-const { db, Order, Address, Brand, Category, Drink, User } = require('./index')
+const {
+  db,
+  Order,
+  Address,
+  Brand,
+  Category,
+  Drink,
+  User,
+  Item
+} = require('./index')
 
+// Rows for tables
 const categories = [
   {
     name: 'Dairy'
@@ -155,3 +165,147 @@ const addresses = [
     country: 'UK'
   }
 ]
+
+const items = [
+  {
+    quantity: 1
+  },
+  {
+    quantity: 5
+  },
+  {
+    quantity: 7
+  },
+  {
+    quantity: 10
+  },
+  {
+    quantity: 2
+  },
+  {
+    quantity: 1
+  },
+  {
+    quantity: 4
+  },
+  {
+    quantity: 1
+  }
+]
+
+const users = [
+  {
+    email: 'blake@gmail.com',
+    password: 'chicken'
+  },
+  {
+    email: 'chole@gmail.com',
+    password: 'chicken'
+  },
+  {
+    email: 'kirk@gmail.com',
+    password: 'chicken'
+  },
+  {
+    email: 'sean@gmail.com',
+    password: 'chicken'
+  },
+  {
+    email: 'jake@gmail.com',
+    password: 'chicken'
+  },
+  {
+    email: 'jill@gmail.com',
+    password: 'chicken'
+  }
+]
+
+// seedScript function
+
+const seedScript = async () => {
+  try {
+    console.log('syncing db')
+    await db.sync({ force: true })
+    console.log('db synced')
+    // Creating the rows
+    const createdAddresses = await Address.bulkCreate(addresses, {
+      returning: true
+    })
+    const createdBrands = await Brand.bulkCreate(brands, {
+      returning: true
+    })
+    const createdCategories = await Category.bulkCreate(categories, {
+      returning: true
+    })
+    const createdDrinks = await Drink.bulkCreate(drinks, {
+      returning: true
+    })
+    const createdItems = await Item.bulkCreate(items, {
+      returning: true
+    })
+    const createdOrders = await Order.bulkCreate(orders, {
+      returning: true
+    })
+    const createdUsers = await User.bulkCreate(users, {
+      returning: true
+    })
+
+    // Assocciations setting Id's
+
+    //setting Brands on Drinks
+    const settingBrandsDrinks = Promise.all([
+      createdDrinks[0].setBrand(createdBrands[0]),
+      createdDrinks[0].setBrand(createdBrands[1]),
+      createdDrinks[0].setBrand(createdBrands[2]),
+      createdDrinks[0].setBrand(createdBrands[0])
+    ])
+    // setting Many to Many with Drink and Category
+
+    // setting User to Order
+    const settingUserOrder = Promise.all([
+      createdOrders[0].setUser(createdUsers[0]),
+      createdOrders[0].setUser(createdUsers[1]),
+      createdOrders[0].setUser(createdUsers[2]),
+      createdOrders[0].setUser(createdUsers[3]),
+      createdOrders[0].setUser(createdUsers[4])
+    ])
+
+    // setting Address to Order
+    const settingAddressesOrder = Promise.all([
+      createdOrders[0].setAddress(createdAddresses[0]),
+      createdOrders[1].setAddress(createdAddresses[1]),
+      createdOrders[2].setAddress(createdAddresses[2]),
+      createdOrders[3].setAddress(createdAddresses[3]),
+      createdOrders[4].setAddress(createdAddresses[0]),
+      createdOrders[5].setAddress(createdAddresses[1])
+    ])
+
+    // setting Drink to Item
+    const settingItemsDrinks = Promise.all([
+      createdItems[0].setDrink(createdDrinks[0]),
+      createdItems[1].setDrink(createdDrinks[1]),
+      createdItems[2].setDrink(createdDrinks[2]),
+      createdItems[3].setDrink(createdDrinks[3]),
+      createdItems[4].setDrink(createdDrinks[0]),
+      createdItems[5].setDrink(createdDrinks[1]),
+      createdItems[6].setDrink(createdDrinks[2]),
+      createdItems[7].setDrink(createdDrinks[3])
+    ])
+    // setting many to many order and item
+
+    // await the promises
+    await Promise.all([
+      settingAddressesOrder,
+      settingBrandsDrinks,
+      settingUserOrder
+    ])
+  } catch (error) {
+    console.log(error)
+  } finally {
+    console.log('shutting db connection down')
+    db.close()
+    console.log('db closed')
+  }
+}
+
+seedScript()
