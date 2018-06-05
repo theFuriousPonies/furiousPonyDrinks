@@ -1,27 +1,27 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+const Sequelize = require('sequelize')
+const db = require('../db')
 
 const Address = db.define('address', {
   street: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   number: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    allowNull: false
   },
   city: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   zipCode: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   country: {
     type: Sequelize.STRING,
-    allowNull: false,
-  },
-});
+    allowNull: false
+  }
+})
 
-module.exports = Address;
+module.exports = Address
