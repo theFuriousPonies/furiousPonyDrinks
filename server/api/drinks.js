@@ -26,10 +26,10 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:drinkId', async (req, res, next) => {
   try {
-    const [_, data] = Drink.update(req.body, {
+    const [_, data] = await Drink.update(req.body, {
       returning: true,
       where: {
-        id: req.params.id
+        id: req.params.drinkId
       }
     })
     res.send(data)
