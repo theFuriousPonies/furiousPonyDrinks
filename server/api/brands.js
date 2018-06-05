@@ -5,7 +5,7 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const brands = await Brand.findAll({include: [Drink]})
-    res.json(users)
+    res.json(brands)
   }
   catch (err){
     next(err)
@@ -38,7 +38,7 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:brandId', async (req, res, next) => {
   try {
-    const brand = Brand.update(req.body, {
+    const [_,brand] = await Brand.update(req.body, {
       where: {
         id: req.params.brandId
       }
@@ -56,7 +56,7 @@ router.delete('/:brandId', async (req, res, next) => {
         id: req.params.brandId
       }
     })
-    res.send(`deleted ${req.params.brandId}`)
+    .end()
   } catch (err) {
     next(err)
   }
