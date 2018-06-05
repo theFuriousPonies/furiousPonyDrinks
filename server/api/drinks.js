@@ -40,12 +40,11 @@ router.put('/:drinkId', async (req, res, next) => {
 
 router.delete('/:drinkId', async (req, res, next) => {
   try {
-    await Drink.destory({
+    await Drink.destroy({
       where: {
         id: req.params.drinkId
       }
-    })
-    .then(_ => res.status(204).end())
+    }).then(_ => res.status(204).end())
   } catch (error) {
     next(error)
   }
