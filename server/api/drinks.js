@@ -44,7 +44,8 @@ router.delete('/:drinkId', async (req, res, next) => {
       where: {
         id: req.params.drinkId
       }
-    }).end()
+    })
+    .then(_ => res.status(204).end())
   } catch (error) {
     next(error)
   }
