@@ -38,11 +38,12 @@ router.put('/:userId', async (req, res, next) => {
 
 router.delete('/:userId', async (req, res, next) => {
   try {
-    await User.destory({
+    await User.destroy({
       where: {
         id: req.params.userId
       }
-    }).end()
+    })
+    .then(_ => res.status(204).end())
   } catch (error) {
     next(error)
   }
