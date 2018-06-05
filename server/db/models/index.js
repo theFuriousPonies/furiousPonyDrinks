@@ -21,11 +21,11 @@ Address.hasMany(User)
 Order.belongsTo(Address)
 Address.hasMany(Order)
 
-Item.belongsTo(Drink)
-Drink.hasMany(Item)
+// Item.belongsTo(Drink)
+// Drink.hasMany(Item)
 
-Item.belongsToMany(Order, { through: 'orderItem' })
-Order.belongsToMany(Item, { through: 'orderItem' })
+Drink.belongsToMany(Order, { through: Item })
+Order.belongsToMany(Drink, { through: Item })
 
 module.exports = {
   User,

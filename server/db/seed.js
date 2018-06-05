@@ -166,33 +166,6 @@ const addresses = [
   }
 ]
 
-const items = [
-  {
-    quantity: 1
-  },
-  {
-    quantity: 5
-  },
-  {
-    quantity: 7
-  },
-  {
-    quantity: 10
-  },
-  {
-    quantity: 2
-  },
-  {
-    quantity: 1
-  },
-  {
-    quantity: 4
-  },
-  {
-    quantity: 1
-  }
-]
-
 const users = [
   {
     email: 'blake@gmail.com',
@@ -220,6 +193,48 @@ const users = [
   }
 ]
 
+const items = [
+  {
+    quantity: 1,
+    drinkId: 2,
+    orderId: 0
+  },
+  {
+    quantity: 5,
+    drinkId: 0,
+    orderId: 0
+  },
+  {
+    quantity: 7,
+    drinkId: 0,
+    orderId: 1
+  },
+  {
+    quantity: 10,
+    drinkId: 1,
+    orderId: 1
+  },
+  {
+    quantity: 2,
+    drinkId: 0,
+    orderId: 4
+  },
+  {
+    quantity: 1,
+    drinkId: 0,
+    orderId: 3
+  },
+  {
+    quantity: 4,
+    drinkId: 3,
+    orderId: 4
+  },
+  {
+    quantity: 1,
+    drinkId: 2,
+    orderId: 2
+  }
+]
 // seedScript function
 
 const seedScript = async () => {
@@ -313,30 +328,6 @@ const seedScript = async () => {
       createdItems[6].setDrink(createdDrinks[2]),
       createdItems[7].setDrink(createdDrinks[3])
     ])
-    // setting many to many order and item
-    const settingOrdersItems = Promise.all([
-      createdOrders[0].setItems([
-        createdItems[1],
-        createdItems[2],
-        createdItems[3]
-      ]),
-      createdOrders[1].setItems([
-        createdItems[7],
-        createdItems[6],
-        createdItems[5]
-      ]),
-      createdOrders[2].setItems([
-        createdItems[0],
-        createdItems[2],
-        createdItems[4]
-      ]),
-      createdOrders[3].setItems([
-        createdItems[0],
-        createdItems[2],
-        createdItems[4]
-      ]),
-      createdOrders[4].setItems([createdItems[0], createdItems[6]])
-    ])
 
     // await the promises
     await Promise.all([
@@ -344,8 +335,7 @@ const seedScript = async () => {
       settingBrandsDrinks,
       settingUserOrder,
       settingItemsDrinks,
-      settingDrinksCategories,
-      settingOrdersItems
+      settingDrinksCategories
     ])
   } catch (error) {
     console.log(error)
