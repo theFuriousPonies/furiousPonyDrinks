@@ -255,11 +255,33 @@ const seedScript = async () => {
     //setting Brands on Drinks
     const settingBrandsDrinks = Promise.all([
       createdDrinks[0].setBrand(createdBrands[0]),
-      createdDrinks[0].setBrand(createdBrands[1]),
-      createdDrinks[0].setBrand(createdBrands[2]),
-      createdDrinks[0].setBrand(createdBrands[0])
+      createdDrinks[1].setBrand(createdBrands[1]),
+      createdDrinks[2].setBrand(createdBrands[2]),
+      createdDrinks[3].setBrand(createdBrands[0])
     ])
     // setting Many to Many with Drink and Category
+    const settingDrinksCategories = Promise.all([
+      createdDrinks[0].setCateogies([
+        createdCategories[0],
+        createdCategories[1],
+        createdCategories[2]
+      ]),
+      createdDrinks[1].setCateogies([
+        createdCategories[2],
+        createdCategories[3],
+        createdCategories[4]
+      ]),
+      createdDrinks[2].setCateogies([
+        createdCategories[2],
+        createdCategories[3],
+        createdCategories[5]
+      ]),
+      createdDrinks[3].setCateogies([
+        createdCategories[0],
+        createdCategories[3],
+        createdCategories[6]
+      ])
+    ])
 
     // setting User to Order
     const settingUserOrder = Promise.all([
@@ -292,12 +314,38 @@ const seedScript = async () => {
       createdItems[7].setDrink(createdDrinks[3])
     ])
     // setting many to many order and item
+    const settingOrdersItems = Promise.all([
+      createdOrders[0].setItems([
+        createdItems[1],
+        createdItems[2],
+        createdItems[3]
+      ]),
+      createdOrders[1].setItems([
+        createdItems[7],
+        createdItems[6],
+        createdItems[5]
+      ]),
+      createdOrders[2].setItems([
+        createdItems[0],
+        createdItems[2],
+        createdItems[4]
+      ]),
+      createdOrders[3].setItems([
+        createdItems[0],
+        createdItems[2],
+        createdItems[4]
+      ]),
+      createdOrders[4].setItems([createdItems[0], createdItems[6]])
+    ])
 
     // await the promises
     await Promise.all([
       settingAddressesOrder,
       settingBrandsDrinks,
-      settingUserOrder
+      settingUserOrder,
+      settingItemsDrinks,
+      settingDrinksCategories,
+      settingOrdersItems
     ])
   } catch (error) {
     console.log(error)
