@@ -24,7 +24,11 @@ router.get('/:brandId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const brand = await Brand.findOrCreate(req.body)
+    const [brand] = await Brand.findOrCreate({
+      where: {
+        id: req.body.id
+      }
+    })
     res.json(brand)
   }
   catch (err){
