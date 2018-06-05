@@ -26,7 +26,8 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:drinkId', async (req, res, next) => {
   try {
-    const data = Drink.update(req.body, {
+    const [_, data] = Drink.update(req.body, {
+      returning: true,
       where: {
         id: req.params.id
       }
@@ -43,8 +44,7 @@ router.delete('/:drinkId', async (req, res, next) => {
       where: {
         id: req.params.drinkId
       }
-    })
-    res.send(`successfully destroyed ${req.params.drinkId}`)
+    }).end()
   } catch (error) {
     next(error)
   }
