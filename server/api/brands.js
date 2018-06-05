@@ -56,7 +56,7 @@ router.delete('/:brandId', async (req, res, next) => {
         id: req.params.brandId
       }
     })
-    .end()
+    .then(_ => res.status(204).end())
   } catch (err) {
     next(err)
   }
