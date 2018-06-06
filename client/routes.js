@@ -7,6 +7,7 @@ import {
   // Signup,
   // UserHome,
   Brands,
+  Brand,
   Home,
   Drinks,
   Categories
@@ -29,6 +30,7 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/brands" component={Brands} />
+        <Route path="/brands/:id" component={Brand} />
         <Route exact path="/drinks" component={Drinks} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/categories" component={Categories} />
