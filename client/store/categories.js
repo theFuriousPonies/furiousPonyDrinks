@@ -28,7 +28,7 @@ const failCategory = err => ({ type: FAIL_CATEGORY, err })
 
 export const getCategories = () => async dispatch => {
   try {
-    const categories = await axios.get('/api/category').then(res => res.data)
+    const categories = await axios.get('/api/categories').then(res => res.data)
     dispatch(gotCategories(categories))
   } catch (err) {
     console.error(err)
@@ -38,7 +38,7 @@ export const getCategories = () => async dispatch => {
 export const newCategory = category => async dispatch => {
   try {
     const nCategory = await axios
-      .post('/api/category', category)
+      .post('/api/categories', category)
       .then(res => res.data)
     dispatch(gotNewCategory(nCategory))
   } catch (err) {
@@ -49,7 +49,7 @@ export const newCategory = category => async dispatch => {
 export const updateCategory = category => async dispatch => {
   try {
     const uCategory = await axios.update(
-      `/api/category/${category.id}`,
+      `/api/categories/${category.id}`,
       category
     )
     dispatch(updatedCategory(uCategory))
@@ -60,7 +60,7 @@ export const updateCategory = category => async dispatch => {
 
 export const removeCategory = id => async dispatch => {
   try {
-    await axios.delete(`/api/category/${id}`)
+    await axios.delete(`/api/categories/${id}`)
     dispatch(removedCategory(id))
   } catch (err) {
     console.error(err)
