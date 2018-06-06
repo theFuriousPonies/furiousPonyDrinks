@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const passport = require('passport')
-  , TwitterStrategy = require('passport-twitter').Strategy;
+const passport = require('passport'),
+  TwitterStrategy = require('passport-twitter').Strategy
 const { User } = require('../db/models')
 module.exports = router
 
@@ -10,7 +10,7 @@ if (!process.env.TWITTER_CLIENT_ID || !process.env.TWITTER_CLIENT_SECRET) {
   const twitterConfig = {
     clientID: process.env.TWITTER_CLIENT_ID,
     clientSecret: process.env.TWITTER_CLIENT_SECRET,
-    callbackURL: 'https://murmuring-journey-40807.herokuapp.com/'
+    callbackURL: process.env.CALLBACK_URL
   }
 
   const strategy = new TwitterStrategy(
@@ -23,7 +23,7 @@ if (!process.env.TWITTER_CLIENT_ID || !process.env.TWITTER_CLIENT_SECRET) {
       }
       User.findOrCreate({
         where: {
-          twitterId: info.twitterId,
+          twitterId: info.twitterId
         },
         defaults: info
       })
