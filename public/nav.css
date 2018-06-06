@@ -107,8 +107,8 @@ form.search input[type='text'] {
 }
 
 form.search i {
-  position: relative;
-  right: 195px;
+  position: absolute;
+  /* left: 0px; */
 }
 
 form.search input[type='text']:focus {

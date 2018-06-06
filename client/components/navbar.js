@@ -33,9 +33,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
               <Link to="/categories">Categories</Link>
             </div>
             <form className="search">
+              <i className="small material-icons">search</i>
               <input type="text" placeholder="Search" />
               <input type="submit" value="Go" />
-              <i className="small material-icons">search</i>
             </form>
             <div id="login-containter">
               <Link to="/login">Login</Link>
