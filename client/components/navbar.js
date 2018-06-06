@@ -31,6 +31,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
               </Link>
               <Link to="/brands">Brands</Link>
               <Link to="/categories">Categories</Link>
+              <Link to="/drinks">Drinks</Link>
             </div>
             <form className="search">
               <i className="small material-icons">search</i>
