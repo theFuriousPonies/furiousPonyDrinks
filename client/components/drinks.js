@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import drinkProfile from './drinkProfile.jsx'
+import DrinkProfile from './drinkProfile.jsx'
 
 const Drinks = props => {
   const drinks = props.drinks
@@ -8,7 +8,7 @@ const Drinks = props => {
     <div>
       <h1>ALL THE DRINKS</h1>
       {drinks.map(drink => {
-        return <drinkProfile key={drink.id} drink={drink} />
+        return <DrinkProfile key={drink.id} drink={drink} />
       })}
     </div>
   )
