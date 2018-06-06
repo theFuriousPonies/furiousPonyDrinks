@@ -7,7 +7,7 @@ import { logout } from '../store'
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
     <nav>
-      <h1>THE FURIOUS PONIES</h1>
+      <h1>THE FURIOUS PONIES DRINKS</h1>
 
       {isLoggedIn ? (
         <div>
@@ -33,9 +33,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
               <Link to="/categories">Categories</Link>
             </div>
             <form className="search">
-              <label>Search</label>
-              <input type="text" />
+              <input type="text" placeholder="Search" />
               <input type="submit" value="Go" />
+              <i className="small material-icons">search</i>
             </form>
             <div id="login-containter">
               <Link to="/login">Login</Link>

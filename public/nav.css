@@ -10,6 +10,18 @@
   }
 }
 
+@keyframes focussearch {
+  0% {
+    outline-color: rgb(243, 210, 210, 0.8);
+  }
+  50% {
+    outline-color: rgb(243, 210, 210, 0.1);
+  }
+  100% {
+    outline-color: rgb(243, 210, 210, 0.8);
+  }
+}
+
 body {
   margin: 0;
 }
@@ -26,7 +38,7 @@ nav {
     rgb(241, 127, 127),
     rgb(228, 119, 119)
   );
-  background-color: rgb(252, 146, 146);
+  /* background-color: rgb(252, 146, 146); */
   width: 100%;
   height: 60px;
 }
@@ -48,7 +60,7 @@ nav a {
 }
 
 nav a:hover {
-  animation: pulse 2s infinite;
+  animation: pulse 1s infinite;
 }
 
 #navlink-containter {
@@ -72,22 +84,35 @@ nav a:hover {
 }
 
 form.search {
+  position: relative;
   color: rgb(0, 0, 0, 0.7);
   text-shadow: 0 1px 1px rgba(190, 190, 190, 0.5);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-grow: 1;
+  animation: focussearch 2s infinite;
 }
 form.search input[type='text'] {
-  flex-grow: 1;
+  height: 2.5em;
+  padding-left: 30px;
   background-color: rgb(250, 181, 181);
   border: 1px;
   border-color: rgb(255, 255, 255, 0.5);
   margin: 1em;
   border-radius: 4px;
+  font-size: 11px;
+  width: 130px;
+  transition: all 0.5s ease 1s;
+}
+
+form.search i {
+  position: relative;
+  right: 195px;
 }
 
 form.search input[type='text']:focus {
   outline-color: rgb(243, 210, 210);
+  width: 200px;
+  transition: width 0.5s ease;
 }
