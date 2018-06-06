@@ -31,6 +31,7 @@ hr {
 }
 
 nav {
+  padding-top: 5px;
   color: rgb(0, 0, 0, 0.7);
   background: linear-gradient(
     rgb(243, 157, 157),
@@ -80,7 +81,7 @@ nav a:hover {
 #login-containter {
   display: flex;
   align-items: center;
-  padding-left: 10em;
+  padding-left: 20em;
 }
 
 form.search {
@@ -89,10 +90,16 @@ form.search {
   text-shadow: 0 1px 1px rgba(190, 190, 190, 0.5);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-grow: 1;
   animation: focussearch 2s infinite;
 }
+form.search i {
+  position: absolute;
+  /* float: right; */
+  left: 14px;
+}
+
 form.search input[type='text'] {
   height: 2.5em;
   padding-left: 30px;
@@ -104,11 +111,6 @@ form.search input[type='text'] {
   font-size: 11px;
   width: 130px;
   transition: all 0.5s ease 1s;
-}
-
-form.search i {
-  position: absolute;
-  /* left: 0px; */
 }
 
 form.search input[type='text']:focus {

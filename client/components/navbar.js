@@ -34,8 +34,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             </div>
             <form className="search">
               <i className="small material-icons">search</i>
+              {/* <input type="submit" value="Go" /> */}
               <input type="text" placeholder="Search" />
-              <input type="submit" value="Go" />
             </form>
             <div id="login-containter">
               <Link to="/login">Login</Link>
