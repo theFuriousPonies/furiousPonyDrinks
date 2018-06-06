@@ -69,18 +69,18 @@ export const removeBrand = id => async dispatch => {
 
 // Brand reducer
 
-const brand = (state = initialState, action) => {
+const brands = (state = initialState, action) => {
   switch (action.type) {
     case GOT_BRANDS:
       return action.brands
     case NEW_BRAND:
       return [...state, action.brand]
     case UPDATE_BRAND: {
-      const index = state.findIndex(brand => brand.id === action.brand.id)
+      const index = state.findIndex(theBrand => theBrand.id === action.brand.id)
       return [...state].splice(index, 1, action.brand)
     }
     case REMOVE_BRAND:
-      return [...state].filter(brand => brand.id !== action.id)
+      return [...state].filter(theBrand => theBrand.id !== action.id)
     case failBrand:
       return action.err
     default:
@@ -88,4 +88,4 @@ const brand = (state = initialState, action) => {
   }
 }
 
-export default brand
+export default brands
