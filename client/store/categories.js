@@ -16,9 +16,9 @@ const initialState = []
 
 const gotCategories = categories => ({ type: GOT_CATEGORIES, categories })
 
-const gotNewCategory = categorie => ({ type: NEW_CATEGORY, categorie })
+const gotNewCategory = category => ({ type: NEW_CATEGORY, category })
 
-const updatedCategory = categorie => ({ type: UPDATE_CATEGORY, categorie })
+const updatedCategory = category => ({ type: UPDATE_CATEGORY, category })
 
 const removedCategory = id => ({ type: REMOVE_CATEGORY, id })
 
@@ -60,7 +60,7 @@ const updateCategory = category => async dispatch => {
 
 const removeCategory = id => async dispatch => {
   try {
-    await axios.destroy(`/api/category/${id}`)
+    await axios.delete(`/api/category/${id}`)
     dispatch(removedCategory(id))
   } catch (err) {
     console.error(err)
@@ -72,9 +72,9 @@ const categories = (state = initialState, action) => {
     case GOT_CATEGORIES:
       return action.categories
     case NEW_CATEGORY:
-      return [...state, action.categorie]
+      return [...state, action.category]
     case UPDATE_CATEGORY: {
-      const index = state.findIndex(theCategory => theCategory.id === action.id)
+      const index = state.findIndex(theCategory => theCategory.id === action.category.id)
       return [...state].splice(index, 1, action.category)
     }
     case REMOVE_CATEGORY:
