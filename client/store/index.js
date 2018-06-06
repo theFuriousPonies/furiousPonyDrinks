@@ -7,6 +7,7 @@ import brands from './brand'
 import categories from './categories'
 
 const reducer = combineReducers({ user, brands, categories })
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 )
