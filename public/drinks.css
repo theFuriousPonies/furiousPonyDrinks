@@ -1,3 +1,7 @@
+.drinks-container {
+  display: flex;
+  flex-direction: row;
+}
 .drink-profile-container {
   display: flex;
   flex-wrap: wrap;
@@ -15,4 +19,18 @@
 .drink-profile img {
   width: 10em;
   height: 10em;
+}
+
+/* DRINKS FILTER BAR */
+
+.filter-category-containter {
+  height: 100vh;
+  padding-right: 50px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.filter-category-containter ul {
+  list-style-type: none;
 }

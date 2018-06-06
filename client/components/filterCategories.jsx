@@ -2,17 +2,23 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class FilterByCategory extends Component {
-  handleSubmit = () => {
-    return 'hello'
-  }
   render() {
     const { categories } = this.props
     return (
       this.props && (
-        <div>
+        <div className="filter-category-containter">
           <ul>
             {categories.map(category => (
-              <li key={category.id}>{category.name}</li>
+              <li key={category.id}>
+                <label>
+                  <input
+                    type="checkbox"
+                    onChange={this.props.handleChange}
+                    value={category.id}
+                  />
+                  {category.name}
+                </label>
+              </li>
             ))}
           </ul>
         </div>
