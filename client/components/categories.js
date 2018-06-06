@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const Categories = ({ categories }) => {
   if (categories) {
@@ -9,9 +9,9 @@ const Categories = ({ categories }) => {
         {categories.map(category => {
           return (
             <div key={category.id}>
-              <Link to={`/category/${category.id}`}>
+              <NavLink to={`/category/${category.id}`}>
                 <h2>{category.name}</h2>
-              </Link>
+              </NavLink>
             </div>
           )
         })}
