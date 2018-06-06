@@ -1,0 +1,18 @@
+.drink-profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.drink-profile {
+  width: 15em;
+  height: 15em;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  flex-direction: column;
+}
+
+.drink-profile img {
+  width: 10em;
+  height: 10em;
+}
