@@ -19,7 +19,7 @@ const gotDrinks = drinks => ({ type: GOT_DRINKS, drinks })
 
 const gotNewDrink = drink => ({ type: NEW_DRINK, drink })
 
-const updateDrink = drink => ({ type: UPDATE_DRINK, drink })
+const updatedDrink = drink => ({ type: UPDATE_DRINK, drink })
 
 const removedDrink = id => ({ type: REMOVE_DRINK, id })
 
@@ -40,7 +40,7 @@ export const getDrinks = () => async dispatch => {
 export const updateDrink = drink => async dispatch => {
   try {
     const { data } = await axios.put(`/api/drinks/${drink.id}`, drink)
-    dispatch(updateDrink(data))
+    dispatch(updatedDrink(data))
   } catch (err) {
     console.error(err)
     dispatch(failDrink(err))
@@ -69,7 +69,7 @@ export const removeDrink = id => async dispatch => {
 
 // DRINK REDUCER
 
-const drinks = (state, action) => {
+const drinks = (state = initialState, action) => {
   switch (action.type) {
     case GOT_DRINKS:
       return action.drinks
