@@ -13,7 +13,7 @@ const FAIL_DRINK = 'FAIL_DRINK'
 
 const initialState = []
 
-// ACTION CREATEORS
+// ACTION CREATORS
 
 const gotDrinks = drinks => ({ type: GOT_DRINKS, drinks })
 
@@ -21,7 +21,7 @@ const gotNewDrink = drink => ({ type: NEW_DRINK, drink })
 
 const updateDrink = drink => ({ type: UPDATE_DRINK, drink })
 
-const removedDrink = drink => ({ type: REMOVE_DRINK, drink })
+const removedDrink = id => ({ type: REMOVE_DRINK, id })
 
 const failDrink = err => ({ type: FAIL_DRINK, err })
 
@@ -39,7 +39,7 @@ export const getDrinks = () => async dispatch => {
 
 export const updateDrink = drink => async dispatch => {
   try {
-    const { data } = await axios.put(`/api/drinks/${drink.id}`, brand)
+    const { data } = await axios.put(`/api/drinks/${drink.id}`, drink)
     dispatch(updateDrink(data))
   } catch (err) {
     console.error(err)
@@ -50,17 +50,17 @@ export const updateDrink = drink => async dispatch => {
 export const getNewDrink = drink => async dispatch => {
   try {
     const { data } = await axios.post('/api/drinks', drink)
-    dispatch(gotNewDrink(drink))
+    dispatch(gotNewDrink(data))
   } catch (error) {
     console.error(error)
     dispatch(failDrink(error))
   }
 }
 
-export const removeDrink = drink => async dispatch => {
+export const removeDrink = id => async dispatch => {
   try {
-    const { data } = await axios.delete(`/api/drinks/${drink.id}`)
-    dispatch(removedDrink(drink))
+    await axios.delete(`/api/drinks/${id}`)
+    dispatch(removedDrink(id))
   } catch (error) {
     console.error(error)
     dispatch(failDrink(error))
@@ -74,7 +74,7 @@ const drinks = (state, action) => {
     case GOT_DRINKS:
       return action.drinks
     case NEW_DRINK:
-      return [...state, action.drunk]
+      return [...state, action.drink]
     case UPDATE_DRINK:
       const index = state.findIndex(drink => drink.id === action.drink.id)
       return [...state].splice(index, 1, action.drink)
