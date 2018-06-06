@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import DrinkProfile from './drinkProfile.jsx'
 
 const Brand = props => {
   if (props.brands.length) {
@@ -8,10 +9,18 @@ const Brand = props => {
         return item
       }
     })
+    console.log(brand)
     return (
       <div>
         <img src={brand.imageUrl} />
-        {brand.name}
+        <h2>{brand.name}</h2>
+        <br />
+        {brand.description}
+        {brand.drinks.map(drink => {
+          return (
+            <DrinkProfile drink={drink} key={drink.id} />
+          )
+        })}
       </div>
     )
   } else {
