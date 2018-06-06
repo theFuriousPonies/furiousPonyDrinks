@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import {
   Login,
-  Signup,
-  UserHome,
+  // Signup,
+  // UserHome,
   Brands,
   Home,
   Drinks,
   Categories
 } from './components'
-import { me } from './store'
+// import { me } from './store'
 
 import { getBrands } from './store/brand'
 import { getDrinks } from './store/drinks'
@@ -26,13 +26,11 @@ class Routes extends Component {
   }
 
   render() {
-    const { brands, drinks } = this.props
-    // if (!brands.length || !drinks.length) return null
-    console.log(brands)
     return (
       <Switch>
         <Route exact path="/brands" component={Brands} />
         <Route exact path="/drinks" component={Drinks} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/categories" component={Categories} />
         <Route exact path="/" component={Home} />
       </Switch>
@@ -53,7 +51,7 @@ const mapState = ({ user, brands, categories, drinks }) => ({
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
-      dispatch(me())
+      // dispatch(me())
       dispatch(getBrands())
       dispatch(getCategories())
       dispatch(getDrinks())
@@ -69,3 +67,8 @@ export default withRouter(
     mapDispatch
   )(Routes)
 )
+
+Routes.propTypes = {
+  loadInitialData: PropTypes.func.isRequired
+  // isLoggedIn: PropTypes.bool.isRequired
+}
