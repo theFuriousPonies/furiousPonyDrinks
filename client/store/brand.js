@@ -69,7 +69,7 @@ export const removeBrand = id => async dispatch => {
 
 // Brand reducer
 
-const brandReducer = (state = initialState, action) => {
+const brand = (state = initialState, action) => {
   switch (action.type) {
     case GOT_BRANDS:
       return action.brands
@@ -88,4 +88,4 @@ const brandReducer = (state = initialState, action) => {
   }
 }
 
-export default brandReducer
+export default brand
