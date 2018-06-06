@@ -62,9 +62,32 @@ nav a:hover {
 #catagories-containter {
   display: flex;
   align-items: center;
+  padding-right: 10em;
 }
 
 #login-containter {
   display: flex;
   align-items: center;
+  padding-left: 10em;
+}
+
+form.search {
+  color: rgb(0, 0, 0, 0.7);
+  text-shadow: 0 1px 1px rgba(190, 190, 190, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+form.search input[type='text'] {
+  flex-grow: 1;
+  background-color: rgb(250, 181, 181);
+  border: 1px;
+  border-color: rgb(255, 255, 255, 0.5);
+  margin: 1em;
+  border-radius: 4px;
+}
+
+form.search input[type='text']:focus {
+  outline-color: rgb(243, 210, 210);
 }
