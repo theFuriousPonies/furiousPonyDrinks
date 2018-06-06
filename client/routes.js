@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 // import PropTypes from 'prop-types'
-import { Login, Signup, UserHome } from './components'
+import { Login, Signup, UserHome, Brands, Home } from './components'
 import { me } from './store'
 
 import { getBrands } from './store/brand'
+import { getDrinks } from './store/drinks'
+import { getCategories } from './store/categories'
+
 /**
  * COMPONENT
  */
@@ -15,21 +18,13 @@ class Routes extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props
-
+    const { brands, drinks } = this.props
+    // if (!brands.length || !drinks.length) return null
+    console.log(brands)
     return (
       <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-          </Switch>
-        )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        <Route exact path="/brands" component={Brands} />
+        <Route exact path="/" component={Home} />
       </Switch>
     )
   }
@@ -49,6 +44,9 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(getBrands())
+      // dispatch(getCategories())
+      dispatch(getDrinks())
     }
   }
 }
