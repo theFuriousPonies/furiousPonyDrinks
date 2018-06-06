@@ -42,8 +42,7 @@ router.delete('/:userId', async (req, res, next) => {
       where: {
         id: req.params.userId
       }
-    })
-    .then(_ => res.status(204).end())
+    }).then(_ => res.status(204).end())
   } catch (error) {
     next(error)
   }
