@@ -1,0 +1,70 @@
+@keyframes pulse {
+  0% {
+    color: rgb(0, 0, 0, 0.7);
+  }
+  50% {
+    color: rgba(82, 80, 80, 0.7);
+  }
+  100% {
+    color: rgb(0, 0, 0, 0.7);
+  }
+}
+
+body {
+  margin: 0;
+}
+
+hr {
+  margin: 0;
+}
+
+nav {
+  color: rgb(0, 0, 0, 0.7);
+  background: linear-gradient(
+    rgb(243, 157, 157),
+    rgb(243, 140, 140),
+    rgb(241, 127, 127),
+    rgb(228, 119, 119)
+  );
+  background-color: rgb(252, 146, 146);
+  width: 100%;
+  height: 60px;
+}
+
+nav h1 {
+  /* display: block; */
+  position: relative;
+  text-shadow: 0 1.5px 1.5px rgba(190, 190, 190, 0.5);
+  margin: 0;
+  padding: 0;
+  left: 16px;
+}
+
+nav a {
+  display: inline-block;
+  color: rgb(0, 0, 0, 0.7);
+  text-shadow: 0 1px 1px rgba(190, 190, 190, 0.5);
+  margin: 1em;
+}
+
+nav a:hover {
+  animation: pulse 2s infinite;
+}
+
+#navlink-containter {
+  color: rgb(233, 108, 108);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 25px;
+}
+
+#catagories-containter {
+  display: flex;
+  align-items: center;
+}
+
+#login-containter {
+  display: flex;
+  align-items: center;
+}
