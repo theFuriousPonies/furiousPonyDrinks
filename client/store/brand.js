@@ -76,11 +76,11 @@ const brand = (state = initialState, action) => {
     case NEW_BRAND:
       return [...state, action.brand]
     case UPDATE_BRAND: {
-      const index = state.findIndex(brand => brand.id === action.brand.id)
+      const index = state.findIndex(theBrand => theBrand.id === action.brand.id)
       return [...state].splice(index, 1, action.brand)
     }
     case REMOVE_BRAND:
-      return [...state].filter(brand => brand.id !== action.id)
+      return [...state].filter(theBrand => theBrand.id !== action.id)
     case failBrand:
       return action.err
     default:
