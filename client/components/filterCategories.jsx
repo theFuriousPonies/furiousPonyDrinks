@@ -12,13 +12,18 @@ class FilterByCategory extends Component {
             <hr />
             {categories.map(category => (
               <li key={category.id}>
-                <label>
+                <label htmlFor={category.id} className="checkbox-containter">
                   <input
                     type="checkbox"
                     onChange={this.props.handleChange}
                     value={category.id}
+                    name={category.id}
                   />
-                  <span className="checkmark" />
+                  <div className="checkmark" content="">
+                    <div>YOU MUST BUILD THE CART!!</div>
+                    <img src="connor.png" />
+                    <i className="big material-icons">shopping_cart</i>
+                  </div>
                   {category.name}
                 </label>
               </li>

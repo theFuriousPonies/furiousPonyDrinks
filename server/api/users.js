@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { User } = require('../db/models')
+const { User, Order } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -28,7 +28,8 @@ router.put('/:userId', async (req, res, next) => {
       returning: true,
       where: {
         id: req.params.userId
-      }
+      },
+      include: [{ model: Order }]
     })
     res.send(data)
   } catch (error) {
