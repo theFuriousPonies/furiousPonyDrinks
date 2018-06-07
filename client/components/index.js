@@ -6,7 +6,7 @@
 export { default as Navbar } from './navbar'
 export { default as UserHome } from './user-home'
 export { default as Brands } from './brands'
-export { default as Brand } from './brand'
+export { default as SingleBrand } from './singleBrand'
 export { default as Home } from './home'
 export { default as Drinks } from './drinks'
 export { default as Categories } from './categories'
