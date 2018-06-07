@@ -169,26 +169,32 @@ const addresses = [
 
 const users = [
   {
+    name: 'Blake',
     email: 'blake@gmail.com',
     password: 'chicken'
   },
   {
-    email: 'chole@gmail.com',
+    name: 'Chloe',
+    email: 'chloe@gmail.com',
     password: 'chicken'
   },
   {
+    name: 'Kirk',
     email: 'kirk@gmail.com',
     password: 'chicken'
   },
   {
+    name: 'Sean',
     email: 'sean@gmail.com',
     password: 'chicken'
   },
   {
+    name: 'Jake',
     email: 'jake@gmail.com',
     password: 'chicken'
   },
   {
+    name: 'Jill',
     email: 'jill@gmail.com',
     password: 'chicken'
   }
