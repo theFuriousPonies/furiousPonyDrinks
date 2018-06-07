@@ -4,15 +4,15 @@ const db = require('../db')
 const Order = db.define('order', {
   total: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    defaultValue: 0
   },
   shippingMethod: {
     type: Sequelize.STRING,
-    allowNull: false
+    defaultValue: 'US Mail'
   },
   status: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 

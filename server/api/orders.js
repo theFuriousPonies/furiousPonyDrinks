@@ -13,11 +13,9 @@ router.get('/', async (req, res, next) => {
 
 router.post('/:userId', async (req, res, next) => {
   try {
-    const order = await Order.create(req.body, {
-      where: {
-        userId: req.params.userId
-      }
-    })
+    const order = await Order.create(req.body).then(result =>
+      result.setUser(req.params.userId)
+    )
     res.json(order)
   } catch (err) {
     next(err)
