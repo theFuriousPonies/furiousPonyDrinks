@@ -46,11 +46,12 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = ({ user, brands, categories, drinks }) => ({
+const mapState = ({ user, brands, categories, drinks, order }) => ({
   user,
   brands,
   categories,
-  drinks
+  drinks,
+  order
 })
 
 const mapDispatch = dispatch => {
