@@ -132,16 +132,16 @@ describe('Models', () => {
   })
 
   describe('Item tests', () => {
-    let itemTest
-    beforeEach(() => {
-      return Item.create({
-        quantity: 1,
-        drinkId: 1,
-        orderId: 1
-      }).then(item => {
-        itemTest = item
-      })
-    })
+    // let itemTest
+    // beforeEach(() => {
+    //   return Item.create({
+    //     quantity: 1,
+    //     drinkId: 1,
+    //     orderId: 1
+    //   }).then(item => {
+    //     itemTest = item
+    //   })
+    // })
 
     describe('definition', () => {
       it('has proper definition attributes', () => {
