@@ -91,7 +91,7 @@ describe('Models', () => {
       return Order.create({
         total: 100,
         shippingMethod: 'Royal Mail',
-        status: 'complete'
+        status: false
       }).then(order => {
         orderTest = order
       })
