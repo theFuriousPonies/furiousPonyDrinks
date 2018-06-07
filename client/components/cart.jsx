@@ -1,14 +1,34 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-
-const Cart = (props) => {
+const Cart = props => {
+  const drinks = props.order.drinks
   return (
     <div>
-      {props}
+      {drinks && (
+        <div>
+          {drinks.map(drink => {
+            return (
+              <div key={drink.id}>
+                <h3>{drink.name}</h3>
+                <h3>{drink.item.quanity}</h3>
+              </div>
+            )
+          })}
+        </div>
+      )}
     </div>
   )
 }
 
-export default connect ()(Cart);
+const mapStateToProps = ({ order, user }) => ({
+  order,
+  user
+})
+
+const mapDispatchToProps = dispatch => {}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Cart)
