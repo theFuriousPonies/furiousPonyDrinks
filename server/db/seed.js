@@ -112,27 +112,27 @@ const orders = [
   {
     total: 100,
     shippingMethod: 'Royal Mail',
-    status: 'complete'
+    status: false
   },
   {
     total: 1000,
     shippingMethod: 'Fedex',
-    status: 'cart'
+    status: false
   },
   {
     total: 102,
     shippingMethod: 'Owl',
-    status: 'pending'
+    status: false
   },
   {
     total: 103,
     shippingMethod: 'DHL',
-    status: 'complete'
+    status: true
   },
   {
     total: 1,
     shippingMethod: 'US Mail',
-    status: 'cart'
+    status: true
   }
 ]
 
@@ -169,26 +169,32 @@ const addresses = [
 
 const users = [
   {
+    name: 'Blake',
     email: 'blake@gmail.com',
     password: 'chicken'
   },
   {
-    email: 'chole@gmail.com',
+    name: 'Chloe',
+    email: 'chloe@gmail.com',
     password: 'chicken'
   },
   {
+    name: 'Kirk',
     email: 'kirk@gmail.com',
     password: 'chicken'
   },
   {
+    name: 'Sean',
     email: 'sean@gmail.com',
     password: 'chicken'
   },
   {
+    name: 'Jake',
     email: 'jake@gmail.com',
     password: 'chicken'
   },
   {
+    name: 'Jill',
     email: 'jill@gmail.com',
     password: 'chicken'
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { auth } from '../store'
+import { auth } from '../store/user'
 
 /**
  * COMPONENT
@@ -13,6 +13,16 @@ const AuthForm = props => {
     <div>
       <form onSubmit={handleSubmit} name={name}>
         <div>
+          {displayName === 'Sign Up' ? (
+            <>
+              <label htmlFor="name">
+                <small>Name</small>
+              </label>
+              <input name="username" type="text" />
+            </>
+          ) : (
+            ''
+          )}
           <label htmlFor="email">
             <small>Email</small>
           </label>
@@ -30,10 +40,6 @@ const AuthForm = props => {
         {error && error.response && <div> {error.response.data} </div>}
       </form>
       <a href="/auth/google">{displayName} with Google</a>
-      <br />
-      <a href="/auth/facebook">{displayName} with Facebook</a>
-      <br />
-      <a href="/auth/twitter">{displayName} with Twitter</a>
     </div>
   )
 }
@@ -61,25 +67,38 @@ const mapSignup = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatchLogin = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      dispatch(auth(null, email, password, formName))
+    }
+  }
+}
+
+const mapDispatchSignup = dispatch => {
+  return {
+    handleSubmit(evt) {
+      evt.preventDefault()
+      const formName = evt.target.name
+      const name = evt.target.username.value
+      const email = evt.target.email.value
+      const password = evt.target.password.value
+      dispatch(auth(name, email, password, formName))
     }
   }
 }
 
 export const Login = connect(
   mapLogin,
-  mapDispatch
+  mapDispatchLogin
 )(AuthForm)
 export const Signup = connect(
   mapSignup,
-  mapDispatch
+  mapDispatchSignup
 )(AuthForm)
 
 /**

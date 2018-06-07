@@ -10,7 +10,7 @@ if (!process.env.FACEBOOK_APP_ID || !process.env.FACEBOOK_APP_SECRET) {
   const facebookConfig = {
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: 'https://murmuring-journey-40807.herokuapp.com/'
+    callbackURL: process.env.FBCALLBACK_URL
   }
 
   const strategy = new FacebookStrategy(
@@ -40,7 +40,7 @@ if (!process.env.FACEBOOK_APP_ID || !process.env.FACEBOOK_APP_SECRET) {
   router.get(
     '/callback',
     passport.authenticate('facebook', {
-      successRedirect: '/home',
+      successRedirect: '/',
       failureRedirect: '/login'
     })
   )
