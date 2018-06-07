@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import DrinkProfile from './drinkProfile.jsx'
 
-const singleBrand = props => {
+const SingleBrand = props => {
   if (props.brands.length) {
     let brand = props.brands.find(item => {
       if (item.id === +props.match.params.id) {
@@ -31,4 +31,4 @@ const mapStateToProps = ({ brands }) => ({
   brands
 })
 
-export default connect(mapStateToProps)(singleBrand)
+export default connect(mapStateToProps)(SingleBrand)
