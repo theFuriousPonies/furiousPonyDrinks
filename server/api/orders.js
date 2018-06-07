@@ -13,10 +13,11 @@ router.get('/', async (req, res, next) => {
 
 router.post('/:userId', async (req, res, next) => {
   try {
-    const order = await Order.create(req.body, {
+    const order = await Order.findOrCreate({
       where: {
         userId: req.params.userId
-      }
+      },
+      defaults: req.body
     })
     res.json(order)
   } catch (err) {

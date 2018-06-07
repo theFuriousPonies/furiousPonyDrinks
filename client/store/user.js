@@ -1,6 +1,8 @@
 import axios from 'axios'
 import history from '../history'
 
+// import { getUserOrder, getNewOrder } from './order'
+
 /**
  * ACTION TYPES
  */
@@ -26,6 +28,25 @@ export const me = () => dispatch =>
     .get('/auth/me')
     .then(res => dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err))
+
+// export const me = () => async dispatch => {
+//   try {
+//     const { data } = await axios.get('/auth/me')
+//     if (data.id) {
+//       dispatch(getUser(data))
+//       console.log(data.orders)
+//       if (data.orders && !data.orders[0].status) {
+//         const orderId = data.orders[0].id
+//         dispatch(getUserOrder(orderId))
+//       }
+//       dispatch(getNewOrder(data.id))
+//     } else {
+//       dispatch(getUser(defaultUser))
+//     }
+//   } catch (err) {
+//     console.error(err)
+//   }
+// }
 
 export const auth = (name, email, password, method) => dispatch =>
   axios
