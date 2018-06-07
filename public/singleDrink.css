@@ -1,0 +1,16 @@
+#single-drink-form img {
+}
+
+#single-drink-content img {
+  width: 100px;
+  height: 100px;
+}
+
+#single-drink-btn-containter {
+  display: flex;
+  flex-direction: row;
+}
+
+#single-drink-btn-containter #minus:active + .single-drink-img {
+  width: 1000px;
+}

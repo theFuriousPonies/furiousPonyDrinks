@@ -47,30 +47,35 @@ class SingleDrink extends Component {
       <div>
         {drink && (
           <form
+            id="single-drink-form"
             onSubmit={this.handleSubmit({
               quantity,
               drinkId,
               orderId
             })}
           >
-            <div>
+            <div id="single-drink-content">
               {drink.inventory ? <div /> : <span>Out of Stock</span>}
-              <h2>{drink.name}</h2>
-              <img src={drink.imageUrl} alt="" />
-              <div>Price: ${(drink.price / 100) * quantity}</div>
-              <div>Quantity: {quantity}</div>
-              {drink.inventory !== quantity ? (
-                <div />
-              ) : (
-                <span>Max Quantity</span>
-              )}
+              <img src={drink.imageUrl} alt="" className="single-drink-img" />
+              <div>
+                <h2>{drink.name}</h2>
+                <div>Price: ${(drink.price / 100) * quantity}</div>
+                <div>Quantity: {quantity}</div>
+                {drink.inventory !== quantity ? (
+                  <div />
+                ) : (
+                  <span>Max Quantity</span>
+                )}
+              </div>
             </div>
-            <button type="button" onClick={this.handleChange} name="add">
-              +
-            </button>
-            <button type="button" onClick={this.handleChange}>
-              -
-            </button>
+            <div id="single-drink-btn-containter">
+              <button type="button" onClick={this.handleChange} name="add">
+                +
+              </button>
+              <button id="minus" type="button" onClick={this.handleChange}>
+                -
+              </button>
+            </div>
             <button type="submit">Add to Cart</button>
           </form>
         )}
