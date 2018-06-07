@@ -11,7 +11,8 @@ import {
   SingleDrink,
   Home,
   Drinks,
-  Categories
+  Categories,
+  Cart
 } from './components'
 import { me } from './store/user'
 
@@ -37,6 +38,7 @@ class Routes extends Component {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/categories" component={Categories} />
+        <Route exact path="/cart" component={Cart} />
         <Route exact path="/" component={Home} />
       </Switch>
     )
