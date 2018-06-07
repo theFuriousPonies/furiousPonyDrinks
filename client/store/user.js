@@ -34,7 +34,6 @@ export const me = () => async dispatch => {
     const { data } = await axios.get('/auth/me')
     if (data.id) {
       dispatch(getUser(data))
-      console.log(data.orders)
       if (data.orders.length && !data.orders[0].status) {
         const orderId = data.orders[0].id
         dispatch(getUserOrder(orderId))
@@ -53,8 +52,14 @@ export const auth = (name, email, password, method) => dispatch =>
   axios
     .post(`/auth/${method}`, { name, email, password })
     .then(
-      res => {
-        dispatch(getUser(res.data))
+      ({ data }) => {
+        dispatch(getUser(data))
+        if (data.orders && data.orders.length && !data.orders[0].status) {
+          const orderId = data.orders[0].id
+          dispatch(getUserOrder(orderId))
+        } else {
+          dispatch(getNewOrder(data.id))
+        }
         history.push('/')
       },
       authError => {
