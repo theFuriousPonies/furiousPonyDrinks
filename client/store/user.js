@@ -35,11 +35,12 @@ export const me = () => async dispatch => {
     if (data.id) {
       dispatch(getUser(data))
       console.log(data.orders)
-      if (data.orders && !data.orders[0].status) {
+      if (data.orders.length && !data.orders[0].status) {
         const orderId = data.orders[0].id
         dispatch(getUserOrder(orderId))
+      } else {
+        dispatch(getNewOrder(data.id))
       }
-      dispatch(getNewOrder(data.id))
     } else {
       dispatch(getUser(defaultUser))
     }
