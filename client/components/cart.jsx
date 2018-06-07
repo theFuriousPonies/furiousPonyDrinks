@@ -11,7 +11,7 @@ const Cart = props => {
             return (
               <div key={drink.id}>
                 <h3>{drink.name}</h3>
-                <h3>{drink.item.quanity}</h3>
+                <h3>{drink.item.quantity}</h3>
               </div>
             )
           })}
