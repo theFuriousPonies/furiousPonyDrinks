@@ -12,7 +12,7 @@ import {
   Drinks,
   Categories
 } from './components'
-// import { me } from './store'
+import { me } from './store/user'
 
 import { getBrands } from './store/brand'
 import { getDrinks } from './store/drinks'
@@ -53,7 +53,7 @@ const mapState = ({ user, brands, categories, drinks }) => ({
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
-      // dispatch(me())
+      dispatch(me())
       dispatch(getBrands())
       dispatch(getCategories())
       dispatch(getDrinks())
