@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Order } = require('../db/models')
+const { Order, Drink } = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -25,7 +25,9 @@ router.post('/:userId', async (req, res, next) => {
 //  /:orderId routes
 router.get('/:orderId', async (req, res, next) => {
   try {
-    const order = await Order.findById(req.params.orderId)
+    const order = await Order.findById(req.params.orderId, {
+      include: [{ model: Drink }]
+    })
     res.json(order)
   } catch (err) {
     next(err)
@@ -36,9 +38,8 @@ router.put('/:orderId', async (req, res, next) => {
   try {
     const [_, order] = await Order.update(req.body, {
       returning: true,
-      where: {
-        id: req.params.orderId
-      }
+      where: { id: req.params.orderId },
+      include: [{ model: Drink }]
     })
     res.send(order)
   } catch (err) {
