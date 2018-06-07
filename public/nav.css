@@ -12,13 +12,13 @@
 
 @keyframes focussearch {
   0% {
-    outline-color: rgb(243, 210, 210, 0.8);
+    outline-color: rgba(243, 140, 140, 0.8);
   }
   50% {
-    outline-color: rgb(243, 210, 210, 0.1);
+    outline-color: rgb(243, 210, 210, 0.8);
   }
   100% {
-    outline-color: rgb(243, 210, 210, 0.8);
+    outline-color: rgba(243, 140, 140, 0.8);
   }
 }
 
@@ -91,8 +91,12 @@ form.search {
   align-items: center;
   justify-content: flex-start;
   flex-grow: 1;
-  animation: focussearch 2s infinite;
 }
+
+/* form.search:hover + form.search input[type='text'] {
+  animation: focussearch 1s infinite;
+} */
+
 form.search i {
   position: absolute;
   /* float: right; */
@@ -109,11 +113,12 @@ form.search input[type='text'] {
   border-radius: 4px;
   font-size: 11px;
   width: 130px;
-  transition: all 0.5s ease 1s;
+  transition: width 0.5s ease;
 }
 
 form.search input[type='text']:focus {
   outline-color: rgb(243, 210, 210);
-  width: 200px;
-  transition: width 0.5s ease;
+  width: 400px;
+  transition: width 1s ease;
+  /* animation: focussearch 4s infinite; */
 }

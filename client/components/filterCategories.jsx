@@ -8,6 +8,8 @@ class FilterByCategory extends Component {
       this.props && (
         <div className="filter-category-containter">
           <ul>
+            <h2>FILTERS</h2>
+            <hr />
             {categories.map(category => (
               <li key={category.id}>
                 <label>
@@ -16,6 +18,7 @@ class FilterByCategory extends Component {
                     onChange={this.props.handleChange}
                     value={category.id}
                   />
+                  <span className="checkmark" />
                   {category.name}
                 </label>
               </li>

@@ -50,16 +50,18 @@ class Drinks extends Component {
     console.log(this.state.filters)
     const drinks = this.props.drinks
     return (
-      <div className="drinks-container">
-        <FilterByCategory handleChange={this.handleChange} />
-        <div>
-          <h1>ALL THE DRINKS</h1>
-          <div className="drink-profile-container">
-            {drinks.map(drink => {
-              if (this.checkFiltersInCategories(drink)) {
-                return <DrinkProfile key={drink.id} drink={drink} />
-              }
-            })}
+      <div id="color-gradient">
+        <div id="drinks-container">
+          <FilterByCategory handleChange={this.handleChange} />
+          <div id="drinks">
+            <h1>ALL THE DRINKS</h1>
+            <div className="drink-profile-container">
+              {drinks.map(drink => {
+                if (this.checkFiltersInCategories(drink)) {
+                  return <DrinkProfile key={drink.id} drink={drink} />
+                }
+              })}
+            </div>
           </div>
         </div>
       </div>
