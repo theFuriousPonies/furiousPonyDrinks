@@ -145,9 +145,9 @@ describe('Models', () => {
 
     describe('definition', () => {
       it('has proper definition attributes', () => {
-        expect(Address.attributes.quantity).to.be.an('object')
-        expect(Address.attributes.drinkId).to.be.an('object')
-        expect(Address.attributes.orderId).to.be.an('object')
+        expect(Item.attributes.quantity).to.be.an('object')
+        expect(Item.attributes.drinkId).to.be.an('object')
+        expect(Item.attributes.orderId).to.be.an('object')
       })
     })
   })
