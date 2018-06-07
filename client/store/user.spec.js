@@ -19,7 +19,7 @@ describe('user reducer', () => {
 
   it('sets a user on GET_USER action', () => {
     const user = { email: 'g@g.com'}
-    const newState = reducer({}, getUser())
+    const newState = reducer(user, getUser())
     expect(newState).to.deep.equal(user)
   })
 })
