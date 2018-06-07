@@ -17,7 +17,7 @@ describe('user reducer', () => {
     expect(newState).to.deep.equal({})
   })
 
-  it.only('sets a user on GET_USER action', () => {
+  it('sets a user on GET_USER action', () => {
     const user = { email: 'g@g.com'}
     const newState = reducer({}, getUser())
     expect(newState).to.deep.equal(user)
