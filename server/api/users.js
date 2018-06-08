@@ -24,16 +24,16 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:userId', async (req, res, next) => {
   try {
-    const [_, data] = await User.update(req.body, {
+    const [_, [data]] = await User.update(req.body, {
       returning: true,
-      where: {
-        id: req.params.userId
-      },
       include: [
         {
           model: Order
         }
-      ]
+      ],
+      where: {
+        id: req.params.userId
+      }
     })
     res.send(data)
   } catch (error) {

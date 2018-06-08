@@ -29,14 +29,37 @@ export const removeUser = () => ({ type: REMOVE_USER })
 //     .then(res => dispatch(getUser(res.data || defaultUser)))
 //     .catch(err => console.log(err))
 
+// export const me = () => async dispatch => {
+//   try {
+//     const { data } = await axios.get('/auth/me')
+//     if (data.id) {
+//       dispatch(getUser(data))
+//       if (data.orders.length && !data.orders[0].status) {
+//         const orderId = data.orders[0].id
+//         dispatch(getUserOrder(orderId))
+//       } else {
+//         dispatch(getNewOrder(data.id))
+//       }
+//     } else {
+//       dispatch(getUser(defaultUser))
+//     }
+//   } catch (err) {
+//     console.error(err)
+//   }
+// }
+
 export const me = () => async dispatch => {
   try {
     const { data } = await axios.get('/auth/me')
     if (data.id) {
       dispatch(getUser(data))
-      if (data.orders.length && !data.orders[0].status) {
-        const orderId = data.orders[0].id
-        dispatch(getUserOrder(orderId))
+      if (data.orders.length) {
+        const [order] = data.orders.filter(order => order.status === false)
+        if (order) {
+          dispatch(getUserOrder(order.id))
+        } else {
+          dispatch(getNewOrder(data.id))
+        }
       } else {
         dispatch(getNewOrder(data.id))
       }
@@ -54,9 +77,13 @@ export const auth = (name, email, password, method) => dispatch =>
     .then(
       ({ data }) => {
         dispatch(getUser(data))
-        if (data.orders && data.orders.length && !data.orders[0].status) {
-          const orderId = data.orders[0].id
-          dispatch(getUserOrder(orderId))
+        if (data.orders && data.orders.length) {
+          const [order] = data.orders.filter(order => order.status === false)
+          if (order) {
+            dispatch(getUserOrder(order.id))
+          } else {
+            dispatch(getNewOrder(data.id))
+          }
         } else {
           dispatch(getNewOrder(data.id))
         }
