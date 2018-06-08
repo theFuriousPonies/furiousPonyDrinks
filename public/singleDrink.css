@@ -1,16 +1,22 @@
 #single-drink-form img {
 }
 
-#single-drink-content img {
-  width: 100px;
-  height: 100px;
-}
-
 #single-drink-btn-containter {
   display: flex;
   flex-direction: row;
 }
 
-#single-drink-btn-containter #minus:active + .single-drink-img {
-  width: 1000px;
+#single-drink-img {
+  width: 100px;
+  height: 100px;
+}
+
+@keyframes image-spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#single-drink-img:hover {
+  animation: image-spin 2s linear infinite;
 }
