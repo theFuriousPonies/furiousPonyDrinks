@@ -177,7 +177,7 @@
   background: rgba(0, 0, 0, 0);
   width: 150vh;
   height: 91.5vh;
-  /* transform: translateX(-50%); */
+  /* overflow: visible; */
 }
 
 .bubble {
@@ -189,11 +189,11 @@
 
 @keyframes up {
   0% {
-    transform: translateY(1000px) translateX(0px);
+    transform: translateY(860px);
   }
 
   100% {
-    transform: translateY(10px) translateX(10px);
+    transform: translateY(75px);
   }
 }
 
@@ -208,42 +208,47 @@
   }
 }
 
-/* .bubble {
-  animation: wobble 2s infinite ease-in-out;
-} */
-
 .bubble-box {
   will-change: transform, opacity;
-  animation: up 6.5s linear infinite;
+  animation: up 6.5s ease-in infinite;
 }
+
+/* up */
 
 #bubble-delayed-big {
   /* transform: translateY(10px); */
   will-change: transform, opacity;
-  animation: up 5.25s linear infinite 3s;
+  animation: up 5.25s ease-in infinite 3s;
+}
+
+#bubble-small-delayed {
+  will-change: transform, opacity;
+  animation: up 5.75s ease-in infinite 4s;
+}
+
+#bubble-small-delay {
+  will-change: transform, opacity;
+  animation: up 6s ease-in infinite 2s;
+}
+
+/* wobble */
+.bubble {
+  animation: wobble 1.5s infinite ease-in-out;
 }
 
 #wobble-delayed {
   animation: wobble 1.5s infinite ease-in-out;
 }
 
-#bubble-small-delayed {
-  will-change: transform, opacity;
-  animation: up 5.75s linear infinite 2s;
-}
-
 #wobble-delayed-fast {
   animation: wobble 3s infinite ease-in-out;
-}
-
-#bubble-small-delay {
-  will-change: transform, opacity;
-  animation: up 6s linear infinite 1s;
 }
 
 #wobble-fast {
   animation: wobble 1.75s infinite ease-in-out;
 }
+
+/* size */
 
 .bubble1 {
   stroke: rgba(255, 255, 255, 0.8);
