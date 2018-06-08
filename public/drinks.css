@@ -138,6 +138,7 @@
     left: 0px;
     top: 0px;
     z-index: 3;
+    transform: rotate(720deg);
   }
   25% {
     left: 100vh;
@@ -162,25 +163,6 @@
 }
 
 .checkbox-containter input:checked + .checkmark {
-  animation: connor 6s infinite;
+  animation: connor 6s linear infinite;
   animation-iteration-count: 1;
 }
-/* .checkmark:after {
-  content: '';
-  position: absolute;
-  display: none;
-} */
-
-/* .checkbox-containter input:checked .checkmark:after {
-  display: block;
-} */
-
-/* .checkbox-containter .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  transform: rotate(45deg);
-}  */
