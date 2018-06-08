@@ -16,7 +16,6 @@ class SingleDrink extends Component {
       return drinkId === drink.id
     })
     const drink = drinkArr[0]
-    console.log(event.target.name)
     if (event.target.name === 'add') {
       if (drink.inventory > quantity) {
         this.setState(prevState => ({
@@ -56,7 +55,7 @@ class SingleDrink extends Component {
           >
             <div id="single-drink-content">
               {drink.inventory ? <div /> : <span>Out of Stock</span>}
-              <img src={drink.imageUrl} alt="" className="single-drink-img" />
+              <img src={drink.imageUrl} content="" id="single-drink-img" />
               <div>
                 <h2>{drink.name}</h2>
                 <div>Price: ${(drink.price / 100) * quantity}</div>
