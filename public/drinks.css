@@ -191,25 +191,22 @@
   0% {
     transform: translateY(1000px) translateX(0px);
   }
-  50% {
-    transform: translateY(0px) translateX(-10px);
-  }
 
   100% {
-    transform: translateY(-100px) translateX(10px);
+    transform: translateY(10px) translateX(10px);
   }
 }
 
 .bubble-thing:nth-child(1) {
-  transform: translateY(2048px);
+  /* transform: translateY(10px); */
   will-change: transform, opacity;
   animation: up 6.5s linear infinite;
 }
 
 .bubble-thing:nth-child(2) {
-  transform: translateY(2048px);
+  transform: translateY(10px);
   will-change: transform, opacity;
-  animation: up 1s linear infinite 2s;
+  /* animation: up 1s linear infinite 5s; */
 }
 
 .bubble1 {
