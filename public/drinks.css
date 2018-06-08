@@ -200,12 +200,36 @@
   }
 }
 
-g {
+.bubble-thing:nth-child(1) {
   transform: translateY(2048px);
-  /* opacity: 0; */
   will-change: transform, opacity;
   animation: up 6.5s linear infinite;
 }
 
-circle {
+.bubble-thing:nth-child(2) {
+  transform: translateY(2048px);
+  will-change: transform, opacity;
+  animation: up 1s linear infinite 2s;
+}
+
+.bubble1 {
+  stroke: rgba(255, 255, 255, 0.8);
+  fill: rgba(211, 211, 211, 0.3);
+  stroke-width: 1.5;
+}
+
+.bubble2 {
+  stroke: rgba(255, 255, 255, 0.5);
+  fill: rgba(190, 190, 190, 0.1);
+  stroke-width: 1;
+}
+
+.bubble3 {
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 1.2;
+}
+
+.bubble4 {
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 1.15;
 }
