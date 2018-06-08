@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import DrinkProfile from './drinkProfile.jsx'
 import FilterByCategory from './filterCategories.jsx'
+import Bubbles from './bubbles.jsx'
 
 class Drinks extends Component {
   constructor() {
@@ -54,6 +55,7 @@ class Drinks extends Component {
         <div id="drinks-container">
           <FilterByCategory handleChange={this.handleChange} />
           <div id="drinks">
+            <Bubbles />
             <h1>ALL THE DRINKS</h1>
             <div className="drink-profile-container">
               {drinks.map(drink => {
