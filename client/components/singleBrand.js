@@ -4,12 +4,12 @@ import DrinkProfile from './drinkProfile.jsx'
 
 const SingleBrand = props => {
   if (props.brands.length) {
+    console.log(props.brands.length)
     let brand = props.brands.find(item => {
       if (item.id === +props.match.params.id) {
         return item
       }
     })
-    console.log(brand)
     return (
       <div>
         <img src={brand.imageUrl} />
@@ -17,9 +17,7 @@ const SingleBrand = props => {
         <br />
         {brand.description}
         {brand.drinks.map(drink => {
-          return (
-            <DrinkProfile drink={drink} key={drink.id} />
-          )
+          return <DrinkProfile drink={drink} key={drink.id} />
         })}
       </div>
     )

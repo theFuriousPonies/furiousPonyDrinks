@@ -40,7 +40,8 @@ export const getBrands = () => async dispatch => {
 export const updateBrand = brand => async dispatch => {
   try {
     const uBrand = await axios.put(`/api/brands/${brand.id}`, brand)
-    dispatch(updatedBrand(uBrand))
+    await dispatch(updatedBrand(uBrand))
+    history.push(`/brands/${brand.id}`)
   } catch (err) {
     console.error(err)
     dispatch(failBrand(err))

@@ -32,7 +32,7 @@ router.get('/:brandId', async (req, res, next) => {
 
 router.put('/:brandId', async (req, res, next) => {
   try {
-    const [_, brand] = await Brand.update(req.body, {
+    const [_, [brand]] = await Brand.update(req.body, {
       returning: true,
       where: {
         id: req.params.brandId
