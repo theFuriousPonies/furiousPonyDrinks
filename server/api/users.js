@@ -29,7 +29,11 @@ router.put('/:userId', async (req, res, next) => {
       where: {
         id: req.params.userId
       },
-      include: [{ model: Order }]
+      include: [
+        {
+          model: Order
+        }
+      ]
     })
     res.send(data)
   } catch (error) {
