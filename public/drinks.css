@@ -197,16 +197,52 @@
   }
 }
 
-.bubble-thing:nth-child(1) {
-  /* transform: translateY(10px); */
+@keyframes wobble {
+  0%,
+  100% {
+    transform: translateX(-10px);
+  }
+
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+/* .bubble {
+  animation: wobble 2s infinite ease-in-out;
+} */
+
+.bubble-box {
   will-change: transform, opacity;
   animation: up 6.5s linear infinite;
 }
 
-.bubble-thing:nth-child(2) {
-  transform: translateY(10px);
+#bubble-delayed-big {
+  /* transform: translateY(10px); */
   will-change: transform, opacity;
-  /* animation: up 1s linear infinite 5s; */
+  animation: up 5.25s linear infinite 3s;
+}
+
+#wobble-delayed {
+  animation: wobble 1.5s infinite ease-in-out;
+}
+
+#bubble-small-delayed {
+  will-change: transform, opacity;
+  animation: up 5.75s linear infinite 2s;
+}
+
+#wobble-delayed-fast {
+  animation: wobble 3s infinite ease-in-out;
+}
+
+#bubble-small-delay {
+  will-change: transform, opacity;
+  animation: up 6s linear infinite 1s;
+}
+
+#wobble-fast {
+  animation: wobble 1.75s infinite ease-in-out;
 }
 
 .bubble1 {
