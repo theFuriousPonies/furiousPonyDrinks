@@ -17,7 +17,6 @@ class EditBrand extends Component {
       const brandEdit = this.props.brands.filter(brand => {
         return +this.props.match.params.id === brand.id
       })[0]
-      console.log(brandEdit)
       const { name, description, imageUrl } = brandEdit
       this.setState({
         name,
@@ -33,7 +32,7 @@ class EditBrand extends Component {
   }
   handleSubmit = event => {
     event.preventDefault()
-    console.log(this.state)
+
     this.props.updateBrand(this.state)
     this.setState({
       name: '',
