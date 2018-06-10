@@ -14,4 +14,5 @@ export { Login, Signup } from './auth-form'
 export { default as SingleDrink } from './singleDrink.jsx'
 export { default as Cart } from './cart.jsx'
 export { default as Checkout } from './checkout.js'
-
+export { default as EditBrand } from './editBrand.jsx'
+export { default as EditDrink } from './editDrink.jsx'

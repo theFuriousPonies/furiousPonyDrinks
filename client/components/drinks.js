@@ -48,7 +48,6 @@ class Drinks extends Component {
   }
 
   render() {
-    console.log(this.state.filters)
     const drinks = this.props.drinks
     return (
       <div id="color-gradient">

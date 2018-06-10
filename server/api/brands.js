@@ -38,7 +38,7 @@ router.put('/:brandId', async (req, res, next) => {
         id: req.params.brandId
       }
     })
-    res.send(brand)
+    res.send(brand[0].dataValues)
   } catch (err) {
     next(err)
   }

@@ -39,8 +39,9 @@ export const getBrands = () => async dispatch => {
 
 export const updateBrand = brand => async dispatch => {
   try {
-    const uBrand = await axios.put(`/api/brands/${brand.id}`, brand)
-    dispatch(updatedBrand(uBrand))
+    const { data } = await axios.put(`/api/brands/${brand.id}`, brand)
+    await dispatch(updatedBrand(data))
+    history.push(`/brands/${brand.id}`)
   } catch (err) {
     console.error(err)
     dispatch(failBrand(err))
@@ -76,8 +77,8 @@ const brands = (state = initialState, action) => {
     case NEW_BRAND:
       return [...state, action.brand]
     case UPDATE_BRAND: {
-      const index = state.findIndex(theBrand => theBrand.id === action.brand.id)
-      return [...state].splice(index, 1, action.brand)
+      const filtered = state.filter(theBrand => theBrand.id !== action.brand.id)
+      return [...filtered, action.brand]
     }
     case REMOVE_BRAND:
       return [...state].filter(theBrand => theBrand.id !== action.id)
