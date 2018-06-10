@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import { changeOneItem } from '../store/item'
+
 class SingleDrink extends Component {
   constructor() {
     super()
@@ -29,8 +31,18 @@ class SingleDrink extends Component {
     }
   }
 
-  handleSubmit() {
-    return 'funck off'
+  handleSubmit = () => {
+    const drinkId = this.props.match.params.id
+    const item = {
+      quantity: this.state.quantity,
+      drinkId: +drinkId
+    }
+    if (this.props.user.id) {
+      item.orderId = this.props.order.id
+      this.props.addToCart(item)
+    } else {
+      localStorage.setItem(drinkId, JSON.stringify(item))
+    }
   }
   render() {
     const drinkId = +this.props.match.params.id
@@ -47,11 +59,7 @@ class SingleDrink extends Component {
         {drink && (
           <form
             id="single-drink-form"
-            onSubmit={this.handleSubmit({
-              quantity,
-              drinkId,
-              orderId
-            })}
+            onSubmit={this.handleSubmit()}
           >
             <div id="single-drink-content">
               {drink.inventory ? <div /> : <span>Out of Stock</span>}
@@ -85,12 +93,12 @@ class SingleDrink extends Component {
 
 const mapStateToProps = state => ({
   drinks: state.drinks,
+  order: state.order,
   user: state.user
-  // order: state.order
 })
 
 const mapDispatchtoProps = dispatch => ({
-  // handleSubmit: obj => dispatch(thunk(obj))
+  addToCart: item => dispatch(changeOneItem(item))
 })
 
 export default connect(
