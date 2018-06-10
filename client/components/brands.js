@@ -6,7 +6,6 @@ import { getBrands } from '../store/brand'
 
 const Brands = ({ brands }) => {
   if (!brands.length) return null
-  console.log(brands)
   return (
     <div>
       {brands.map(brand => (
