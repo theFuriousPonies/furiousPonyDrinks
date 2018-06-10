@@ -13,7 +13,5 @@ export { default as Categories } from './categories'
 export { Login, Signup } from './auth-form'
 export { default as SingleDrink } from './singleDrink.jsx'
 export { default as Cart } from './cart.jsx'
-export { default as CheckoutForm } from './checkoutForm'
-export { default as checkout } from './checkout.jsx'
-export { default as cardSection } from './cardSection'
+export { default as Checkout } from './checkout.js'
 
