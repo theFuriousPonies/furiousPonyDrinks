@@ -12,18 +12,18 @@ class EditBrand extends Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.props.brands.length) {
-      const brandEdit = this.props.brands.filter(brand => {
-        return +this.props.match.params.id === brand.id
+  static getDerivedStateFromProps(props) {
+    if (props.brands.length) {
+      const brandEdit = props.brands.filter(brand => {
+        return +props.match.params.id === brand.id
       })[0]
       const { name, description, imageUrl } = brandEdit
-      this.setState({
+      return {
         name,
         description,
         imageUrl,
-        id: this.props.match.params.id
-      })
+        id: brandEdit.id
+      }
     }
   }
 
