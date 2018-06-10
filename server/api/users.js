@@ -21,14 +21,14 @@ router.put('/:userId', async (req, res, next) => {
   try {
     const [_, user] = await User.update(req.body, {
       returning: true,
-      where: {
-        id: req.params.userId
-      },
       include: [
         {
           model: Order
         }
-      ]
+      ],
+      where: {
+        id: req.params.userId
+      }
     })
     res.send(user[0].dataValues)
   } catch (error) {

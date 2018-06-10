@@ -2,6 +2,7 @@ import axios from 'axios'
 import history from '../history'
 
 import { getUserOrder, getNewOrder } from './order'
+import { getItems } from './item'
 
 /**
  * ACTION TYPES
@@ -23,20 +24,20 @@ export const removeUser = () => ({ type: REMOVE_USER })
 /**
  * THUNK CREATORS
  */
-// export const me = () => dispatch =>
-//   axios
-//     .get('/auth/me')
-//     .then(res => dispatch(getUser(res.data || defaultUser)))
-//     .catch(err => console.log(err))
 
 export const me = () => async dispatch => {
   try {
     const { data } = await axios.get('/auth/me')
     if (data.id) {
       dispatch(getUser(data))
-      if (data.orders.length && !data.orders[0].status) {
-        const orderId = data.orders[0].id
-        dispatch(getUserOrder(orderId))
+      if (data.orders.length) {
+        const [order] = data.orders.filter(order => order.status === false)
+        if (order) {
+          dispatch(getUserOrder(order.id))
+          dispatch(getItems(order.id))
+        } else {
+          dispatch(getNewOrder(data.id))
+        }
       } else {
         dispatch(getNewOrder(data.id))
       }
@@ -54,9 +55,14 @@ export const auth = (name, email, password, method) => dispatch =>
     .then(
       ({ data }) => {
         dispatch(getUser(data))
-        if (data.orders && data.orders.length && !data.orders[0].status) {
-          const orderId = data.orders[0].id
-          dispatch(getUserOrder(orderId))
+        if (data.orders && data.orders.length) {
+          const [order] = data.orders.filter(order => order.status === false)
+          if (order) {
+            dispatch(getUserOrder(order.id))
+            dispatch(getItems(order.id))
+          } else {
+            dispatch(getNewOrder(data.id))
+          }
         } else {
           dispatch(getNewOrder(data.id))
         }

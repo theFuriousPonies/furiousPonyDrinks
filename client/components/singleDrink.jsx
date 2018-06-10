@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
+import { addOneItem } from '../store/item'
+
 class SingleDrink extends Component {
   constructor() {
     super()
@@ -30,8 +32,14 @@ class SingleDrink extends Component {
     }
   }
 
-  handleSubmit() {
-    return 'funck off'
+  handleSubmit = event => {
+    event.preventDefault()
+    const item = {
+      quantity: this.state.quantity,
+      orderId: this.props.order.id,
+      drinkId: +this.props.match.params.id
+    }
+    this.props.addToCart(item)
   }
   render() {
     const drinkId = +this.props.match.params.id
@@ -42,32 +50,26 @@ class SingleDrink extends Component {
     // const { handleSubmit, handleChange } = this.props
     const { quantity } = this.state
     // const orderId = this.state.order.id
-    const orderId = 1
+
     return (
       <div>
         {drink && (
-          <div>
-            <form
-              id="single-drink-form"
-              onSubmit={this.handleSubmit({
-                quantity,
-                drinkId,
-                orderId
-              })}
-            >
-              <div id="single-drink-content">
-                {drink.inventory ? <div /> : <span>Out of Stock</span>}
-                <img src={drink.imageUrl} content="" id="single-drink-img" />
-                <div>
-                  <h2>{drink.name}</h2>
-                  <div>Price: ${(drink.price / 100) * quantity}</div>
-                  <div>Quantity: {quantity}</div>
-                  {drink.inventory !== quantity ? (
-                    <div />
-                  ) : (
-                    <span>Max Quantity</span>
-                  )}
-                </div>
+          <form
+            id="single-drink-form"
+            onSubmit={this.handleSubmit}
+          >
+            <div id="single-drink-content">
+              {drink.inventory ? <div /> : <span>Out of Stock</span>}
+              <img src={drink.imageUrl} content="" id="single-drink-img" />
+              <div>
+                <h2>{drink.name}</h2>
+                <div>Price: ${(drink.price / 100) * quantity}</div>
+                <div>Quantity: {quantity}</div>
+                {drink.inventory !== quantity ? (
+                  <div />
+                ) : (
+                  <span>Max Quantity</span>
+                )}
               </div>
               <div id="single-drink-btn-containter">
                 <button type="button" onClick={this.handleChange} name="add">
@@ -93,12 +95,12 @@ class SingleDrink extends Component {
 
 const mapStateToProps = state => ({
   drinks: state.drinks,
+  order: state.order,
   user: state.user
-  // order: state.order
 })
 
 const mapDispatchtoProps = dispatch => ({
-  // handleSubmit: obj => dispatch(thunk(obj))
+  addToCart: item => dispatch(addOneItem(item))
 })
 
 export default connect(
