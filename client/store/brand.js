@@ -78,8 +78,6 @@ const brands = (state = initialState, action) => {
       return [...state, action.brand]
     case UPDATE_BRAND: {
       const filtered = state.filter(theBrand => theBrand.id !== action.brand.id)
-      console.log('update reducer')
-      console.log([...filtered, action.brand])
       return [...filtered, action.brand]
     }
     case REMOVE_BRAND:
