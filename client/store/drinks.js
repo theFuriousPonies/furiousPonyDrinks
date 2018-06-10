@@ -81,7 +81,7 @@ const drinks = (state = initialState, action) => {
       return [...filtered, action.drink]
     case REMOVE_DRINK:
       return [...state].filter(drink => drink.id !== action.id)
-    case failDrink:
+    case FAIL_DRINK:
       return action.err
     default:
       return state
