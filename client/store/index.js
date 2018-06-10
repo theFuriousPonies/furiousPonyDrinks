@@ -8,6 +8,7 @@ import categories from './categories'
 import drinks from './drinks'
 import order from './order'
 import items from './item'
+import users from './users'
 
 const reducer = combineReducers({
   user,
@@ -15,7 +16,8 @@ const reducer = combineReducers({
   brands,
   categories,
   drinks,
-  items
+  items,
+  users
 })
 
 const middleware = composeWithDevTools(
