@@ -40,7 +40,8 @@ export const getDrinks = () => async dispatch => {
 export const updateDrink = drink => async dispatch => {
   try {
     const { data } = await axios.put(`/api/drinks/${drink.id}`, drink)
-    dispatch(updatedDrink(data))
+    await dispatch(updatedDrink(data))
+    history.push(`/drinks/${drink.id}`)
   } catch (err) {
     console.error(err)
     dispatch(failDrink(err))
@@ -76,8 +77,10 @@ const drinks = (state = initialState, action) => {
     case NEW_DRINK:
       return [...state, action.drink]
     case UPDATE_DRINK:
-      const index = state.findIndex(drink => drink.id === action.drink.id)
-      return [...state].splice(index, 1, action.drink)
+      const filtered = state.filter(drink => {
+        return drink.id !== action.drink.id
+      })
+      return [...filtered, action.drink]
     case REMOVE_DRINK:
       return [...state].filter(drink => drink.id !== action.id)
     case failDrink:
