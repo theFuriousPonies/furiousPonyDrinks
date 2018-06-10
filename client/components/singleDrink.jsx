@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { changeOneItem } from '../store/item'
+import { addOneItem } from '../store/item'
 
 class SingleDrink extends Component {
   constructor() {
@@ -94,7 +94,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchtoProps = dispatch => ({
-  addToCart: item => dispatch(changeOneItem(item))
+  addToCart: item => dispatch(addOneItem(item))
 })
 
 export default connect(

@@ -36,6 +36,26 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.post('/:drinkId', async (req, res, next) => {
+  try {
+    const { orderId, quantity } = req.body
+    const drinkId = req.params.drinkId
+    const item = await Item.findOne({ where: { drinkId, orderId } }).then(
+      foundItem => {
+        if (foundItem) {
+          const newQuantity = foundItem.quantity + quantity
+          return foundItem.update({ quantity: newQuantity })
+        } else {
+          return Item.create(req.body)
+        }
+      }
+    )
+    res.json(item)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.delete('/', async (req, res, next) => {
   try {
     await Item.destroy({ where: req.body })
