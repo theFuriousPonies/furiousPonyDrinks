@@ -77,9 +77,7 @@ const drinks = (state = initialState, action) => {
     case NEW_DRINK:
       return [...state, action.drink]
     case UPDATE_DRINK:
-      const filtered = state.filter(drink => {
-        return drink.id !== action.drink.id
-      })
+      const filtered = state.filter(drink => drink.id !== action.drink.id)
       return [...filtered, action.drink]
     case REMOVE_DRINK:
       return [...state].filter(drink => drink.id !== action.id)

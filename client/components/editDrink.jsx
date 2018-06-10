@@ -18,6 +18,59 @@ class EditDrink extends Component {
     }
   }
 
+  static getDerivedStateFromProps(props) {
+    if (props.drinks.length) {
+      const drinkEdit = props.drinks.filter(drink => {
+        return +props.match.params.id === drink.id
+      })[0]
+      const {
+        name,
+        flavor,
+        price,
+        description,
+        size,
+        tag,
+        imageUrl,
+        inventory,
+        brandId
+      } = drinkEdit
+      return {
+        name,
+        flavor,
+        price,
+        description,
+        size,
+        tag,
+        imageUrl,
+        inventory,
+        brandId,
+        id: drinkEdit.id
+      }
+    }
+  }
+
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    this.props.updateDrink(this.state)
+    this.setState({
+      name: '',
+      flavor: '',
+      price: NaN,
+      description: '',
+      size: NaN,
+      tag: {},
+      imageUrl: '',
+      inventory: NaN,
+      brandId: NaN
+    })
+  }
+
   render() {
     const {
       name,
@@ -35,19 +88,54 @@ class EditDrink extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <label>Name</label>
-          <input type="text" value={name} name="name" />
+          <input
+            type="text"
+            value={name}
+            name="name"
+            onChange={this.handleChange}
+          />
           <label>Flavour</label>
-          <input type="text" value={flavor} name="flavor" />
+          <input
+            type="text"
+            value={flavor}
+            name="flavor"
+            onChange={this.handleChange}
+          />
           <label>Price</label>
-          <input type="number" value={price} name="price" />
+          <input
+            type="number"
+            value={price}
+            name="price"
+            onChange={this.handleChange}
+          />
           <label>Description</label>
-          <input type="text" value={description} name="description" />
+          <input
+            type="text"
+            value={description}
+            name="description"
+            onChange={this.handleChange}
+          />
           <label>Size</label>
-          <input type="number" name="size" value={size} />
+          <input
+            type="number"
+            name="size"
+            value={size}
+            onChange={this.handleChange}
+          />
           <label>Image Url</label>
-          <input type="text" name="imageUrl" value={imageUrl} />
+          <input
+            type="text"
+            name="imageUrl"
+            value={imageUrl}
+            onChange={this.handleChange}
+          />
           <label>Inventory</label>
-          <input type="number" name="inventory" value={inventory} />
+          <input
+            type="number"
+            name="inventory"
+            value={inventory}
+            onChange={this.handleChange}
+          />
           <button type="submit">Submit</button>
         </form>
       </div>
