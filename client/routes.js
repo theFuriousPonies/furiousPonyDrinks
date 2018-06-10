@@ -12,7 +12,10 @@ import {
   Home,
   Drinks,
   Categories,
-  Cart
+  Checkout,
+  Cart,
+  EditBrand,
+  EditDrink
 } from './components'
 import { me } from './store/user'
 
@@ -32,13 +35,20 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/brands" component={Brands} />
-        <Route path="/brands/:id" component={SingleBrand} />
+        <Route exact path="/brands/:id" component={SingleBrand} />
+        {this.props.user.isAdmin && (
+          <Route path="/brands/:id/edit" component={EditBrand} />
+        )}
         <Route exact path="/drinks" component={Drinks} />
         <Route exact path="/drinks/:id" component={SingleDrink} />
+        {this.props.user.isAdmin && (
+          <Route path="/drinks/:id/edit" component={EditDrink} />
+        )}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/categories" component={Categories} />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/" component={Home} />
       </Switch>
     )

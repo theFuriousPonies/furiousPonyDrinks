@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
 import { addOneItem } from '../store/item'
 
@@ -70,17 +71,22 @@ class SingleDrink extends Component {
                   <span>Max Quantity</span>
                 )}
               </div>
-            </div>
-            <div id="single-drink-btn-containter">
-              <button type="button" onClick={this.handleChange} name="add">
-                +
-              </button>
-              <button id="minus" type="button" onClick={this.handleChange}>
-                -
-              </button>
-            </div>
-            <button type="submit">Add to Cart</button>
-          </form>
+              <div id="single-drink-btn-containter">
+                <button type="button" onClick={this.handleChange} name="add">
+                  +
+                </button>
+                <button id="minus" type="button" onClick={this.handleChange}>
+                  -
+                </button>
+              </div>
+              <button type="submit">Add to Cart</button>
+            </form>
+            {this.props.user.isAdmin && (
+              <NavLink to={`/drinks/${drinkId}/edit`}>
+                <button type="button">Edit Drink</button>
+              </NavLink>
+            )}
+          </div>
         )}
       </div>
     )
