@@ -12,6 +12,7 @@ import {
   Home,
   Drinks,
   Categories,
+  Checkout,
   Cart,
   EditBrand,
   EditDrink
@@ -47,6 +48,7 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/categories" component={Categories} />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/" component={Home} />
       </Switch>
     )
