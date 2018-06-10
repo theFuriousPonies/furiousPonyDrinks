@@ -79,9 +79,11 @@ class SingleDrink extends Component {
               </div>
               <button type="submit">Add to Cart</button>
             </form>
-            <NavLink to={`/drinks/${drinkId}/edit`}>
-              <button type="button">Edit Drink</button>
-            </NavLink>
+            {this.props.user.isAdmin && (
+              <NavLink to={`/drinks/${drinkId}/edit`}>
+                <button type="button">Edit Drink</button>
+              </NavLink>
+            )}
           </div>
         )}
       </div>

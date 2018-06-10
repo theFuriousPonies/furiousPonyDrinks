@@ -35,12 +35,12 @@ class Routes extends Component {
       <Switch>
         <Route exact path="/brands" component={Brands} />
         <Route exact path="/brands/:id" component={SingleBrand} />
-        {this.props.user.googleId && (
+        {this.props.user.isAdmin && (
           <Route path="/brands/:id/edit" component={EditBrand} />
         )}
         <Route exact path="/drinks" component={Drinks} />
         <Route exact path="/drinks/:id" component={SingleDrink} />
-        {this.props.user.googleId && (
+        {this.props.user.isAdmin && (
           <Route path="/drinks/:id/edit" component={EditDrink} />
         )}
         <Route exact path="/login" component={Login} />
