@@ -46,8 +46,12 @@ const items = (state = initialState, action) => {
   switch (action.type) {
     case GOT_ITEMS:
       return action.allItems
-    case ONE_ITEM:
-      return [action.item, ...state]
+    case ONE_ITEM: {
+      const filtered = state.filter(
+        item => item.drinkId !== action.item.drinkId
+      )
+      return [...filtered, action.item]
+    }
     case REMOVED_ITEM:
       return [...state].filter(
         item =>

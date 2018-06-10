@@ -31,18 +31,14 @@ class SingleDrink extends Component {
     }
   }
 
-  handleSubmit = () => {
-    const drinkId = this.props.match.params.id
+  handleSubmit = event => {
+    event.preventDefault()
     const item = {
       quantity: this.state.quantity,
-      drinkId: +drinkId
+      orderId: this.props.order.id,
+      drinkId: +this.props.match.params.id
     }
-    if (this.props.user.id) {
-      item.orderId = this.props.order.id
-      this.props.addToCart(item)
-    } else {
-      localStorage.setItem(drinkId, JSON.stringify(item))
-    }
+    this.props.addToCart(item)
   }
   render() {
     const drinkId = +this.props.match.params.id
@@ -53,13 +49,13 @@ class SingleDrink extends Component {
     // const { handleSubmit, handleChange } = this.props
     const { quantity } = this.state
     // const orderId = this.state.order.id
-    const orderId = 1
+
     return (
       <div>
         {drink && (
           <form
             id="single-drink-form"
-            onSubmit={this.handleSubmit()}
+            onSubmit={this.handleSubmit}
           >
             <div id="single-drink-content">
               {drink.inventory ? <div /> : <span>Out of Stock</span>}

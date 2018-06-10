@@ -2,6 +2,7 @@ import axios from 'axios'
 import history from '../history'
 
 import { getUserOrder, getNewOrder } from './order'
+import { getItems } from './item'
 
 /**
  * ACTION TYPES
@@ -33,6 +34,7 @@ export const me = () => async dispatch => {
         const [order] = data.orders.filter(order => order.status === false)
         if (order) {
           dispatch(getUserOrder(order.id))
+          dispatch(getItems(order.id))
         } else {
           dispatch(getNewOrder(data.id))
         }
@@ -57,6 +59,7 @@ export const auth = (name, email, password, method) => dispatch =>
           const [order] = data.orders.filter(order => order.status === false)
           if (order) {
             dispatch(getUserOrder(order.id))
+            dispatch(getItems(order.id))
           } else {
             dispatch(getNewOrder(data.id))
           }
