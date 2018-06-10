@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import { addOneItem } from '../store/item'
+import { changeOneItem } from '../store/item'
 
 class SingleDrink extends Component {
   constructor() {
@@ -47,29 +47,29 @@ class SingleDrink extends Component {
       return drinkId === drink.id
     })
     const drink = drinkArr[0]
-    // const { handleSubmit, handleChange } = this.props
     const { quantity } = this.state
-    // const orderId = this.state.order.id
 
     return (
       <div>
         {drink && (
-          <form
-            id="single-drink-form"
-            onSubmit={this.handleSubmit}
-          >
-            <div id="single-drink-content">
-              {drink.inventory ? <div /> : <span>Out of Stock</span>}
-              <img src={drink.imageUrl} content="" id="single-drink-img" />
-              <div>
-                <h2>{drink.name}</h2>
-                <div>Price: ${(drink.price / 100) * quantity}</div>
-                <div>Quantity: {quantity}</div>
-                {drink.inventory !== quantity ? (
-                  <div />
-                ) : (
-                  <span>Max Quantity</span>
-                )}
+          <div>
+            <form
+              id="single-drink-form"
+              onSubmit={this.handleSubmit}
+            >
+              <div id="single-drink-content">
+                {drink.inventory ? <div /> : <span>Out of Stock</span>}
+                <img src={drink.imageUrl} content="" id="single-drink-img" />
+                <div>
+                  <h2>{drink.name}</h2>
+                  <div>Price: ${(drink.price / 100) * quantity}</div>
+                  <div>Quantity: {quantity}</div>
+                  {drink.inventory !== quantity ? (
+                    <div />
+                  ) : (
+                    <span>Max Quantity</span>
+                  )}
+                </div>
               </div>
               <div id="single-drink-btn-containter">
                 <button type="button" onClick={this.handleChange} name="add">
@@ -100,7 +100,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchtoProps = dispatch => ({
-  addToCart: item => dispatch(addOneItem(item))
+  addToCart: item => dispatch(changeOneItem(item))
 })
 
 export default connect(
