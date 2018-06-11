@@ -55,23 +55,12 @@ class SplitForm extends React.Component {
     });
   };
 
-  handleSubmit = ev => {
-    ev.preventDefault()
-    if (this.props.stripe) {
-      this.props.stripe
-        .createToken()
-        .then(payload => console.log('[token]', payload))
-    } else {
-      console.log("Stripe.js hasn't loaded yet.")
-    }
-  }
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
           Name:
           <input name="name" type="text" placeholder="Jane Doe" required onChange={handleNameChange} />
-          <input name="name" type="text" placeholder="Jane Doe" required onChange={handleChange} />
         </label>
         <label>
           Card number
