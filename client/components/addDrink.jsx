@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateDrink } from '../store/drinks'
+import { getNewDrink } from '../store/drinks'
 
 class AddDrink extends Component {
   constructor() {
@@ -11,46 +11,14 @@ class AddDrink extends Component {
       price: 0,
       description: '',
       size: 0,
-      tag: {},
+      tag: [],
       imageUrl: '',
       inventory: 0,
       brandId: 0
     }
   }
 
-  static getDerivedStateFromProps(props) {
-    if (props.drinks.length) {
-      const drinkEdit = props.drinks.filter(drink => {
-        return +props.match.params.id === drink.id
-      })[0]
-      const {
-        name,
-        flavor,
-        price,
-        description,
-        size,
-        tag,
-        imageUrl,
-        inventory,
-        brandId
-      } = drinkEdit
-      return {
-        name,
-        flavor,
-        price,
-        description,
-        size,
-        tag,
-        imageUrl,
-        inventory,
-        brandId,
-        id: drinkEdit.id
-      }
-    }
-  }
-
   handleChange = event => {
-    console.log(event.target.name)
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -58,7 +26,8 @@ class AddDrink extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.updateDrink(this.state)
+    console.log(this.state)
+    this.props.createDrink(this.state)
   }
 
   render() {
@@ -73,14 +42,6 @@ class AddDrink extends Component {
       inventory,
       brandId
     } = this.state
-
-    // for select form
-    let brandOptions = []
-    let firstBrand = {}
-    if (this.props.brands.length) {
-      brandOptions = this.props.brands.filter(brand => brand.id !== brandId)
-      firstBrand = this.props.brands.filter(brand => brand.id === brandId)[0]
-    }
 
     return (
       <div>
@@ -136,10 +97,8 @@ class AddDrink extends Component {
           />
           {
             <select name="brandId" onChange={this.handleChange}>
-              <option value={firstBrand}>
-                {firstBrand ? firstBrand.name : ''}
-              </option>
-              {brandOptions.map(brand => {
+              <option value="">SELECT BRAND!</option>
+              {this.props.brands.map(brand => {
                 return (
                   <option key={brand.id} value={brand.id}>
                     {brand.name}
@@ -162,7 +121,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateDrink: drink => dispatch(updateDrink(drink))
+  createDrink: drink => dispatch(getNewDrink(drink))
 })
 
 export default connect(
