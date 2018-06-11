@@ -31,16 +31,12 @@ class Drinks extends Component {
 
   checkFiltersInCategories(drink) {
     // This is for experimentation
-    if (!drink.categories) {
-      return true
-    }
-    // This is for experimentation
     if (!this.state.filters.length) {
       return true
     }
     for (let i = 0; i < drink.categories.length; i++) {
       for (let j = 0; j < this.state.filters.length; j++) {
-        if (this.state.filters[j] === drink.categories[i].id) {
+        if (+this.state.filters[j] === drink.categories[i].id) {
           return true
         }
       }
@@ -49,21 +45,24 @@ class Drinks extends Component {
   }
 
   render() {
+    console.log('drinks', this.props.drinks)
+    console.log('filters', this.state.filters)
     const drinks = this.props.drinks
     const isAdmin = this.props.user.isAdmin
-    console.log('isAdmin', isAdmin)
     return (
       <div id="color-gradient">
         <div id="drinks-container">
           <FilterByCategory handleChange={this.handleChange} />
-          {isAdmin && (
-            <NavLink to="/drinks/add">
-              <button type="button">Create Drink</button>
-            </NavLink>
-          )}
           <div id="drinks">
-            <Bubbles />
             <h1>ALL THE DRINKS</h1>
+            {isAdmin && (
+              <NavLink to="/drinks/add">
+                <button type="button" id="add-drink-btn">
+                  Create Drink
+                </button>
+              </NavLink>
+            )}
+            <Bubbles />
             <div className="drink-profile-container">
               {drinks.map(drink => {
                 if (this.checkFiltersInCategories(drink)) {
