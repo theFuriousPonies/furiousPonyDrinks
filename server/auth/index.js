@@ -5,11 +5,7 @@ module.exports = router
 router.post('/login', (req, res, next) => {
   User.findOne({
     where: { email: req.body.email },
-    include: [
-      {
-        model: Order
-      }
-    ]
+    include: [{ model: Order }]
   })
     .then(user => {
       if (!user) {

@@ -7,7 +7,6 @@ import {
   injectStripe
 } from 'react-stripe-elements'
 import axios from 'axios'
-
 const handleBlur = () => {
   console.log('[blur]')
 }
@@ -45,18 +44,7 @@ const createOptions = (fontSize, padding) => {
 }
 
 class SplitForm extends React.Component {
-  // handleSubmit = ev => {
-  //   ev.preventDefault()
-  //   // if (this.props.stripe) {
-  //   //   this.props.stripe
-  //   //     .createToken()
-  //   //     .then(payload => console.log('[token]', payload))
-  //   // } else {
-  //   //   console.log("Stripe.js hasn't loaded yet.")
-  //   // }
-  // }
   handleSubmit = (ev) => {
-    // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault();
 
     // Within the context of `Elements`, this call to createToken knows which Element to
@@ -65,22 +53,25 @@ class SplitForm extends React.Component {
       axios.post('/api/stripe', token)
       console.log('Received Stripe token:', token);
     });
-
-    // However, this line of code will do the same thing:
-    //
-    // this.props.stripe.createToken({type: 'card', name: 'Jenny Rosen'});
-
-    // You can also use createSource to create Sources. See our Sources
-    // documentation for more: https://stripe.com/docs/stripe-js/reference#stripe-create-source
-    //
-    // this.props.stripe.createSource({type: 'card', name: 'Jenny Rosen'});
   };
+
+  handleSubmit = ev => {
+    ev.preventDefault()
+    if (this.props.stripe) {
+      this.props.stripe
+        .createToken()
+        .then(payload => console.log('[token]', payload))
+    } else {
+      console.log("Stripe.js hasn't loaded yet.")
+    }
+  }
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
           Name:
           <input name="name" type="text" placeholder="Jane Doe" required onChange={handleNameChange} />
+          <input name="name" type="text" placeholder="Jane Doe" required onChange={handleChange} />
         </label>
         <label>
           Card number

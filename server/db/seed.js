@@ -112,12 +112,12 @@ const orders = [
   {
     total: 100,
     shippingMethod: 'Royal Mail',
-    status: false
+    status: true
   },
   {
     total: 1000,
     shippingMethod: 'Fedex',
-    status: false
+    status: true
   },
   {
     total: 102,

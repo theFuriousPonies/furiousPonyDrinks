@@ -5,14 +5,6 @@
   padding: 0 5px;
 }
 
-/* button:hover {
-  color: #fff;
-  cursor: pointer;
-  background-color: #7795f8;
-  transform: translateY(-1px);
-  box-shadow: 0 7px 14px rgba(50, 50, 93, .10), 0 3px 6px rgba(0, 0, 0, .08);
-} */
-
 input,
 .StripeElement {
   display: block;
@@ -31,13 +23,6 @@ input,
 input::placeholder {
   color: #aab7c4;
 }
-
-/* input:focus,
-.StripeElement--focus {
-  box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px, rgba(0, 0, 0, 0.0784314) 0px 1px 3px;
-  -webkit-transition: all 150ms ease;
-  transition: all 150ms ease;
-} */
 
 .StripeElement.IdealBankElement,
 .StripeElement.PaymentRequestButton {

@@ -25,7 +25,7 @@ const SingleBrand = props => {
         {drinks.map(drink => {
           return <DrinkProfile drink={drink} key={drink.id} />
         })}
-        {props.user.googleId && (
+        {props.user.isAdmin && (
           <NavLink to={`/brands/${id}/edit`}>
             <button type="button">Edit</button>
           </NavLink>

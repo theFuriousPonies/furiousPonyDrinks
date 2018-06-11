@@ -12,10 +12,11 @@ import {
   Home,
   Drinks,
   Categories,
+  Checkout,
   Cart,
   EditBrand,
-  Checkout
-
+  Checkout,
+  EditDrink
 } from './components'
 import { me } from './store/user'
 
@@ -36,9 +37,14 @@ class Routes extends Component {
       <Switch>
         <Route exact path="/brands" component={Brands} />
         <Route exact path="/brands/:id" component={SingleBrand} />
-        <Route path="/brands/:id/edit" component={EditBrand} />
+        {this.props.user.isAdmin && (
+          <Route path="/brands/:id/edit" component={EditBrand} />
+        )}
         <Route exact path="/drinks" component={Drinks} />
         <Route exact path="/drinks/:id" component={SingleDrink} />
+        {this.props.user.isAdmin && (
+          <Route path="/drinks/:id/edit" component={EditDrink} />
+        )}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/categories" component={Categories} />
@@ -53,12 +59,13 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = ({ user, brands, categories, drinks, order }) => ({
+const mapState = ({ users, user, brands, categories, drinks, order }) => ({
   user,
   brands,
   categories,
   drinks,
-  order
+  order,
+  users
 })
 
 const mapDispatch = dispatch => {
