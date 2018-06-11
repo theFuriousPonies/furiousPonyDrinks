@@ -42,11 +42,11 @@ class Routes extends Component {
       <Switch>
         <Route exact path="/brands" component={Brands} />
         {this.props.user.isAdmin && (
-          <Route path="/brands/add" component={AddBrand} />
+          <Route exact path="/brands/add" component={AddBrand} />
         )}
         <Route exact path="/brands/:id" component={SingleBrand} />
         {this.props.user.isAdmin && (
-          <Route path="/brands/:id/edit" component={EditBrand} />
+          <Route exact path="/brands/:id/edit" component={EditBrand} />
         )}
         <Route exact path="/drinks" component={Drinks} />
         {this.props.user.isAdmin && (
