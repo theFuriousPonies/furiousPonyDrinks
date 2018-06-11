@@ -18,7 +18,8 @@ import {
   EditDrink,
   Users,
   SingleUser,
-  EditUser
+  EditUser,
+  AddDrink
 } from './components'
 import { me } from './store/user'
 
@@ -56,37 +57,39 @@ class Routes extends Component {
           <Route exact path="/brands" component={Brands} />
           <Route exact path="/brands/:id" component={SingleBrand} />
           {this.props.user.isAdmin && (
-          <Route path="/brands/:id/edit" component={EditBrand} />
+            <Route path="/brands/:id/edit" component={EditBrand} />
           )}
           <Route exact path="/drinks" component={Drinks} />
+          {this.props.user.isAdmin && (
+            <Route exact path="/drinks/add" component={AddDrink} />
+          )}
           <Route exact path="/drinks/:id" component={SingleDrink} />
-         {this.props.user.isAdmin && (
-          <Route path="/drinks/:id/edit" component={EditDrink} />
-
-        )}
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/categories" component={Categories} />
-           <Route
+          {this.props.user.isAdmin && (
+            <Route path="/drinks/:id/edit" component={EditDrink} />
+          )}
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/categories" component={Categories} />
+          <Route
             exact
             path="/cart"
             render={routeProps => (
               <Cart {...routeProps} drinksTable={drinksTable} />
             )}
           />
-        <Route exact path="/checkout" component={Checkout} />
-        {this.props.user.isAdmin && (
-          <Route exact path="/users" component={Users} />
-        )}
-        {this.props.user.isAdmin && (
-          <Route exact path="/users/:id" component={SingleUser} />
-        )}
-        {this.props.user.isAdmin && (
-          <Route exact path="/users/:id/edit" component={EditUser} />
-        )}
-        <Route exact path="/" component={Home} />
-        {/* Admin restricted access to pages below */}
-        {/* {this.props.user.isAdmin && (
+          <Route exact path="/checkout" component={Checkout} />
+          {this.props.user.isAdmin && (
+            <Route exact path="/users" component={Users} />
+          )}
+          {this.props.user.isAdmin && (
+            <Route exact path="/users/:id" component={SingleUser} />
+          )}
+          {this.props.user.isAdmin && (
+            <Route exact path="/users/:id/edit" component={EditUser} />
+          )}
+          <Route exact path="/" component={Home} />
+          {/* Admin restricted access to pages below */}
+          {/* {this.props.user.isAdmin && (
           <>
             <Route path="/users" component={Users} />
             <Route path="/drinks/:id/edit" component={EditDrink} />

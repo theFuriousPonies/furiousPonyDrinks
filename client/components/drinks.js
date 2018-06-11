@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import DrinkProfile from './drinkProfile.jsx'
 import FilterByCategory from './filterCategories.jsx'
 import Bubbles from './bubbles.jsx'
+import { NavLink } from 'react-router-dom'
 
 class Drinks extends Component {
   constructor() {
@@ -49,10 +50,16 @@ class Drinks extends Component {
 
   render() {
     const drinks = this.props.drinks
+    const isAdmin = this.props.user.isAdmin
     return (
       <div id="color-gradient">
         <div id="drinks-container">
           <FilterByCategory handleChange={this.handleChange} />
+          {isAdmin && (
+            <NavLink to="/drinks/add">
+              <button type="button">Create Drink</button>
+            </NavLink>
+          )}
           <div id="drinks">
             <Bubbles />
             <h1>ALL THE DRINKS</h1>
@@ -71,7 +78,8 @@ class Drinks extends Component {
 }
 
 const mapStateToProps = state => ({
-  drinks: state.drinks
+  drinks: state.drinks,
+  user: state.user
 })
 
 export default connect(
