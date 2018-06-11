@@ -1,9 +1,9 @@
 const router = require('express').Router()
-const { User, Order } = require('../db/models')
+const { User, Order, Address } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  User.findAll()
+  User.findAll({ include: [Address] })
     .then(users => res.json(users))
     .catch(next)
 })

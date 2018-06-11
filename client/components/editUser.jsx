@@ -9,7 +9,8 @@ class EditUser extends Component {
       name: '',
       email: '',
       isAdmin: false,
-      addressId: 0
+      addressId: 0,
+      address: {}
     }
   }
 
@@ -18,12 +19,13 @@ class EditUser extends Component {
       const userEdit = props.users.filter(user => {
         return +props.match.params.id === user.id
       })[0]
-      const { name, email, isAdmin, addressId } = userEdit
+      const { name, email, isAdmin, addressId, address } = userEdit
       return {
         name,
         email,
         isAdmin,
-        addressId
+        addressId,
+        address
       }
     }
     return null
@@ -56,9 +58,10 @@ class EditUser extends Component {
       option2 = isAdmin ? 'False' : 'True'
     }
 
-    const { name, email, addressId } = this.state
+    const { name, email, addressId, address } = this.state
     return isAdminOption ? (
       <div>
+        {console.log(address)}
         <form onSubmit={this.handleSumbit}>
           <label>Name</label>
           <input
@@ -78,11 +81,12 @@ class EditUser extends Component {
             <option value={isAdmin}>{option1}</option>
             <option value={!isAdmin}>{option2}</option>
           </select>
+          {address ? <div>There is an address </div> : <div>No Address</div>}
           <button type="submit">Submit</button>
         </form>
       </div>
     ) : (
-      <div>broken</div>
+      <div>Loading</div>
     )
   }
 }
