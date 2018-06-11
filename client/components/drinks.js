@@ -55,14 +55,16 @@ class Drinks extends Component {
       <div id="color-gradient">
         <div id="drinks-container">
           <FilterByCategory handleChange={this.handleChange} />
-          {isAdmin && (
-            <NavLink to="/drinks/add">
-              <button type="button">Create Drink</button>
-            </NavLink>
-          )}
           <div id="drinks">
-            <Bubbles />
             <h1>ALL THE DRINKS</h1>
+            {isAdmin && (
+              <NavLink to="/drinks/add">
+                <button type="button" id="add-drink-btn">
+                  Create Drink
+                </button>
+              </NavLink>
+            )}
+            <Bubbles />
             <div className="drink-profile-container">
               {drinks.map(drink => {
                 if (this.checkFiltersInCategories(drink)) {
