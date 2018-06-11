@@ -50,6 +50,7 @@ class EditDrink extends Component {
   }
 
   handleChange = event => {
+    console.log(event.target.name)
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -136,6 +137,16 @@ class EditDrink extends Component {
             value={inventory}
             onChange={this.handleChange}
           />
+          <select name="brandId" onChange={this.handleChange}>
+            {this.props.brands.map(brand => {
+              return (
+                <option key={brand.id} value={brand.id}>
+                  {brand.name}
+                </option>
+              )
+            })}
+          </select>
+
           <button type="submit">Submit</button>
         </form>
       </div>
@@ -144,7 +155,8 @@ class EditDrink extends Component {
 }
 
 const mapStateToProps = state => ({
-  drinks: state.drinks
+  drinks: state.drinks,
+  brands: state.brands
 })
 
 const mapDispatchToProps = dispatch => ({
