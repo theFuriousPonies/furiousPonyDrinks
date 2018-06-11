@@ -15,6 +15,7 @@ import {
   Checkout,
   Cart,
   EditBrand,
+  Checkout,
   EditDrink
 } from './components'
 import { me } from './store/user'
