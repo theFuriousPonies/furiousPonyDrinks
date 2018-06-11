@@ -53,7 +53,8 @@ export const updateDrink = drink => async dispatch => {
 export const getNewDrink = drink => async dispatch => {
   try {
     const { data } = await axios.post('/api/drinks', drink)
-    dispatch(gotNewDrink(data))
+    await dispatch(gotNewDrink(data))
+    history.push('/drinks')
   } catch (error) {
     console.error(error)
     dispatch(failDrink(error))
@@ -63,7 +64,8 @@ export const getNewDrink = drink => async dispatch => {
 export const removeDrink = id => async dispatch => {
   try {
     await axios.delete(`/api/drinks/${id}`)
-    dispatch(removedDrink(id))
+    await dispatch(removedDrink(id))
+    history.push('/drinks')
   } catch (error) {
     console.error(error)
     dispatch(failDrink(error))
@@ -78,9 +80,10 @@ const drinks = (state = initialState, action) => {
       return action.drinks
     case NEW_DRINK:
       return [...state, action.drink]
-    case UPDATE_DRINK:
+    case UPDATE_DRINK: {
       const filtered = state.filter(drink => drink.id !== action.drink.id)
       return [...filtered, action.drink]
+    }
     case REMOVE_DRINK:
       return [...state].filter(drink => drink.id !== action.id)
     case FAIL_DRINK:

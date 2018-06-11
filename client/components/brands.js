@@ -4,24 +4,32 @@ import { NavLink } from 'react-router-dom'
 
 import { getBrands } from '../store/brand'
 
-const Brands = ({ brands }) => {
-  if (!brands.length) return null
+const Brands = ({ brands, user }) => {
   return (
     <div>
-      {brands.map(brand => (
-        <div key={brand.id}>
-          <img src={brand.imageUrl} />
-          <NavLink to={`/brands/${brand.id}`}>
-            <h2>{brand.name}</h2>
-          </NavLink>
-        </div>
-      ))}
+      <h3>Brands</h3>
+      {user.isAdmin && (
+        <NavLink to="/brands/add">
+          <button type="button">Add Brand</button>
+        </NavLink>
+      )}
+      {brands &&
+        brands.map(brand => (
+          <div key={brand.id}>
+            <img src={brand.imageUrl} />
+            <NavLink to={`/brands/${brand.id}`}>
+              <h2>{brand.name}</h2>
+            </NavLink>
+          </div>
+        ))}
+      {!brands.length && <div>There are no brands Add SOME!</div>}
     </div>
   )
 }
 
-const mapStateToProps = ({ brands }) => ({
-  brands
+const mapStateToProps = ({ brands, user }) => ({
+  brands,
+  user
 })
 
 const mapDispatchToProps = {
