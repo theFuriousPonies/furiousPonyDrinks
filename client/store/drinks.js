@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import { getTable } from './drinksTable'
 
 // ACTION TYPES
 
@@ -31,7 +32,8 @@ export const getDrinks = () => async dispatch => {
   try {
     const { data } = await axios.get('/api/drinks')
     dispatch(gotDrinks(data))
-  } catch {
+    dispatch(getTable(data))
+  } catch (err) {
     console.error(err)
     dispatch(failDrink(err))
   }
