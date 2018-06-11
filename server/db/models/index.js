@@ -5,12 +5,13 @@ const Category = require('./Category')
 const Order = require('./Order')
 const Address = require('./Address')
 const Item = require('./Item')
+const CategoryDrink = require('./CategoryDrink')
 
 Drink.belongsTo(Brand)
 Brand.hasMany(Drink)
 
-Drink.belongsToMany(Category, { through: 'drinkType' })
-Category.belongsToMany(Drink, { through: 'drinkType' })
+Drink.belongsToMany(Category, { through: CategoryDrink })
+Category.belongsToMany(Drink, { through: CategoryDrink })
 
 Order.belongsTo(User)
 User.hasMany(Order)
@@ -34,5 +35,6 @@ module.exports = {
   Category,
   Order,
   Address,
-  Item
+  Item,
+  CategoryDrink
 }

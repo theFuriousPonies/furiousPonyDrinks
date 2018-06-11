@@ -4,7 +4,13 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const data = await Drink.findAll()
+    const data = await Drink.findAll({
+      include: [
+        {
+          model: Category
+        }
+      ]
+    })
     res.json(data)
   } catch (error) {
     next(error)

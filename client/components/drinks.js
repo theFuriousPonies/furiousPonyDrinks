@@ -31,16 +31,12 @@ class Drinks extends Component {
 
   checkFiltersInCategories(drink) {
     // This is for experimentation
-    if (!drink.categories) {
-      return true
-    }
-    // This is for experimentation
     if (!this.state.filters.length) {
       return true
     }
     for (let i = 0; i < drink.categories.length; i++) {
       for (let j = 0; j < this.state.filters.length; j++) {
-        if (this.state.filters[j] === drink.categories[i].id) {
+        if (+this.state.filters[j] === drink.categories[i].id) {
           return true
         }
       }
@@ -49,6 +45,8 @@ class Drinks extends Component {
   }
 
   render() {
+    console.log('drinks', this.props.drinks)
+    console.log('filters', this.state.filters)
     const drinks = this.props.drinks
     const isAdmin = this.props.user.isAdmin
     return (
