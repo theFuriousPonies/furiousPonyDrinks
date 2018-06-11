@@ -19,7 +19,8 @@ import {
   Users,
   SingleUser,
   EditUser,
-  AddDrink
+  AddDrink,
+  AddBrand
 } from './components'
 import { me } from './store/user'
 
@@ -40,6 +41,9 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/brands" component={Brands} />
+        {this.props.user.isAdmin && (
+          <Route path="/brands/add" component={AddBrand} />
+        )}
         <Route exact path="/brands/:id" component={SingleBrand} />
         {this.props.user.isAdmin && (
           <Route path="/brands/:id/edit" component={EditBrand} />

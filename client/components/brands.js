@@ -8,6 +8,10 @@ const Brands = ({ brands }) => {
   if (!brands.length) return null
   return (
     <div>
+      <h3>Brands</h3>
+      <NavLink to="/brands/add">
+        <button type="button">Add Brand</button>
+      </NavLink>
       {brands.map(brand => (
         <div key={brand.id}>
           <img src={brand.imageUrl} />
