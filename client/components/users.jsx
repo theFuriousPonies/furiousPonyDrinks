@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import DrinkProfile from './drinkProfile.jsx'
 import FilterByCategory from './filterCategories.jsx'
 import Bubbles from './bubbles.jsx'
-import UserProfile from './userProfile'
+import UserProfile from './userProfile.jsx'
 
 const Users = props => {
   return (
