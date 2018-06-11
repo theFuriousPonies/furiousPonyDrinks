@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 import { addOneItem } from '../store/item'
+import { removeDrink } from '../store/drinks'
 
 class SingleDrink extends Component {
   constructor() {
@@ -30,6 +31,10 @@ class SingleDrink extends Component {
         quantity: prevState.quantity - 1
       }))
     }
+  }
+
+  handleDelete = () => {
+    this.props.removeDrink(+this.props.match.params.id)
   }
 
   handleSubmit = event => {
@@ -65,10 +70,7 @@ class SingleDrink extends Component {
       <div>
         {drink && (
           <div>
-            <form
-              id="single-drink-form"
-              onSubmit={this.handleSubmit}
-            >
+            <form id="single-drink-form" onSubmit={this.handleSubmit}>
               <div id="single-drink-content">
                 {drink.inventory ? <div /> : <span>Out of Stock</span>}
                 <img src={drink.imageUrl} content="" id="single-drink-img" />
@@ -94,9 +96,14 @@ class SingleDrink extends Component {
               <button type="submit">Add to Cart</button>
             </form>
             {this.props.user.isAdmin && (
-              <NavLink to={`/drinks/${drinkId}/edit`}>
-                <button type="button">Edit Drink</button>
-              </NavLink>
+              <>
+                <NavLink to={`/drinks/${drinkId}/edit`}>
+                  <button type="button">Edit Drink</button>
+                </NavLink>
+                <button type="button" onClick={this.handleDelete}>
+                  Delete Me!
+                </button>
+              </>
             )}
           </div>
         )}
@@ -114,7 +121,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchtoProps = dispatch => ({
-  addToCart: (item, inventory) => dispatch(addOneItem(item, inventory))
+  addToCart: (item, inventory) => dispatch(addOneItem(item, inventory)),
+  removeDrink: id => dispatch(removeDrink(id))
 })
 
 export default connect(
