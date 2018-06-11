@@ -21,6 +21,9 @@
 
 #drinks h1 {
   text-shadow: 0 1.7px 1.7px rgba(190, 190, 190, 0.55);
+  overflow: visible;
+  z-index: 10;
+  position: relative;
 }
 
 .drink-profile-container {
@@ -169,14 +172,21 @@
   animation-iteration-count: 1;
 }
 
+#add-drink-btn {
+  position: relative;
+  z-index: 10;
+}
+
 /* Bubbles */
 
 .bubble-containter {
   z-index: 0;
   position: absolute;
+  top: 68px;
   background: rgba(0, 0, 0, 0);
-  width: 150vh;
+  width: 80%;
   height: 91.5vh;
+  left: 200px;
   /* overflow: visible; */
 }
 
