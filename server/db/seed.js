@@ -171,7 +171,8 @@ const users = [
   {
     name: 'Blake',
     email: 'blake@gmail.com',
-    password: 'chicken'
+    password: 'chicken',
+    isAdmin: true
   },
   {
     name: 'Chloe',
