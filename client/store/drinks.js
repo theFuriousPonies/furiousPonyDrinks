@@ -53,7 +53,8 @@ export const updateDrink = drink => async dispatch => {
 export const getNewDrink = drink => async dispatch => {
   try {
     const { data } = await axios.post('/api/drinks', drink)
-    dispatch(gotNewDrink(data))
+    await dispatch(gotNewDrink(data))
+    history.push('/drinks')
   } catch (error) {
     console.error(error)
     dispatch(failDrink(error))
