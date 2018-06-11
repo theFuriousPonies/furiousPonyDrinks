@@ -22,6 +22,7 @@ class Cart extends Component {
   }
 
   render () {
+    console.log(this.props.drinksTable)
     const guestCart = this.getGuestCart()
     let drinksArr = this.props.isLoggedIn ? this.props.items : guestCart
     const drinks = this.createCart(drinksArr)
@@ -40,11 +41,12 @@ class Cart extends Component {
   }
 }
 
-const mapStateToProps = ({ drinks, order, user, items }) => ({
+const mapStateToProps = ({ drinks, order, user, items, drinksTable }) => ({
   order,
   drinks,
   user,
   items,
+  drinksTable,
   isLoggedIn: !!user.id
 })
 
