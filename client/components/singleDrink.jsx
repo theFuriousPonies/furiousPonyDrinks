@@ -32,14 +32,30 @@ class SingleDrink extends Component {
     }
   }
 
-  handleSubmit = event => {
+  handleSubmit = (event, drinkInventory) => {
     event.preventDefault()
-    const item = {
-      quantity: this.state.quantity,
-      orderId: this.props.order.id,
-      drinkId: +this.props.match.params.id
+    const drinkId = this.props.match.params.id
+    if (this.props.isLoggedIn) {
+      const item = {
+        quantity: this.state.quantity,
+        orderId: this.props.order.id,
+        drinkId: +drinkId
+      }
+      const drinkUpdate = {
+        id: +drinkId,
+        inventory: drinkInventory - this.state.quantity
+      }
+      console.log(drinkUpdate)
+      this.props.addToCart(item, drinkUpdate)
+    } else {
+      const prevItem = JSON.parse(localStorage.getItem(`drinkId${drinkId}`))
+      const item = {
+        quantity: this.state.quantity,
+        drinkId
+      }
+      if (prevItem) item.quantity += prevItem.quantity
+      localStorage.setItem(`drinkId${drinkId}`, JSON.stringify(item))
     }
-    this.props.addToCart(item)
   }
   render() {
     const drinkId = +this.props.match.params.id
@@ -55,7 +71,7 @@ class SingleDrink extends Component {
           <div>
             <form
               id="single-drink-form"
-              onSubmit={this.handleSubmit}
+              onSubmit={evt => this.handleSubmit(evt, drink.inventory)}
             >
               <div id="single-drink-content">
                 {drink.inventory ? <div /> : <span>Out of Stock</span>}
@@ -96,11 +112,12 @@ class SingleDrink extends Component {
 const mapStateToProps = state => ({
   drinks: state.drinks,
   order: state.order,
-  user: state.user
+  user: state.user,
+  isLoggedIn: !!state.user.id
 })
 
 const mapDispatchtoProps = dispatch => ({
-  addToCart: item => dispatch(addOneItem(item))
+  addToCart: (item, inventory) => dispatch(addOneItem(item, inventory))
 })
 
 export default connect(

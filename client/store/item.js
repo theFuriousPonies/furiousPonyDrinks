@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import { updateDrink } from './drinks'
 
 // ACTION TYPES
 
@@ -40,10 +41,11 @@ export const changeOneItem = item => async dispatch => {
   }
 }
 
-export const addOneItem = item => async dispatch => {
+export const addOneItem = (item, inventory) => async dispatch => {
   try {
     const { data } = await axios.post(`/api/items/${item.drinkId}`, item)
     dispatch(oneItem(data))
+    dispatch(updateDrink(inventory))
   } catch (err) {
     console.error(err)
   }

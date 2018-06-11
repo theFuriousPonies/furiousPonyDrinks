@@ -1,59 +1,58 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import CartItems from './cartItems.jsx'
 
-const Cart = props => {
-  localStorage.clear()
-  const testItem = {
-    id: 1,
-    name: 'Regular Coke',
-    item: {
-      quantity: 10
-    }
+class Cart extends Component {
+  getGuestCart = () => {
+    return Object.keys(localStorage).slice(1)
+    .map(key => JSON.parse(localStorage.getItem(key)))
   }
-  const testItem2 = {
-    id: 2,
-    name: 'Diet Coke',
-    item: {
-      quantity: 3
-    }
+
+  createCart = items => {
+    const drinksTable = this.props.drinksTable
+    return items.map(item => {
+      const updatedItem = drinksTable[item.drinkId];
+      updatedItem.quantity = item.quantity
+      return updatedItem
+    })
   }
-  localStorage.setItem('1', JSON.stringify(testItem))
-  localStorage.setItem('2', JSON.stringify(testItem2))
-  const guestCart = props.getGuestCart()
-  let drinks = props.isLoggedIn ? props.order.drinks : guestCart
-  // merge cart
-  // if (isLoggedIn && guestCart.length)
-  return (
-    <div>
-      {drinks.length ? (
-        <CartItems drinks={drinks} />
-      ) : (
-        <h3>Your cart is empty!</h3>
-      )}
-    </div>
-  )
+
+  total = items => {
+    return items.reduce((acc, pV) => acc + (pV.price * pV.quantity), 0) / 100
+  }
+
+  render () {
+    const guestCart = this.getGuestCart()
+    let drinksArr = this.props.isLoggedIn ? this.props.items : guestCart
+    const drinks = this.createCart(drinksArr)
+    const total = this.total(drinks)
+    // merge cart
+    // if (isLoggedIn && guestCart.length)
+    return (
+      <div>
+        {drinks.length ? (
+          <CartItems drinks={drinks} total={total} />
+        ) : (
+          <h3>Your cart is empty!</h3>
+        )}
+      </div>
+    )
+  }
 }
 
-const getGuestCart = () => {
-  const cart = []
-  Object.keys(localStorage).forEach(key => {
-    cart.push(JSON.parse(localStorage.getItem(key)))
-  })
-  return cart
-}
-
-const mapStateToProps = ({ order, user }) => ({
+const mapStateToProps = ({ drinks, order, user, items }) => ({
   order,
+  drinks,
   user,
+  items,
   isLoggedIn: !!user.id
 })
 
-const mapDispatchToProps = dispatch => ({
-  getGuestCart
-})
+// const mapDispatchToProps = dispatch => ({
+//   getGuestCart
+// })
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  // mapDispatchToProps
 )(Cart)

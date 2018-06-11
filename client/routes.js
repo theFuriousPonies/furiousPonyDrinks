@@ -35,23 +35,45 @@ class Routes extends Component {
     this.props.loadInitialData()
   }
 
+  drinksTable = () => {
+    return this.props.drinks.reduce((acc, pV) => {
+      const drinkId = pV.id
+      const price = pV.price
+      const name = pV.name
+      const inventory = pV.inventory
+      acc[drinkId] = { price, name, drinkId, inventory }
+      return acc
+    }, {})
+  }
+
   render() {
-    return (
-      <Switch>
-        <Route exact path="/brands" component={Brands} />
-        <Route exact path="/brands/:id" component={SingleBrand} />
-        {this.props.user.isAdmin && (
+    if (!this.props.drinks.length) {
+      return null
+    } else {
+      const drinksTable = this.drinksTable()
+      return (
+        <Switch>
+          <Route exact path="/brands" component={Brands} />
+          <Route exact path="/brands/:id" component={SingleBrand} />
+          {this.props.user.isAdmin && (
           <Route path="/brands/:id/edit" component={EditBrand} />
-        )}
-        <Route exact path="/drinks" component={Drinks} />
-        <Route exact path="/drinks/:id" component={SingleDrink} />
-        {this.props.user.isAdmin && (
+          )}
+          <Route exact path="/drinks" component={Drinks} />
+          <Route exact path="/drinks/:id" component={SingleDrink} />
+         {this.props.user.isAdmin && (
           <Route path="/drinks/:id/edit" component={EditDrink} />
+
         )}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/categories" component={Categories} />
-        <Route exact path="/cart" component={Cart} />
+           <Route
+            exact
+            path="/cart"
+            render={routeProps => (
+              <Cart {...routeProps} drinksTable={drinksTable} />
+            )}
+          />
         <Route exact path="/checkout" component={Checkout} />
         {this.props.user.isAdmin && (
           <Route exact path="/users" component={Users} />
@@ -71,8 +93,9 @@ class Routes extends Component {
             <Route path="/brands/:id/edit" component={EditBrand} />
           </>
         )} */}
-      </Switch>
-    )
+        </Switch>
+      )
+    }
   }
 }
 
@@ -111,5 +134,4 @@ export default withRouter(
 
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired
-  // isLoggedIn: PropTypes.bool.isRequired
 }
