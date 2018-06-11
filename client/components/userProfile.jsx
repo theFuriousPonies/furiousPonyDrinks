@@ -7,7 +7,7 @@ const UserProfile = props => {
     <NavLink to={`/users/${id}`}>
       <div>{name}</div>
       <div>{email}</div>
-      <div>{isAdmin}</div>
+      {isAdmin && <div>Admin</div>}
     </NavLink>
   )
 }

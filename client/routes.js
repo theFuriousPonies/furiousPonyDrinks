@@ -23,6 +23,7 @@ import { me } from './store/user'
 import { getBrands } from './store/brand'
 import { getDrinks } from './store/drinks'
 import { getCategories } from './store/categories'
+import { getUsers } from './store/users'
 
 /**
  * COMPONENT
@@ -50,7 +51,9 @@ class Routes extends Component {
         <Route exact path="/categories" component={Categories} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
-        {this.props.user.isAdmin && <Route path="/users" component={Users} />}
+        {this.props.user.isAdmin && (
+          <Route exact path="/users" component={Users} />
+        )}
         <Route exact path="/" component={Home} />
         {/* Admin restricted access to pages below */}
         {/* {this.props.user.isAdmin && (
@@ -84,6 +87,7 @@ const mapDispatch = dispatch => {
       dispatch(getBrands())
       dispatch(getCategories())
       dispatch(getDrinks())
+      dispatch(getUsers())
     }
   }
 }

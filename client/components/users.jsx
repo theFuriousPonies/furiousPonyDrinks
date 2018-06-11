@@ -8,7 +8,7 @@ import UserProfile from './userProfile.jsx'
 const Users = props => {
   return (
     <div>
-      {props.users &&
+      {props.users.length &&
         props.users.map(user => <UserProfile key={user.id} user={user} />)}
     </div>
   )
