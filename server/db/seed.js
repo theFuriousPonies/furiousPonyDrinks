@@ -7,7 +7,8 @@ const {
   Category,
   Drink,
   User,
-  Item
+  Item,
+  CategoryDrink
 } = require('./models')
 
 // Rows for tables
@@ -243,6 +244,41 @@ const items = [
     orderId: 1
   }
 ]
+
+const categoryDrink = [
+  {
+    drinkId: 1,
+    categoryId: 1
+  },
+  {
+    drinkId: 1,
+    categoryId: 2
+  },
+  {
+    drinkId: 2,
+    categoryId: 1
+  },
+  {
+    drinkId: 1,
+    categoryId: 7
+  },
+  {
+    drinkId: 1,
+    categoryId: 3
+  },
+  {
+    drinkId: 3,
+    categoryId: 2
+  },
+  {
+    drinkId: 4,
+    categoryId: 6
+  },
+  {
+    drinkId: 3,
+    categoryId: 5
+  }
+]
 // seedScript function
 
 const seedScript = async () => {
@@ -273,7 +309,10 @@ const seedScript = async () => {
     const createdItems = await Item.bulkCreate(items, {
       returning: true
     })
-    console.log('hello')
+
+    const createdCategoryDrink = await CategoryDrink.bulkCreate(categoryDrink, {
+      returning: true
+    })
     // Assocciations setting Id's
 
     //setting Brands on Drinks
@@ -283,30 +322,6 @@ const seedScript = async () => {
       createdDrinks[2].setBrand(createdBrands[2]),
       createdDrinks[3].setBrand(createdBrands[0])
     ])
-    // setting Many to Many with Drink and Category
-    // I don't know how to do this
-    // const settingDrinksCategories = Promise.all([
-    //   createdDrinks[0].setCateogies([
-    //     createdCategories[0],
-    //     createdCategories[1],
-    //     createdCategories[2]
-    //   ]),
-    //   createdDrinks[1].setCateogies([
-    //     createdCategories[2],
-    //     createdCategories[3],
-    //     createdCategories[4]
-    //   ]),
-    //   createdDrinks[2].setCateogies([
-    //     createdCategories[2],
-    //     createdCategories[3],
-    //     createdCategories[5]
-    //   ]),
-    //   createdDrinks[3].setCateogies([
-    //     createdCategories[0],
-    //     createdCategories[3],
-    //     createdCategories[6]
-    //   ])
-    // ])
 
     // setting User to Order
     const settingUserOrder = Promise.all([
@@ -325,18 +340,6 @@ const seedScript = async () => {
       createdOrders[3].setAddress(createdAddresses[3]),
       createdOrders[4].setAddress(createdAddresses[0])
     ])
-
-    // setting Drink to Item
-    // const settingItemsDrinks = Promise.all([
-    //   createdItems[0].setDrink(createdDrinks[0]),
-    //   createdItems[1].setDrink(createdDrinks[1]),
-    //   createdItems[2].setDrink(createdDrinks[2]),
-    //   createdItems[3].setDrink(createdDrinks[3]),
-    //   createdItems[4].setDrink(createdDrinks[0]),
-    //   createdItems[5].setDrink(createdDrinks[1]),
-    //   createdItems[6].setDrink(createdDrinks[2]),
-    //   createdItems[7].setDrink(createdDrinks[3])
-    // ])
 
     // await the promises
     await Promise.all([
