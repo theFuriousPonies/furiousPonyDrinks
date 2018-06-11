@@ -17,8 +17,8 @@ import {
   Checkout,
   EditDrink,
   Users,
-  SingleUser
-  
+  SingleUser,
+  EditUser
 } from './components'
 import { me } from './store/user'
 
@@ -58,6 +58,9 @@ class Routes extends Component {
         )}
         {this.props.user.isAdmin && (
           <Route exact path="/users/:id" component={SingleUser} />
+        )}
+        {this.props.user.isAdmin && (
+          <Route exact path="/users/:id/edit" component={EditUser} />
         )}
         <Route exact path="/" component={Home} />
         {/* Admin restricted access to pages below */}
