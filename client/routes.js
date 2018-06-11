@@ -12,7 +12,6 @@ import {
   Home,
   Drinks,
   Categories,
-  Checkout,
   Cart,
   EditBrand,
   Checkout,
