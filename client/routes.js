@@ -18,8 +18,11 @@ import {
   EditDrink,
   Users,
   SingleUser,
+  AcceptedPayment,
   EditUser,
-  AddDrink
+  AddDrink,
+  AddBrand
+
 } from './components'
 import { me } from './store/user'
 
@@ -40,9 +43,12 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/brands" component={Brands} />
+        {this.props.user.isAdmin && (
+          <Route exact path="/brands/add" component={AddBrand} />
+        )}
         <Route exact path="/brands/:id" component={SingleBrand} />
         {this.props.user.isAdmin && (
-          <Route path="/brands/:id/edit" component={EditBrand} />
+          <Route exact path="/brands/:id/edit" component={EditBrand} />
         )}
         <Route exact path="/drinks" component={Drinks} />
         {this.props.user.isAdmin && (
@@ -57,6 +63,7 @@ class Routes extends Component {
         <Route exact path="/categories" component={Categories} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
+        <Route exact path="/acceptedPayment" component={AcceptedPayment} />
         {this.props.user.isAdmin && (
           <Route exact path="/users" component={Users} />
         )}
