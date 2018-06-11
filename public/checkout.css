@@ -5,7 +5,6 @@
   padding: 0 5px;
 }
 
-input,
 .StripeElement {
   display: block;
   margin: 10px 0 20px 0;
@@ -18,13 +17,4 @@ input,
   outline: 0;
   border-radius: 4px;
   background: white;
-}
-
-input::placeholder {
-  color: #aab7c4;
-}
-
-.StripeElement.IdealBankElement,
-.StripeElement.PaymentRequestButton {
-  padding: 0;
 }
