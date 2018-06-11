@@ -4,11 +4,8 @@ import CartItems from './cartItems.jsx'
 
 class Cart extends Component {
   getGuestCart = () => {
-    const cart = []
-    Object.keys(localStorage).forEach(key => {
-      cart.push(JSON.parse(localStorage.getItem(key)))
-    })
-    return cart
+    return Object.keys(localStorage).slice(1)
+    .map(key => JSON.parse(localStorage.getItem(key)))
   }
 
   createCart = (items) => {
@@ -21,27 +18,24 @@ class Cart extends Component {
   }
 
   render () {
-    localStorage.clear()
-    const testItem = {
-      id: 1,
-      name: 'Regular Coke',
-      item: {
-        quantity: 10
-      }
-    }
-  const testItem2 = {
-      id: 2,
-      name: 'Diet Coke',
-      item: {
-        quantity: 3
-      }
-    }
-  localStorage.setItem('1', JSON.stringify(testItem))
-  localStorage.setItem('2', JSON.stringify(testItem2))
+  //   localStorage.clear()
+  //   const testItem = {
+  //     drinkId: 1,
+  //     name: 'Regular Coke',
+  //     quantity: 10
+  //   }
+  // const testItem2 = {
+  //     drinkId: 2,
+  //     name: 'Diet Coke',
+  //     quantity: 3
+  //   }
+  // localStorage.setItem('1', JSON.stringify(testItem))
+  // localStorage.setItem('2', JSON.stringify(testItem2))
     const guestCart = this.getGuestCart()
-    let drinks = this.props.isLoggedIn ? this.props.order.drinks : guestCart
-    const drinksArr = this.createCart(this.props.items)
+    let drinksArr = this.props.isLoggedIn ? this.props.items : guestCart
+    const drinks = this.createCart(drinksArr)
     console.log(drinksArr)
+    console.log(drinks)
     // merge cart
     // if (isLoggedIn && guestCart.length)
     return (

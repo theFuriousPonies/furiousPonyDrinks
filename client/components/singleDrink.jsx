@@ -34,12 +34,23 @@ class SingleDrink extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    const item = {
-      quantity: this.state.quantity,
-      orderId: this.props.order.id,
-      drinkId: +this.props.match.params.id
+    const drinkId = this.props.match.params.id
+    if (this.props.isLoggedIn) {
+      const item = {
+        quantity: this.state.quantity,
+        orderId: this.props.order.id,
+        drinkId: +drinkId
+      }
+      this.props.addToCart(item)
+    } else {
+      const prevItem = JSON.parse(localStorage.getItem(`drinkId${drinkId}`))
+      const item = {
+        quantity: this.state.quantity,
+        drinkId
+      }
+      if (prevItem) item.quantity += prevItem.quantity
+      localStorage.setItem(`drinkId${drinkId}`, JSON.stringify(item))
     }
-    this.props.addToCart(item)
   }
   render() {
     const drinkId = +this.props.match.params.id
@@ -96,7 +107,8 @@ class SingleDrink extends Component {
 const mapStateToProps = state => ({
   drinks: state.drinks,
   order: state.order,
-  user: state.user
+  user: state.user,
+  isLoggedIn: !!state.user.id
 })
 
 const mapDispatchtoProps = dispatch => ({
