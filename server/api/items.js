@@ -24,6 +24,7 @@ router.post('/', async (req, res, next) => {
             return foundItem.update({ quantity })
           } else {
             foundItem.destroy()
+            res.status(204).end()
           }
         } else {
           return Item.create(req.body)
