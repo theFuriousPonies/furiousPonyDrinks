@@ -60,11 +60,12 @@ class SplitForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Name:
-          <input name="name" type="text" placeholder="Jane Doe" required onChange={handleNameChange} />
+          <input name="name" type="text" className="StripeElement" placeholder="Jane Doe" required onChange={handleNameChange} />
         </label>
         <label>
           Card number
           <CardNumberElement
+            className="StripeElement"
             onBlur={handleBlur}
             onChange={handleChange}
             onFocus={handleFocus}
@@ -75,6 +76,7 @@ class SplitForm extends React.Component {
         <label>
           Expiration date
           <CardExpiryElement
+            className="StripeElement"
             onBlur={handleBlur}
             onChange={handleChange}
             onFocus={handleFocus}
@@ -85,6 +87,7 @@ class SplitForm extends React.Component {
         <label>
           CVC
           <CardCVCElement
+            className="StripeElement"
             onBlur={handleBlur}
             onChange={handleChange}
             onFocus={handleFocus}
@@ -95,6 +98,7 @@ class SplitForm extends React.Component {
         <label>
           Postal code
           <PostalCodeElement
+            className="StripeElement"
             onBlur={handleBlur}
             onChange={handleChange}
             onFocus={handleFocus}
