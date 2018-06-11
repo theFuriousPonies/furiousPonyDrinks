@@ -8,13 +8,13 @@ class EditDrink extends Component {
     this.state = {
       name: '',
       flavor: '',
-      price: NaN,
+      price: 0,
       description: '',
-      size: NaN,
+      size: 0,
       tag: {},
       imageUrl: '',
-      inventory: NaN,
-      brandId: NaN
+      inventory: 0,
+      brandId: 0
     }
   }
 
@@ -61,13 +61,13 @@ class EditDrink extends Component {
     this.setState({
       name: '',
       flavor: '',
-      price: NaN,
+      price: 0,
       description: '',
-      size: NaN,
+      size: 0,
       tag: {},
       imageUrl: '',
-      inventory: NaN,
-      brandId: NaN
+      inventory: 0,
+      brandId: 0
     })
   }
 

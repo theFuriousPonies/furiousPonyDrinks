@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateDrink } from '../store/drinks'
+import { updateUser } from '../store/users'
 
 class EditUser extends Component {
   constructor() {
@@ -9,7 +9,7 @@ class EditUser extends Component {
       name: '',
       email: '',
       isAdmin: false,
-      addressId: NaN
+      addressId: 0
     }
   }
 
@@ -26,6 +26,7 @@ class EditUser extends Component {
         addressId
       }
     }
+    return null
   }
 
   handleChange = event => {
@@ -34,15 +35,35 @@ class EditUser extends Component {
     })
   }
 
+  handleSumbit = event => {
+    const id = +this.props.match.params.id
+    event.preventDefault()
+    this.props.updateUser({ ...this.state, id })
+  }
+
   render() {
-    const { name, email, isAdmin, addressId } = this.state
-    return (
+    // this is so false or true loads correctly
+    const isAdminOption = this.props.users.filter(user => {
+      return +this.props.match.params.id === user.id
+    })[0]
+    let option1 = false
+    let option2 = false
+    let isAdmin
+
+    if (isAdminOption) {
+      isAdmin = isAdminOption.isAdmin
+      option1 = isAdmin ? 'True' : 'False'
+      option2 = isAdmin ? 'False' : 'True'
+    }
+
+    const { name, email, addressId } = this.state
+    return isAdminOption ? (
       <div>
         <form onSubmit={this.handleSumbit}>
           <label>Name</label>
           <input
             type="text"
-            name={name}
+            name="name"
             value={name}
             onChange={this.handleChange}
           />
@@ -54,12 +75,14 @@ class EditUser extends Component {
             onChange={this.handleChange}
           />
           <select name="isAdmin" onChange={this.handleChange}>
-            <option value="">...</option>
-            <option value={false}>False</option>
-            <option value={true}>True</option>
+            <option value={isAdmin}>{option1}</option>
+            <option value={!isAdmin}>{option2}</option>
           </select>
+          <button type="submit">Submit</button>
         </form>
       </div>
+    ) : (
+      <div>broken</div>
     )
   }
 }
@@ -68,7 +91,11 @@ const mapStateToProps = state => ({
   users: state.users
 })
 
+const mapDispatchToProps = dispatch => ({
+  updateUser: user => dispatch(updateUser(user))
+})
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(EditUser)
