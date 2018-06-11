@@ -62,7 +62,7 @@ export const newBrand = brand => async dispatch => {
 export const removeBrand = id => async dispatch => {
   try {
     await axios.delete(`/api/brands/${id}`)
-    await dispatch(removedBrand(id))
+    dispatch(removedBrand(id))
     history.push('/brands')
   } catch (err) {
     console.error(err)

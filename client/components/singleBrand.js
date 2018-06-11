@@ -22,24 +22,29 @@ class SingleBrand extends Component {
           return drink
         }
       })
+      console.log('brand', brand)
       return (
         <div>
-          <img src={brand.imageUrl} />
-          <h2>{brand.name}</h2>
-          <br />
-          {brand.description}
-          {drinks.map(drink => {
-            return <DrinkProfile drink={drink} key={drink.id} />
-          })}
-          {this.props.user.isAdmin && (
-            <>
-              <NavLink to={`/brands/${id}/edit`}>
-                <button type="button">Edit</button>
-              </NavLink>
-              <button type="button" onClick={this.handleDelete}>
-                Delete Me!
-              </button>
-            </>
+          {brand && (
+            <div>
+              <img src={brand.imageUrl} />
+              <h2>{brand.name}</h2>
+              <br />
+              {brand.description}
+              {drinks.map(drink => {
+                return <DrinkProfile drink={drink} key={drink.id} />
+              })}
+              {this.props.user.isAdmin && (
+                <>
+                  <NavLink to={`/brands/${id}/edit`}>
+                    <button type="button">Edit</button>
+                  </NavLink>
+                  <button type="button" onClick={this.handleDelete}>
+                    Delete Me!
+                  </button>
+                </>
+              )}
+            </div>
           )}
         </div>
       )

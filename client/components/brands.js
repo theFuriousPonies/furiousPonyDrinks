@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom'
 import { getBrands } from '../store/brand'
 
 const Brands = ({ brands, user }) => {
-  if (!brands.length) return null
   return (
     <div>
       <h3>Brands</h3>
@@ -14,14 +13,16 @@ const Brands = ({ brands, user }) => {
           <button type="button">Add Brand</button>
         </NavLink>
       )}
-      {brands.map(brand => (
-        <div key={brand.id}>
-          <img src={brand.imageUrl} />
-          <NavLink to={`/brands/${brand.id}`}>
-            <h2>{brand.name}</h2>
-          </NavLink>
-        </div>
-      ))}
+      {brands &&
+        brands.map(brand => (
+          <div key={brand.id}>
+            <img src={brand.imageUrl} />
+            <NavLink to={`/brands/${brand.id}`}>
+              <h2>{brand.name}</h2>
+            </NavLink>
+          </div>
+        ))}
+      {!brands.length && <div>There are no brands Add SOME!</div>}
     </div>
   )
 }
