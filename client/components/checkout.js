@@ -28,13 +28,6 @@ export default class Checkout extends React.Component {
         <Elements>
           <SplitForm fontSize={elementFontSize} />
         </Elements>
-        <h1>Available Elements</h1>
-        <Elements>
-          <SplitForm fontSize={elementFontSize} />
-        </Elements>
-        <Elements>
-          <PaymentRequestForm />
-        </Elements>
       </div>
     )
   }
