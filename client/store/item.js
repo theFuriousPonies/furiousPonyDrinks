@@ -62,7 +62,8 @@ const items = (state = initialState, action) => {
         item => item.drinkId === action.item.drinkId
       )
       const itemsArr = [...state]
-      itemsArr.splice(index, 1, action.item)
+      if (index >= 0) itemsArr.splice(index, 1, action.item)
+      else itemsArr.push(action.item)
       return itemsArr
     }
     case REMOVED_ITEM:

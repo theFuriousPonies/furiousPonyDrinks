@@ -4,6 +4,18 @@ import CartItems from './cartItems.jsx'
 import { addOneItem, changeOneItem } from '../store/item'
 
 class Cart extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      guestCart: []
+    }
+  }
+
+  componentDidMount () {
+    const guestCart = this.getGuestCart()
+    this.setState({ guestCart })
+  }
+
   getGuestCart = () => {
     return Object.keys(localStorage).slice(1)
     .map(key => JSON.parse(localStorage.getItem(key)))
@@ -18,9 +30,9 @@ class Cart extends Component {
     })
   }
 
-  mergeCart = async guestItems => {
+  mergeCart = guestItems => {
     const orderId = this.props.order.id
-    await guestItems.forEach(item => {
+    guestItems.forEach(item => {
       item.orderId = orderId
       this.props.addToCart(item)
       })
@@ -32,19 +44,31 @@ class Cart extends Component {
   }
 
   handleChange = (event, drinkId) => {
-    const item = {
-      drinkId,
-      quantity: +event.target.value,
-      orderId: this.props.order.id
+    if (this.props.isLoggedIn) {
+      const item = {
+        drinkId,
+        quantity: +event.target.value,
+        orderId: this.props.order.id
+      }
+      this.props.changeQuantity(item)
+    } else {
+      const item = {
+        drinkId,
+        quantity: +event.target.value
+      }
+      if (!+event.target.value) localStorage.removeItem(`drinkId${drinkId}`)
+      else localStorage.setItem(`drinkId${drinkId}`, JSON.stringify(item))
+      const guestCart = this.getGuestCart()
+      this.setState({ guestCart })
     }
-    this.props.changeQuantity(item)
   }
 
   render () {
+    if (!this.props.drinksTable['1']) return null
     const guestCart = this.getGuestCart()
     if (this.props.isLoggedIn) this.mergeCart(guestCart)
-    let drinksArr = this.props.isLoggedIn ? this.props.items : guestCart
-    const drinks = this.createCart(drinksArr)
+    const drinksArr = this.props.isLoggedIn ? this.props.items : guestCart
+    const drinks = drinksArr.length ? this.createCart(drinksArr) : drinksArr
     const total = this.total(drinks)
     return (
       <div>

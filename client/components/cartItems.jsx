@@ -18,9 +18,9 @@ const CartItems = ({ drinks, total, handleChange }) => {
       <div key={drink.id} className="cart">
         <h4>{drink.name}</h4>
         <h4>${drink.price / 100}</h4>
-        <h4>{drink.quantity}
+        <h4>
           <CartQuantity drink={drink} optionsArr={optionsArr} handleChange={handleChange} />
-          </h4>
+        </h4>
       </div>
       <hr/>
       </div>
