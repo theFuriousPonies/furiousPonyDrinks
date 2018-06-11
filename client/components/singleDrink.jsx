@@ -32,7 +32,7 @@ class SingleDrink extends Component {
     }
   }
 
-  handleSubmit = event => {
+  handleSubmit = (event, drinkInventory) => {
     event.preventDefault()
     const drinkId = this.props.match.params.id
     if (this.props.isLoggedIn) {
@@ -41,7 +41,12 @@ class SingleDrink extends Component {
         orderId: this.props.order.id,
         drinkId: +drinkId
       }
-      this.props.addToCart(item)
+      const drinkUpdate = {
+        id: +drinkId,
+        inventory: drinkInventory - this.state.quantity
+      }
+      console.log(drinkUpdate)
+      this.props.addToCart(item, drinkUpdate)
     } else {
       const prevItem = JSON.parse(localStorage.getItem(`drinkId${drinkId}`))
       const item = {
@@ -66,7 +71,7 @@ class SingleDrink extends Component {
           <div>
             <form
               id="single-drink-form"
-              onSubmit={this.handleSubmit}
+              onSubmit={evt => this.handleSubmit(evt, drink.inventory)}
             >
               <div id="single-drink-content">
                 {drink.inventory ? <div /> : <span>Out of Stock</span>}
@@ -112,7 +117,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchtoProps = dispatch => ({
-  addToCart: item => dispatch(addOneItem(item))
+  addToCart: (item, inventory) => dispatch(addOneItem(item, inventory))
 })
 
 export default connect(

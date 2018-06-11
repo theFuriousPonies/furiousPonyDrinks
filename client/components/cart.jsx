@@ -8,7 +8,7 @@ class Cart extends Component {
     .map(key => JSON.parse(localStorage.getItem(key)))
   }
 
-  createCart = (items) => {
+  createCart = items => {
     const drinksTable = this.props.drinksTable
     return items.map(item => {
       const updatedItem = drinksTable[item.drinkId];
@@ -17,31 +17,21 @@ class Cart extends Component {
     })
   }
 
+  total = items => {
+    return items.reduce((acc, pV) => acc + (pV.price * pV.quantity), 0) / 100
+  }
+
   render () {
-  //   localStorage.clear()
-  //   const testItem = {
-  //     drinkId: 1,
-  //     name: 'Regular Coke',
-  //     quantity: 10
-  //   }
-  // const testItem2 = {
-  //     drinkId: 2,
-  //     name: 'Diet Coke',
-  //     quantity: 3
-  //   }
-  // localStorage.setItem('1', JSON.stringify(testItem))
-  // localStorage.setItem('2', JSON.stringify(testItem2))
     const guestCart = this.getGuestCart()
     let drinksArr = this.props.isLoggedIn ? this.props.items : guestCart
     const drinks = this.createCart(drinksArr)
-    console.log(drinksArr)
-    console.log(drinks)
+    const total = this.total(drinks)
     // merge cart
     // if (isLoggedIn && guestCart.length)
     return (
       <div>
         {drinks.length ? (
-          <CartItems drinks={drinks} />
+          <CartItems drinks={drinks} total={total} />
         ) : (
           <h3>Your cart is empty!</h3>
         )}

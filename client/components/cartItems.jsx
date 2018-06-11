@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CartItems = ({ drinks }) => {
+const CartItems = ({ drinks, total }) => {
   return (
   <div>
     <h3>You have {drinks.length} items in your cart</h3>
@@ -10,6 +10,7 @@ const CartItems = ({ drinks }) => {
         <h4>{drink.quantity}</h4>
       </div>
     ))}
+    <h4>Your total cost is ${total}</h4>
   </div>
 )}
 

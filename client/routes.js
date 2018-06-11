@@ -36,7 +36,8 @@ class Routes extends Component {
       const drinkId = pV.id
       const price = pV.price
       const name = pV.name
-      acc[drinkId] = { price, name, drinkId }
+      const inventory = pV.inventory
+      acc[drinkId] = { price, name, drinkId, inventory }
       return acc
     }, {})
   }
