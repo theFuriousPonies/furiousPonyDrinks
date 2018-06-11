@@ -6,7 +6,7 @@ import {
   PostalCodeElement,
   injectStripe
 } from 'react-stripe-elements'
-
+import axios from 'axios'
 const handleBlur = () => {
   console.log('[blur]')
 }
@@ -18,6 +18,9 @@ const handleFocus = () => {
 }
 const handleReady = () => {
   console.log('[ready]')
+}
+const handleNameChange = event => {
+  [event.target.name] = event.target.value
 }
 
 const createOptions = (fontSize, padding) => {
@@ -41,6 +44,17 @@ const createOptions = (fontSize, padding) => {
 }
 
 class SplitForm extends React.Component {
+  handleSubmit = (ev) => {
+    ev.preventDefault();
+
+    // Within the context of `Elements`, this call to createToken knows which Element to
+    // tokenize, since there's only one in this group.
+    this.props.stripe.createToken({name: 'Jenny Rosen'}).then(({token}) => {
+      axios.post('/api/stripe', token)
+      console.log('Received Stripe token:', token);
+    });
+  };
+
   handleSubmit = ev => {
     ev.preventDefault()
     if (this.props.stripe) {
@@ -56,6 +70,7 @@ class SplitForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Name:
+          <input name="name" type="text" placeholder="Jane Doe" required onChange={handleNameChange} />
           <input name="name" type="text" placeholder="Jane Doe" required onChange={handleChange} />
         </label>
         <label>

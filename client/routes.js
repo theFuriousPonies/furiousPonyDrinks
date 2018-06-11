@@ -12,12 +12,13 @@ import {
   Home,
   Drinks,
   Categories,
-  Checkout,
   Cart,
   EditBrand,
+  Checkout,
   EditDrink,
   Users,
   SingleUser
+  
 } from './components'
 import { me } from './store/user'
 
