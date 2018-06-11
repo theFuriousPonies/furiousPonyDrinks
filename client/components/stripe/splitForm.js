@@ -11,7 +11,6 @@ class SplitForm extends React.Component {
     const newToken = await this.props.stripe.createToken({
       type: 'card'
     })
-    console.log('Received Stripe token:', newToken.token.id)
     const newCharge = await axios.post('/api/stripe', {
       token: newToken.token.id
     })
@@ -23,7 +22,7 @@ class SplitForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <CardElement style={{ base: { fontSize: '18px' } }} />
+        <CardElement />
         <button type="submit">Submit Payment HOLLA!!!</button>
       </form>
     )
