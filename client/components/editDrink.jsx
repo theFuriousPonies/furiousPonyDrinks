@@ -59,17 +59,6 @@ class EditDrink extends Component {
   handleSubmit = event => {
     event.preventDefault()
     this.props.updateDrink(this.state)
-    this.setState({
-      name: '',
-      flavor: '',
-      price: 0,
-      description: '',
-      size: 0,
-      tag: {},
-      imageUrl: '',
-      inventory: 0,
-      brandId: 0
-    })
   }
 
   render() {
@@ -84,6 +73,14 @@ class EditDrink extends Component {
       inventory,
       brandId
     } = this.state
+
+    // for select form
+    let brandOptions = []
+    let firstBrand = {}
+    if (this.props.brands.length) {
+      brandOptions = this.props.brands.filter(brand => brand.id !== brandId)
+      firstBrand = this.props.brands.filter(brand => brand.id === brandId)[0]
+    }
 
     return (
       <div>
@@ -137,15 +134,20 @@ class EditDrink extends Component {
             value={inventory}
             onChange={this.handleChange}
           />
-          <select name="brandId" onChange={this.handleChange}>
-            {this.props.brands.map(brand => {
-              return (
-                <option key={brand.id} value={brand.id}>
-                  {brand.name}
-                </option>
-              )
-            })}
-          </select>
+          {
+            <select name="brandId" onChange={this.handleChange}>
+              <option value={firstBrand}>
+                {firstBrand ? firstBrand.name : ''}
+              </option>
+              {brandOptions.map(brand => {
+                return (
+                  <option key={brand.id} value={brand.id}>
+                    {brand.name}
+                  </option>
+                )
+              })}
+            </select>
+          }
 
           <button type="submit">Submit</button>
         </form>
