@@ -19,3 +19,33 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+div.cartBox {
+  width: 70%;
+  margin: 1em;
+}
+
+div.cartHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 0.8em;
+}
+
+.cartHeader div {
+  justify-self: right
+}
+
+div.cart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around
+}
+
+.cart h4 {
+  margin-right: 0.3em;
+}
+
+div.cartTotal {
+  text-align: end
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import CartItems from './cartItems.jsx'
-import { addOneItem } from '../store/item'
+import { addOneItem, changeOneItem } from '../store/item'
 
 class Cart extends Component {
   getGuestCart = () => {
@@ -31,6 +31,15 @@ class Cart extends Component {
     return items.reduce((acc, pV) => acc + (pV.price * pV.quantity), 0) / 100
   }
 
+  handleChange = (event, drinkId) => {
+    const item = {
+      drinkId,
+      quantity: event.target.value,
+      orderId: this.props.order.id
+    }
+    this.props.changeQuantity(item)
+  }
+
   render () {
     const guestCart = this.getGuestCart()
     if (this.props.isLoggedIn) this.mergeCart(guestCart)
@@ -40,7 +49,7 @@ class Cart extends Component {
     return (
       <div>
         {drinks.length ? (
-          <CartItems drinks={drinks} total={total} />
+          <CartItems drinks={drinks} total={total} handleChange={this.handleChange} />
         ) : (
           <h3>Your cart is empty!</h3>
         )}
@@ -59,7 +68,8 @@ const mapStateToProps = ({ drinks, order, user, items, drinksTable }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addToCart: item => dispatch(addOneItem(item))
+  addToCart: item => dispatch(addOneItem(item)),
+  changeQuantity: item => dispatch(changeOneItem(item))
 })
 
 export default connect(
