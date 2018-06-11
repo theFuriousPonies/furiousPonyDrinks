@@ -15,7 +15,8 @@ import {
   Checkout,
   Cart,
   EditBrand,
-  EditDrink
+  EditDrink,
+  Users
 } from './components'
 import { me } from './store/user'
 
@@ -49,7 +50,16 @@ class Routes extends Component {
         <Route exact path="/categories" component={Categories} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/checkout" component={Checkout} />
+        {this.props.user.isAdmin && <Route path="/users" component={Users} />}
         <Route exact path="/" component={Home} />
+        {/* Admin restricted access to pages below */}
+        {/* {this.props.user.isAdmin && (
+          <>
+            <Route path="/users" component={Users} />
+            <Route path="/drinks/:id/edit" component={EditDrink} />
+            <Route path="/brands/:id/edit" component={EditBrand} />
+          </>
+        )} */}
       </Switch>
     )
   }
