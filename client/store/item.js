@@ -53,7 +53,7 @@ export const addOneItem = item => async dispatch => {
 
 export const removeItem = item => async dispatch => {
   try {
-    await axios.delete(`/api/items/`, item)
+    await axios.delete(`/api/items/`, { data: item })
     dispatch(removedItem(item))
   } catch (err) {
     console.error(err)

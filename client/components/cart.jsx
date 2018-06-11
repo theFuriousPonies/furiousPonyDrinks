@@ -66,9 +66,9 @@ class Cart extends Component {
   handleDelete = event => {
     if (this.props.isLoggedIn) {
       this.props.deleteItem({
-      drinkId: +event.target.value,
-      orderId: this.props.order.id
-    })
+        drinkId: +event.target.value,
+        orderId: this.props.order.id
+      })
     } else {
       localStorage.removeItem(`drinkId${event.target.value}`)
       const guestCart = this.getGuestCart()
