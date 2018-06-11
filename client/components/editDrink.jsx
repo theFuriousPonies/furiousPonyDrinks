@@ -8,13 +8,13 @@ class EditDrink extends Component {
     this.state = {
       name: '',
       flavor: '',
-      price: NaN,
+      price: 0,
       description: '',
-      size: NaN,
+      size: 0,
       tag: {},
       imageUrl: '',
-      inventory: NaN,
-      brandId: NaN
+      inventory: 0,
+      brandId: 0
     }
   }
 
@@ -50,6 +50,7 @@ class EditDrink extends Component {
   }
 
   handleChange = event => {
+    console.log(event.target.name)
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -58,17 +59,6 @@ class EditDrink extends Component {
   handleSubmit = event => {
     event.preventDefault()
     this.props.updateDrink(this.state)
-    this.setState({
-      name: '',
-      flavor: '',
-      price: NaN,
-      description: '',
-      size: NaN,
-      tag: {},
-      imageUrl: '',
-      inventory: NaN,
-      brandId: NaN
-    })
   }
 
   render() {
@@ -83,6 +73,14 @@ class EditDrink extends Component {
       inventory,
       brandId
     } = this.state
+
+    // for select form
+    let brandOptions = []
+    let firstBrand = {}
+    if (this.props.brands.length) {
+      brandOptions = this.props.brands.filter(brand => brand.id !== brandId)
+      firstBrand = this.props.brands.filter(brand => brand.id === brandId)[0]
+    }
 
     return (
       <div>
@@ -136,6 +134,21 @@ class EditDrink extends Component {
             value={inventory}
             onChange={this.handleChange}
           />
+          {
+            <select name="brandId" onChange={this.handleChange}>
+              <option value={firstBrand}>
+                {firstBrand ? firstBrand.name : ''}
+              </option>
+              {brandOptions.map(brand => {
+                return (
+                  <option key={brand.id} value={brand.id}>
+                    {brand.name}
+                  </option>
+                )
+              })}
+            </select>
+          }
+
           <button type="submit">Submit</button>
         </form>
       </div>
@@ -144,7 +157,8 @@ class EditDrink extends Component {
 }
 
 const mapStateToProps = state => ({
-  drinks: state.drinks
+  drinks: state.drinks,
+  brands: state.brands
 })
 
 const mapDispatchToProps = dispatch => ({

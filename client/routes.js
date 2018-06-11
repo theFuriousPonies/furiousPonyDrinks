@@ -17,8 +17,8 @@ import {
   Checkout,
   EditDrink,
   Users,
-  SingleUser
-  
+  SingleUser,
+  EditUser
 } from './components'
 import { me } from './store/user'
 
@@ -62,27 +62,31 @@ class Routes extends Component {
           <Route exact path="/drinks/:id" component={SingleDrink} />
          {this.props.user.isAdmin && (
           <Route path="/drinks/:id/edit" component={EditDrink} />
-          )}
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/categories" component={Categories} />
-          <Route
+
+        )}
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/categories" component={Categories} />
+           <Route
             exact
             path="/cart"
             render={routeProps => (
               <Cart {...routeProps} drinksTable={drinksTable} />
             )}
           />
-          <Route exact path="/checkout" component={Checkout} />
-          {this.props.user.isAdmin && (
-            <Route exact path="/users" component={Users} />
-          )}
-          {this.props.user.isAdmin && (
-            <Route exact path="/users/:id" component={SingleUser} />
-          )}
-          <Route exact path="/" component={Home} />
-          {/* Admin restricted access to pages below */}
-          {/* {this.props.user.isAdmin && (
+        <Route exact path="/checkout" component={Checkout} />
+        {this.props.user.isAdmin && (
+          <Route exact path="/users" component={Users} />
+        )}
+        {this.props.user.isAdmin && (
+          <Route exact path="/users/:id" component={SingleUser} />
+        )}
+        {this.props.user.isAdmin && (
+          <Route exact path="/users/:id/edit" component={EditUser} />
+        )}
+        <Route exact path="/" component={Home} />
+        {/* Admin restricted access to pages below */}
+        {/* {this.props.user.isAdmin && (
           <>
             <Route path="/users" component={Users} />
             <Route path="/drinks/:id/edit" component={EditDrink} />

@@ -18,6 +18,9 @@ const SingleUser = props => {
           <div>{name}</div>
           <div>{email}</div>
           {isAdmin && <div>Admin</div>}
+          <NavLink to={`/users/${id}/edit`}>
+            <button type="button">Edit User</button>
+          </NavLink>
         </>
       )}
     </div>
