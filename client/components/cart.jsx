@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import CartItems from './cartItems.jsx'
+import { addOneItem } from '../store/item'
 
 class Cart extends Component {
   getGuestCart = () => {
@@ -17,18 +18,25 @@ class Cart extends Component {
     })
   }
 
+  mergeCart = async guestItems => {
+    const orderId = this.props.order.id
+    await guestItems.forEach(item => {
+      item.orderId = orderId
+      this.props.addToCart(item)
+      })
+    localStorage.clear()
+  }
+
   total = items => {
     return items.reduce((acc, pV) => acc + (pV.price * pV.quantity), 0) / 100
   }
 
   render () {
-    console.log(this.props.drinksTable)
     const guestCart = this.getGuestCart()
+    if (this.props.isLoggedIn) this.mergeCart(guestCart)
     let drinksArr = this.props.isLoggedIn ? this.props.items : guestCart
     const drinks = this.createCart(drinksArr)
     const total = this.total(drinks)
-    // merge cart
-    // if (isLoggedIn && guestCart.length)
     return (
       <div>
         {drinks.length ? (
@@ -50,11 +58,11 @@ const mapStateToProps = ({ drinks, order, user, items, drinksTable }) => ({
   isLoggedIn: !!user.id
 })
 
-// const mapDispatchToProps = dispatch => ({
-//   getGuestCart
-// })
+const mapDispatchToProps = dispatch => ({
+  addToCart: item => dispatch(addOneItem(item))
+})
 
 export default connect(
   mapStateToProps,
-  // mapDispatchToProps
+  mapDispatchToProps
 )(Cart)
