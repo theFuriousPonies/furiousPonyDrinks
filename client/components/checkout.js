@@ -26,7 +26,7 @@ export default class Checkout extends React.Component {
       <div className="Checkout">
         <h1>Enter Your Credit Card Info</h1>
         <Elements>
-          <SplitForm fontSize={elementFontSize} />
+          <SplitForm fontSize={elementFontSize} {...this.props} />
         </Elements>
       </div>
     )
