@@ -51,7 +51,8 @@ export const updateBrand = brand => async dispatch => {
 export const newBrand = brand => async dispatch => {
   try {
     const nBrand = await axios.post('/api/brands', brand).then(res => res.data)
-    dispatch(gotNewBrand(nBrand))
+    await dispatch(gotNewBrand(nBrand))
+    history.push('/brands')
   } catch (err) {
     console.error(err)
     dispatch(failBrand(err))
@@ -60,8 +61,9 @@ export const newBrand = brand => async dispatch => {
 
 export const removeBrand = id => async dispatch => {
   try {
-    await axios.delete(`/api/campus/${id}`)
+    await axios.delete(`/api/brands/${id}`)
     dispatch(removedBrand(id))
+    history.push('/brands')
   } catch (err) {
     console.error(err)
     dispatch(failBrand(err))

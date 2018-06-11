@@ -63,9 +63,10 @@ class SingleDrink extends Component {
   }
   render() {
     const drinkId = this.props.match.params.id
-    const drink = this.props.drinksTable[drinkId]
+    const drink = this.props.drinks.filter(drink => {
+      return +drinkId === drink.id
+    })[0]
     const { quantity } = this.state
-
     return (
       <div>
         {drink && (
