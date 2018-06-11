@@ -34,7 +34,7 @@ export const getItems = id => async dispatch => {
 export const changeOneItem = item => async dispatch => {
   try {
     const { data } = await axios.post(`/api/items`, item)
-    if (data) dispatch(oneItem(data))
+    if (data.quantity) dispatch(oneItem(data))
     else dispatch(removedItem(item))
   } catch (err) {
     console.error(err)
@@ -58,17 +58,15 @@ const items = (state = initialState, action) => {
     case GOT_ITEMS:
       return action.allItems
     case ONE_ITEM: {
-      const filtered = state.filter(
-        item => item.drinkId !== action.item.drinkId
+      const index = state.findIndex(
+        item => item.drinkId === action.item.drinkId
       )
-      return [...filtered, action.item]
+      const itemsArr = [...state]
+      itemsArr.splice(index, 1, action.item)
+      return itemsArr
     }
     case REMOVED_ITEM:
-      return [...state].filter(
-        item =>
-          item.drinkId !== action.item.drinkId &&
-          item.orderId !== action.item.orderId
-      )
+      return [...state].filter(item => item.drinkId !== action.item.drinkId)
     default:
       return state
   }

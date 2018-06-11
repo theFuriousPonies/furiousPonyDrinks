@@ -12,7 +12,8 @@ const CartItems = ({ drinks, total, handleChange }) => {
       <div>Quantity</div>
     </div>
     <hr />
-    {drinks.map(drink => (
+    {drinks.map(drink => {
+      return (
       <div key={drink.id}>
       <div key={drink.id} className="cart">
         <h4>{drink.name}</h4>
@@ -23,7 +24,7 @@ const CartItems = ({ drinks, total, handleChange }) => {
       </div>
       <hr/>
       </div>
-    ))}
+    )})}
     <div className="cartTotal">
     <h4>Your total cost is ${total}</h4>
     </div>

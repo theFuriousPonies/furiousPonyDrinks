@@ -51,7 +51,6 @@ class Drinks extends Component {
   render() {
     const drinks = this.props.drinks
     const isAdmin = this.props.user.isAdmin
-    console.log('isAdmin', isAdmin)
     return (
       <div id="color-gradient">
         <div id="drinks-container">

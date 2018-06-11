@@ -34,7 +34,7 @@ class Cart extends Component {
   handleChange = (event, drinkId) => {
     const item = {
       drinkId,
-      quantity: event.target.value,
+      quantity: +event.target.value,
       orderId: this.props.order.id
     }
     this.props.changeQuantity(item)
