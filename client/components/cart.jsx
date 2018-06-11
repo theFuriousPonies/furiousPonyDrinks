@@ -76,6 +76,12 @@ class Cart extends Component {
     }
   }
 
+  handleSubmit = event => {
+    event.preventDefault()
+    const total = +event.target.value
+
+  }
+
   render () {
     if (!this.props.drinksTable['1']) return null
     const guestCart = this.getGuestCart()
@@ -86,7 +92,7 @@ class Cart extends Component {
     return (
       <div>
         {drinks.length ? (
-          <CartItems drinks={drinks} total={total} handleChange={this.handleChange} handleDelete={this.handleDelete} />
+          <CartItems drinks={drinks} total={total} handleChange={this.handleChange} handleDelete={this.handleDelete} handleSubmit={this.handleSubmit} />
         ) : (
           <h3>Your cart is empty!</h3>
         )}

@@ -1,7 +1,7 @@
 import React from 'react'
 import CartQuantity from './cartQuantity.jsx'
 
-const CartItems = ({ drinks, total, handleChange, handleDelete }) => {
+const CartItems = ({ drinks, total, handleChange, handleDelete, handleSubmit }) => {
   const optionsArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   return (
   <div className="cartBox">
@@ -18,16 +18,19 @@ const CartItems = ({ drinks, total, handleChange, handleDelete }) => {
       <div key={drink.id} className="cart">
         <h4>{drink.name}</h4>
         <h4>${drink.price / 100}</h4>
+        <div className="cartQuantity">
         <h4>
           <CartQuantity drink={drink} optionsArr={optionsArr} handleChange={handleChange} />
         </h4>
-        <button type="button" value={drink.id} onClick={handleDelete}>X</button>
+        <button type="button" value={drink.id} onClick={handleDelete}>Remove</button>
+        </div>
       </div>
       <hr/>
       </div>
     )})}
     <div className="cartTotal">
     <h4>Your total cost is ${total}</h4>
+    <button type="button" value={total} onClick={handleSubmit}>Checkout</button>
     </div>
   </div>
 )}

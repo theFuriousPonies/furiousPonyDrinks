@@ -32,6 +32,21 @@ div.cartHeader {
   font-size: 0.8em;
 }
 
+div.cartQuantity {
+  display: flex;
+  flex-direction: row;
+}
+
+.cartQuantity button {
+  padding: 0.2em;
+  height: 2em;
+  align-self: center
+}
+
+.cartQuantity button:hover {
+  cursor: pointer
+}
+
 .cartHeader div {
   justify-self: right
 }
