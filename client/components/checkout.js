@@ -1,7 +1,6 @@
 import React from 'react'
 import { Elements } from 'react-stripe-elements'
 import SplitForm from './stripe/splitForm'
-import PaymentRequestForm from './stripe/paymentRequestForm'
 
 export default class Checkout extends React.Component {
   constructor() {
@@ -25,12 +24,9 @@ export default class Checkout extends React.Component {
     const { elementFontSize } = this.state
     return (
       <div className="Checkout">
-        <h1>Available Elements</h1>
+        <h1>Enter Your Credit Card Info</h1>
         <Elements>
           <SplitForm fontSize={elementFontSize} />
-        </Elements>
-        <Elements>
-          <PaymentRequestForm />
         </Elements>
       </div>
     )

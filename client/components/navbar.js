@@ -18,6 +18,7 @@ const Navbar = ({ handleClick, isLoggedIn, user }) => (
             <Link to="/brands">Brands</Link>
             <Link to="/categories">Categories</Link>
             <Link to="/drinks">Drinks</Link>
+            {user.isAdmin ? <Link to="/users">Users</Link> : <div />}
           </div>
           <form className="search">
             <i className="small material-icons">search</i>
