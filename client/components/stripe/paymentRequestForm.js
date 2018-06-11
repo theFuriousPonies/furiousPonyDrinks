@@ -1,22 +1,11 @@
 import React from 'react'
 import {
-  CardElement,
-  CardNumberElement,
-  CardExpiryElement,
-  CardCVCElement,
-  PostalCodeElement,
   PaymentRequestButtonElement,
-  IbanElement,
-  IdealBankElement,
-  Elements,
   injectStripe
 } from 'react-stripe-elements'
 
 const handleBlur = () => {
   console.log('[blur]')
-}
-const handleChange = change => {
-  console.log('[change]', change)
 }
 const handleClick = () => {
   console.log('[click]')
