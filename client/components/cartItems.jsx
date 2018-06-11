@@ -1,7 +1,7 @@
 import React from 'react'
 import CartQuantity from './cartQuantity.jsx'
 
-const CartItems = ({ drinks, total, handleChange }) => {
+const CartItems = ({ drinks, total, handleChange, handleDelete }) => {
   const optionsArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   return (
   <div className="cartBox">
@@ -21,6 +21,7 @@ const CartItems = ({ drinks, total, handleChange }) => {
         <h4>
           <CartQuantity drink={drink} optionsArr={optionsArr} handleChange={handleChange} />
         </h4>
+        <button type="button" value={drink.id} onClick={handleDelete}>X</button>
       </div>
       <hr/>
       </div>

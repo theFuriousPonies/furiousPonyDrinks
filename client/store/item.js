@@ -51,6 +51,15 @@ export const addOneItem = item => async dispatch => {
   }
 }
 
+export const removeItem = item => async dispatch => {
+  try {
+    await axios.delete(`/api/items/`, item)
+    dispatch(removedItem(item))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 // ITEMS REDUCER
 
 const items = (state = initialState, action) => {

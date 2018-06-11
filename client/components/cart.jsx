@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import CartItems from './cartItems.jsx'
-import { addOneItem, changeOneItem } from '../store/item'
+import { addOneItem, changeOneItem, removeItem } from '../store/item'
 
 class Cart extends Component {
   constructor(props) {
@@ -63,6 +63,19 @@ class Cart extends Component {
     }
   }
 
+  handleDelete = event => {
+    if (this.props.isLoggedIn) {
+      this.props.deleteItem({
+      drinkId: +event.target.value,
+      orderId: this.props.order.id
+    })
+    } else {
+      localStorage.removeItem(`drinkId${event.target.value}`)
+      const guestCart = this.getGuestCart()
+      this.setState({ guestCart })
+    }
+  }
+
   render () {
     if (!this.props.drinksTable['1']) return null
     const guestCart = this.getGuestCart()
@@ -73,7 +86,7 @@ class Cart extends Component {
     return (
       <div>
         {drinks.length ? (
-          <CartItems drinks={drinks} total={total} handleChange={this.handleChange} />
+          <CartItems drinks={drinks} total={total} handleChange={this.handleChange} handleDelete={this.handleDelete} />
         ) : (
           <h3>Your cart is empty!</h3>
         )}
@@ -93,7 +106,8 @@ const mapStateToProps = ({ drinks, order, user, items, drinksTable }) => ({
 
 const mapDispatchToProps = dispatch => ({
   addToCart: item => dispatch(addOneItem(item)),
-  changeQuantity: item => dispatch(changeOneItem(item))
+  changeQuantity: item => dispatch(changeOneItem(item)),
+  deleteItem: item => dispatch(removeItem(item))
 })
 
 export default connect(
