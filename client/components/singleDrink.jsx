@@ -58,17 +58,15 @@ class SingleDrink extends Component {
   }
   render() {
     const drinkId = this.props.match.params.id
-    const drink = this.props.drinksTable[drinkId]
+    const drink = this.props.drinks.filter(drink => {
+      return +drinkId === drink.id
+    })[0]
     const { quantity } = this.state
-
     return (
       <div>
         {drink && (
           <div>
-            <form
-              id="single-drink-form"
-              onSubmit={this.handleSubmit}
-            >
+            <form id="single-drink-form" onSubmit={this.handleSubmit}>
               <div id="single-drink-content">
                 {drink.inventory ? <div /> : <span>Out of Stock</span>}
                 <img src={drink.imageUrl} content="" id="single-drink-img" />
