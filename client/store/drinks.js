@@ -64,7 +64,8 @@ export const getNewDrink = drink => async dispatch => {
 export const removeDrink = id => async dispatch => {
   try {
     await axios.delete(`/api/drinks/${id}`)
-    dispatch(removedDrink(id))
+    await dispatch(removedDrink(id))
+    history.push('/drinks')
   } catch (error) {
     console.error(error)
     dispatch(failDrink(error))
