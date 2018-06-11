@@ -41,7 +41,7 @@ nav {
   );
   /* background-color: rgb(252, 146, 146); */
   width: 100%;
-  height: 20vh;
+  height: 60px;
 }
 
 nav h1 {
@@ -119,7 +119,7 @@ form.search input[type='text'] {
 
 form.search input[type='text']:focus {
   outline-color: rgb(243, 210, 210);
-  width: 400px;
+  width: 220px;
   transition: width 1s ease;
   /* animation: focussearch 4s infinite; */
 }
