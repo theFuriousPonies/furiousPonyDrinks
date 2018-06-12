@@ -4,8 +4,6 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log('req.user.dataValues', req.user.dataValues)
-
     const brands = await Brand.findAll({ include: [Drink] })
     res.json(brands)
   } catch (err) {
