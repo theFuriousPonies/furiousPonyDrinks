@@ -7,8 +7,9 @@ class Cart extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      // guestCart: [],
-      more: false
+      more: false,
+      total: 0,
+      cart: []
     }
   }
 
@@ -80,14 +81,15 @@ class Cart extends Component {
     } else {
       localStorage.removeItem(`drinkId${event.target.value}`)
       const guestCart = this.getGuestCart()
-      this.setState({ guestCart })
+      this.setState({ cart: guestCart })
     }
   }
 
-  handleSubmit = event => {
+  handleSubmit = (event, cart, total) => {
     event.preventDefault()
-    const total = +event.target.value
-
+    console.log('CART', cart)
+    console.log('TOTAL', total)
+    this.setState({ total, cart }, () => console.log('STATE', this.state))
   }
 
   render () {
