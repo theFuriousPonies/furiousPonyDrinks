@@ -2,12 +2,16 @@ import React from 'react'
 
 import { Navbar } from './components'
 import Routes from './routes'
+import Bubbles from './components/bubbles.jsx'
 
 const App = () => {
   return (
-    <div>
+    <div id="hello">
       <Navbar />
-      <Routes />
+      <div className="content">
+        <Bubbles />
+        <Routes />
+      </div>
     </div>
   )
 }

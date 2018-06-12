@@ -1,6 +1,21 @@
 body {
   font-family: sans-serif;
 }
+button {
+  position: relative;
+  z-index: 100;
+}
+
+input {
+  position: relative;
+  z-index: 100;
+}
+
+#app {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
 
 a {
   text-decoration: none;
@@ -57,13 +72,13 @@ div.cartQuantity {
 }
 
 .cartHeader div {
-  justify-self: right
+  justify-self: right;
 }
 
 div.cart {
   display: flex;
   flex-direction: row;
-  justify-content: space-around
+  justify-content: space-around;
 }
 
 .cart h4 {
@@ -71,6 +86,25 @@ div.cart {
 }
 
 div.cartTotal {
-  text-align: end
+  text-align: end;
+}
+
+.content {
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom right,
+    rgb(243, 157, 157),
+    rgb(243, 140, 140),
+    rgb(241, 127, 127),
+    rgb(228, 119, 119)
+  );
+  overflow-y: auto;
+}
+
+.overflow-scroll {
+  overflow-y: auto;
 }
 
