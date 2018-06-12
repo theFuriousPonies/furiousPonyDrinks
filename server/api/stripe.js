@@ -8,7 +8,7 @@ router.post('/', async (req, res, next) => {
     const { token, total } = req.body
     console.log('Get the total from Token OMG',token)
     const charge = await stripe.charges.create({
-      amount: total * 100,
+      amount: total,
       currency: 'usd',
       description: 'Example charge',
       source: token
