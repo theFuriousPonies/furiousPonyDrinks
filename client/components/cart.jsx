@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import CartItems from './cartItems.jsx'
 import { addOneItem, changeOneItem, removeItem } from '../store/item'
 
@@ -87,13 +88,20 @@ class Cart extends Component {
 
   handleSubmit = (event, cart, total) => {
     event.preventDefault()
-    console.log('CART', cart)
-    console.log('TOTAL', total)
-    this.setState({ total, cart }, () => console.log('STATE', this.state))
+    this.setState({ total, cart })
+
   }
 
   render () {
     if (!this.props.drinksTable['1']) return null
+
+    if (this.state.total) return (<Redirect to={
+      {
+        pathname: '/reviewCart',
+        state: { referrer: this.state }
+      }
+    } />)
+
     const guestCart = this.getGuestCart()
     if (this.props.isLoggedIn) this.mergeCart(guestCart)
     const drinksArr = this.props.isLoggedIn ? this.props.items : guestCart
