@@ -60,7 +60,6 @@ class Drinks extends Component {
                 </button>
               </NavLink>
             )}
-            <Bubbles />
             <CokeBubbles />
             <div className="drink-profile-container">
               {drinks.map(drink => {
