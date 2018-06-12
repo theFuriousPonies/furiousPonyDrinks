@@ -3,6 +3,7 @@ import { CardElement, injectStripe } from 'react-stripe-elements'
 import { connect } from 'react-redux'
 import { updateOrder } from '../../store/order'
 import { updateDrink } from '../../store/drinks'
+import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 class SplitForm extends React.Component {
@@ -56,8 +57,8 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default injectStripe(
-  connect(
+  withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
   )(SplitForm)
-)
+))
