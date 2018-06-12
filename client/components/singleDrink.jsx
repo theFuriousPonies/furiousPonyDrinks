@@ -9,7 +9,8 @@ class SingleDrink extends Component {
   constructor() {
     super()
     this.state = {
-      quantity: 1
+      quantity: 1,
+      added: false
     }
   }
 
@@ -60,7 +61,15 @@ class SingleDrink extends Component {
       if (prevItem) item.quantity += prevItem.quantity
       localStorage.setItem(`drinkId${drinkId}`, JSON.stringify(item))
     }
+    this.setState({ added: true, quantity: 1 })
   }
+
+  redirect = location => {
+    if (typeof location === 'string') this.props.history.push(`/${location}`)
+    else this.props.history.goBack()
+    this.setState({ added: false })
+  }
+
   render() {
     const drinkId = this.props.match.params.id
     const drink = this.props.drinks.filter(drink => {
@@ -94,7 +103,16 @@ class SingleDrink extends Component {
                   -
                 </button>
               </div>
+              <div className="cartQuantity">
               <button type="submit">Add to Cart</button>
+              {this.state.added ? (
+                <div>
+                <span>Added!</span>
+                <button type="button" onClick={() => this.redirect('cart')}>Go to Cart</button>
+                <button type="button" onClick={this.redirect}>Continue Shopping</button>
+                </div>
+              ) : ''}
+              </div>
             </form>
             {this.props.user.isAdmin && (
               <>

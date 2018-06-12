@@ -1,11 +1,12 @@
 import React from 'react'
 import CartQuantity from './cartQuantity.jsx'
 
-const CartItems = ({ drinks, total, handleChange, handleDelete }) => {
+const CartItems = ({ drinks, total, handleChange, handleDelete, handleSubmit, show }) => {
   const optionsArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  const number = drinks.reduce((acc, pV) => acc + pV.quantity, 0)
   return (
   <div className="cartBox">
-    <h3>You have {drinks.length} items in your cart</h3>
+    <h3>You have {number} items in your cart</h3>
     <div className="cartHeader">
       <div>Name</div>
       <div>Price</div>
@@ -18,16 +19,21 @@ const CartItems = ({ drinks, total, handleChange, handleDelete }) => {
       <div key={drink.id} className="cart">
         <h4>{drink.name}</h4>
         <h4>${drink.price / 100}</h4>
+        <div className="cartQuantity">
         <h4>
-          <CartQuantity drink={drink} optionsArr={optionsArr} handleChange={handleChange} />
+          <CartQuantity drink={drink} optionsArr={optionsArr} handleChange={handleChange} show={show} />
         </h4>
-        <button type="button" value={drink.id} onClick={handleDelete}>X</button>
+        <button type="button" value={drink.id} onClick={handleDelete}>Remove</button>
+        </div>
       </div>
       <hr/>
       </div>
     )})}
     <div className="cartTotal">
-    <h4>Your total cost is ${total}</h4>
+    <h5>Subtotal: ${total}</h5>
+    <h5>Tax: 8.875%</h5>
+    <h4>Total: ${Number(Math.round(total * 1.08875 + 'e2') + 'e-2')}</h4>
+    <button type="button" value={total} onClick={handleSubmit}>Checkout</button>
     </div>
   </div>
 )}
