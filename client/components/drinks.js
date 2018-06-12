@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import DrinkProfile from './drinkProfile.jsx'
 import FilterByCategory from './filterCategories.jsx'
-import Bubbles from './bubbles.jsx'
 import { NavLink } from 'react-router-dom'
 import CokeBubbles from './cokeBubbles.jsx'
 

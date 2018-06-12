@@ -13,15 +13,17 @@ const Brands = ({ brands, user }) => {
           <button type="button">Add Brand</button>
         </NavLink>
       )}
-      {brands &&
-        brands.map(brand => (
-          <div key={brand.id}>
-            <img src={brand.imageUrl} />
-            <NavLink to={`/brands/${brand.id}`}>
-              <h2>{brand.name}</h2>
-            </NavLink>
-          </div>
-        ))}
+      <div className="overflow-scroll">
+        {brands &&
+          brands.map(brand => (
+            <div key={brand.id}>
+              <img src={brand.imageUrl} />
+              <NavLink to={`/brands/${brand.id}`}>
+                <h2>{brand.name}</h2>
+              </NavLink>
+            </div>
+          ))}
+      </div>
       {!brands.length && <div>There are no brands Add SOME!</div>}
     </div>
   )

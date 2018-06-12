@@ -1,6 +1,21 @@
 body {
   font-family: sans-serif;
 }
+button {
+  position: relative;
+  z-index: 100;
+}
+
+input {
+  position: relative;
+  z-index: 100;
+}
+
+#app {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
 
 a {
   text-decoration: none;
@@ -32,6 +47,30 @@ div.cartHeader {
   font-size: 0.8em;
 }
 
+div.cartQuantity {
+  display: flex;
+  flex-direction: row;
+  padding: 0.2em;
+}
+
+.cartQuantity span {
+  font-size: 0.7em;
+  padding-right: 0.5em;
+  font-style: italic
+}
+
+.cartQuantity button {
+  padding: 0.2em;
+  margin-left: 0.2em;
+  height: 2em;
+  align-self: center;
+}
+
+.cartQuantity button:hover {
+  cursor: pointer;
+  font-weight: bold
+}
+
 .cartHeader div {
   justify-self: right;
 }
@@ -49,3 +88,23 @@ div.cart {
 div.cartTotal {
   text-align: end;
 }
+
+.content {
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom right,
+    rgb(243, 157, 157),
+    rgb(243, 140, 140),
+    rgb(241, 127, 127),
+    rgb(228, 119, 119)
+  );
+  overflow-y: auto;
+}
+
+.overflow-scroll {
+  overflow-y: auto;
+}
+
