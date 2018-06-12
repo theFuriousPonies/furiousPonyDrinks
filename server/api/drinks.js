@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const { Drink, Brand, Category } = require('../db/models')
 module.exports = router
+const errorNaughty = new Error('naughty')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -23,7 +24,7 @@ router.post('/', async (req, res, next) => {
       const newDrink = await Drink.create(req.body)
       res.json(newDrink)
     } else {
-      res.redirect('/')
+      next(errorNaughty)
     }
   } catch (error) {
     next(error)
@@ -41,7 +42,7 @@ router.put('/:drinkId', async (req, res, next) => {
       })
       res.send(drink[0].dataValues)
     } else {
-      res.redirect('/')
+      next(errorNaughty)
     }
   } catch (error) {
     next(error)
@@ -58,7 +59,7 @@ router.delete('/:drinkId', async (req, res, next) => {
       })
       res.status(204).end()
     } else {
-      res.redirect('/')
+      next(errorNaughty)
     }
   } catch (error) {
     next(error)
