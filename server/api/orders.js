@@ -29,6 +29,15 @@ router.post('/:userId', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    const order = await Order.create(req.body)
+    res.json(order)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //  /:orderId routes
 router.get('/:orderId', async (req, res, next) => {
   try {
