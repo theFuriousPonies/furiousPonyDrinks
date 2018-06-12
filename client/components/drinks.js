@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import DrinkProfile from './drinkProfile.jsx'
 import FilterByCategory from './filterCategories.jsx'
-import Bubbles from './bubbles.jsx'
 import { NavLink } from 'react-router-dom'
 
 class Drinks extends Component {
@@ -62,7 +61,6 @@ class Drinks extends Component {
                 </button>
               </NavLink>
             )}
-            <Bubbles />
             <div className="drink-profile-container">
               {drinks.map(drink => {
                 if (this.checkFiltersInCategories(drink)) {
