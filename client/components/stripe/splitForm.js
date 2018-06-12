@@ -3,6 +3,7 @@ import {
   CardElement,
   injectStripe
 } from 'react-stripe-elements'
+import { connect } from 'react-redux'
 import axios from 'axios'
 
 class SplitForm extends React.Component {
@@ -15,11 +16,13 @@ class SplitForm extends React.Component {
       token: newToken.token.id
     })
     if (newCharge) {
+      //create order on the DB then push
       this.props.history.push('./acceptedPayment')
     }
   }
 
   render() {
+    console.log("Holla this.props", this.props)
     return (
       <form onSubmit={this.handleSubmit}>
         <CardElement />
@@ -28,5 +31,19 @@ class SplitForm extends React.Component {
     )
   }
 }
-export default injectStripe(SplitForm)
+const mapStateToProps = ({ drinks, order, user, items, drinksTable }) => ({
+  order,
+  drinks,
+  user,
+  items,
+  drinksTable,
+  isLoggedIn: !!user.id
+})
+// const mapDispatchToProps = dispatch => ({
+//   addToCart: item => dispatch(addOneItem(item)),
+//   changeQuantity: item => dispatch(changeOneItem(item)),
+//   deleteItem: item => dispatch(removeItem(item))
+// })
+
+export default injectStripe(connect(mapStateToProps)(SplitForm))
 
