@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const { Order, Drink } = require('../db/models')
 module.exports = router
+const errorNaughty = new Error('naughty')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -21,7 +22,7 @@ router.post('/:userId', async (req, res, next) => {
       }).then(result => result.setUser(req.params.userId))
       res.json(order)
     } else {
-      res.redirect('/')
+      next(errorNaughty)
     }
   } catch (err) {
     next(err)
@@ -40,13 +41,13 @@ router.post('/', async (req, res, next) => {
 //  /:orderId routes
 router.get('/:orderId', async (req, res, next) => {
   try {
-    if (req.user && req.user.isAdmin) {
-      const order = await Order.findById(req.params.orderId, {
-        include: [{ model: Drink }]
-      })
+    const order = await Order.findById(req.params.orderId, {
+      include: [{ model: Drink }]
+    })
+    if (order.userId === req.user.id) {
       res.json(order)
     } else {
-      res.redirect('/')
+      next(errorNaughty)
     }
   } catch (err) {
     next(err)
@@ -63,7 +64,7 @@ router.put('/:orderId', async (req, res, next) => {
       })
       res.send(order)
     } else {
-      res.redirect('/')
+      next(errorNaughty)
     }
   } catch (err) {
     next(err)
@@ -80,7 +81,7 @@ router.delete('/:orderId', async (req, res, next) => {
       })
       res.status(204).end()
     } else {
-      res.redirect('/')
+      next(errorNaughty)
     }
   } catch (err) {
     next(err)

@@ -29,7 +29,6 @@ import { me } from './store/user'
 import { getBrands } from './store/brand'
 import { getDrinks } from './store/drinks'
 import { getCategories } from './store/categories'
-import { getUsers } from './store/users'
 
 /**
  * COMPONENT
@@ -93,13 +92,12 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = ({ users, user, brands, categories, drinks, order }) => ({
+const mapState = ({ user, brands, categories, drinks, order }) => ({
   user,
   brands,
   categories,
   drinks,
-  order,
-  users
+  order
 })
 
 const mapDispatch = dispatch => {
@@ -109,7 +107,6 @@ const mapDispatch = dispatch => {
       dispatch(getBrands())
       dispatch(getCategories())
       dispatch(getDrinks())
-      dispatch(getUsers())
     }
   }
 }
