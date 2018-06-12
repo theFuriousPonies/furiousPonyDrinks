@@ -18,8 +18,8 @@ class Cart extends Component {
   // }
 
   getGuestCart = () => {
-    return Object.keys(localStorage).slice(1)
-    .map(key => JSON.parse(localStorage.getItem(key)))
+    const keys = Object.keys(localStorage).filter(key => key.startsWith('drinkId'))
+    return keys.map(key => JSON.parse(localStorage.getItem(key)))
   }
 
   createCart = items => {
