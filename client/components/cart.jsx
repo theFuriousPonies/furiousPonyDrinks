@@ -89,18 +89,15 @@ class Cart extends Component {
   handleSubmit = (event, cart, total) => {
     event.preventDefault()
     this.setState({ total, cart })
-
   }
 
   render () {
     if (!this.props.drinksTable['1']) return null
 
-    if (this.state.total) return (<Redirect to={
-      {
+    if (this.state.total) return (<Redirect to={{
         pathname: '/reviewCart',
         state: { referrer: this.state }
-      }
-    } />)
+      }} />)
 
     const guestCart = this.getGuestCart()
     if (this.props.isLoggedIn) this.mergeCart(guestCart)

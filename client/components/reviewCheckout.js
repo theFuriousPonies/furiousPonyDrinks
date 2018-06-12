@@ -1,8 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { Checkout } from './'
 
 const reviewCheckout = props => {
   console.log(props)
-  return <div>HI</div>
+  const { total, cart } = props.location.state.referrer
+  return (
+    <div>
+      {cart.map(item => (
+        <div key={item.id}>
+          {item.name}
+          {item.quantity}
+        </div>
+      ))}
+      <Checkout total={total} />
+    </div>
+  )
 }
 
 export default reviewCheckout
