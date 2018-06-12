@@ -2,7 +2,6 @@ import React from 'react'
 import { Checkout } from './'
 
 const reviewCheckout = props => {
-  console.log(props)
   const { total, cart } = props.location.state.referrer
   return (
     <div>

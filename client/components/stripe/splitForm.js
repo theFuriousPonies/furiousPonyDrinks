@@ -1,7 +1,7 @@
 import React from 'react'
 import { CardElement, injectStripe } from 'react-stripe-elements'
 import { connect } from 'react-redux'
-import { updateOrder } from '../../store/order'
+import { updateOrder, getNewOrder } from '../../store/order'
 import { updateDrink } from '../../store/drinks'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
@@ -12,8 +12,10 @@ class SplitForm extends React.Component {
     const newToken = await this.props.stripe.createToken({
       type: 'card'
     })
+    console.log("Frontend TOKEN!!!", newToken)
     const newCharge = await axios.post('/api/stripe', {
-      token: newToken.token.id
+      token: newToken.token.id,
+      total: this.props.total
     })
     if (newCharge) {
       if (this.props.isLoggedIn) {
@@ -27,14 +29,16 @@ class SplitForm extends React.Component {
           return { id: item.drinkId,
                    inventory: this.props.drinksTable[item.drinkId].inventory - item.quantity }
         })
-        console.log(updatedItems)
+        updatedItems.map(item => {
+          return this.props.updateInventory(item)
+        })
+        this.props.createOrder(this.props.user.id)
       }
       this.props.history.push('./acceptedPayment')
     }
   }
 
   render() {
-    console.log('Holla this.props', this.props)
     return (
       <form onSubmit={this.handleSubmit}>
         <CardElement />
@@ -53,7 +57,8 @@ const mapStateToProps = ({ drinks, order, user, items, drinksTable }) => ({
 })
 const mapDispatchToProps = dispatch => ({
   completeUserOrder: order => dispatch(updateOrder(order)),
-  updateInventory: drink => dispatch(updateDrink(drink))
+  updateInventory: drink => dispatch(updateDrink(drink)),
+  createOrder: id => dispatch(getNewOrder(id))
 })
 
 export default injectStripe(

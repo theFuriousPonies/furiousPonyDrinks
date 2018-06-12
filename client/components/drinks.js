@@ -44,8 +44,6 @@ class Drinks extends Component {
   }
 
   render() {
-    console.log('drinks', this.props.drinks)
-    console.log('filters', this.state.filters)
     const drinks = this.props.drinks
     const isAdmin = this.props.user.isAdmin
     return (
