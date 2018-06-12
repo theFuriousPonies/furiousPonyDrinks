@@ -6,6 +6,16 @@ button {
   z-index: 100;
 }
 
+button:hover {
+  cursor: pointer;
+  font-weight: bold
+}
+
+select {
+  position: relative;
+  z-index: 100
+}
+
 input {
   position: relative;
   z-index: 100;

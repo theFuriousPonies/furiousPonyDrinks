@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const { Drink, Brand, Category } = require('../db/models')
 module.exports = router
+const errorNaughty = new Error('naughty')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -19,8 +20,12 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newDrink = await Drink.create(req.body)
-    res.json(newDrink)
+    if (req.user && req.user.isAdmin) {
+      const newDrink = await Drink.create(req.body)
+      res.json(newDrink)
+    } else {
+      next(errorNaughty)
+    }
   } catch (error) {
     next(error)
   }
@@ -28,13 +33,17 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:drinkId', async (req, res, next) => {
   try {
-    const [_, drink] = await Drink.update(req.body, {
-      returning: true,
-      where: {
-        id: req.params.drinkId
-      }
-    })
-    res.send(drink[0].dataValues)
+    if (req.user && req.user.isAdmin) {
+      const [_, drink] = await Drink.update(req.body, {
+        returning: true,
+        where: {
+          id: req.params.drinkId
+        }
+      })
+      res.send(drink[0].dataValues)
+    } else {
+      next(errorNaughty)
+    }
   } catch (error) {
     next(error)
   }
@@ -42,12 +51,16 @@ router.put('/:drinkId', async (req, res, next) => {
 
 router.delete('/:drinkId', async (req, res, next) => {
   try {
-    await Drink.destroy({
-      where: {
-        id: req.params.drinkId
-      }
-    })
-    res.status(204).end()
+    if (req.user && req.user.isAdmin) {
+      await Drink.destroy({
+        where: {
+          id: req.params.drinkId
+        }
+      })
+      res.status(204).end()
+    } else {
+      next(errorNaughty)
+    }
   } catch (error) {
     next(error)
   }

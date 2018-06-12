@@ -43,7 +43,6 @@ export const updateDrink = drink => async dispatch => {
   try {
     const { data } = await axios.put(`/api/drinks/${drink.id}`, drink)
     await dispatch(updatedDrink(data))
-    history.push(`/drinks/${drink.id}`)
   } catch (err) {
     console.error(err)
     dispatch(failDrink(err))

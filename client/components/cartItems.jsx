@@ -1,5 +1,6 @@
 import React from 'react'
 import CartQuantity from './cartQuantity.jsx'
+import { Link } from 'react-router-dom'
 
 const CartItems = ({ drinks, total, handleChange, handleDelete, handleSubmit, show }) => {
   const optionsArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -34,7 +35,9 @@ const CartItems = ({ drinks, total, handleChange, handleDelete, handleSubmit, sh
     <h5>Subtotal: ${total}</h5>
     <h5>Tax: 8.875%</h5>
     <h4>Total: ${totalAfterTax}</h4>
+    {/* <Link to="/reviewCart" params={{ drinks, totalAfterTax}} drink={drinks} > */}
     <button type="button" onClick={() => handleSubmit(event, drinks, totalAfterTax)}>Checkout</button>
+    {/* </Link> */}
     </div>
   </div>
 )}

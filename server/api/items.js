@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const { Item } = require('../db/models')
 module.exports = router
+const errorNaughty = new Error('naughty')
 
 router.get('/:orderId', async (req, res, next) => {
   try {

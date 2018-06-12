@@ -7,6 +7,7 @@ const AcceptedPayment = () => {
       <h2>
         Hopefully you don't mind that we also sold your data on the dark web
         CHEERS!
+        get confirm # and order# maybe e-mail
       </h2>
     </div>
   )
