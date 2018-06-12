@@ -4,6 +4,8 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
+    console.log('req.user.dataValues', req.user.dataValues)
+
     const brands = await Brand.findAll({ include: [Drink] })
     res.json(brands)
   } catch (err) {
@@ -13,8 +15,12 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const brand = await Brand.create(req.body)
-    res.json(brand)
+    if (req.user && req.user.isAdmin) {
+      const brand = await Brand.create(req.body)
+      res.json(brand)
+    } else {
+      res.redirect('/')
+    }
   } catch (err) {
     next(err)
   }
@@ -32,13 +38,17 @@ router.get('/:brandId', async (req, res, next) => {
 
 router.put('/:brandId', async (req, res, next) => {
   try {
-    const [_, brand] = await Brand.update(req.body, {
-      returning: true,
-      where: {
-        id: req.params.brandId
-      }
-    })
-    res.send(brand[0].dataValues)
+    if (req.user && req.user.isAdmin) {
+      const [_, brand] = await Brand.update(req.body, {
+        returning: true,
+        where: {
+          id: req.params.brandId
+        }
+      })
+      res.send(brand[0].dataValues)
+    } else {
+      res.redirect('/')
+    }
   } catch (err) {
     next(err)
   }
@@ -46,12 +56,16 @@ router.put('/:brandId', async (req, res, next) => {
 
 router.delete('/:brandId', async (req, res, next) => {
   try {
-    await Brand.destroy({
-      where: {
-        id: req.params.brandId
-      }
-    })
-    res.status(204).end()
+    if (req.user && req.user.isAdmin) {
+      await Brand.destroy({
+        where: {
+          id: req.params.brandId
+        }
+      })
+      res.status(204).end()
+    } else {
+      res.redirect('/')
+    }
   } catch (err) {
     next(err)
   }
