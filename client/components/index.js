@@ -22,4 +22,4 @@ export { default as EditUser } from './editUser.jsx'
 export { default as AcceptedPayment } from './stripe/acceptedPayment'
 export { default as AddDrink } from './addDrink.jsx'
 export { default as AddBrand } from './addBrand.jsx'
-
+export { default as ReviewCheckout } from './reviewCheckout'

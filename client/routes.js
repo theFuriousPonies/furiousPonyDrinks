@@ -21,7 +21,8 @@ import {
   AcceptedPayment,
   EditUser,
   AddDrink,
-  AddBrand
+  AddBrand,
+  ReviewCheckout
 } from './components'
 import { me } from './store/user'
 
@@ -42,6 +43,7 @@ class Routes extends Component {
     return (
       <div>
         <Switch>
+          <Route path="/reviewCart" component={ReviewCheckout} />
           <Route exact path="/brands" component={Brands} />
           {this.props.user.isAdmin && (
             <Route exact path="/brands/add" component={AddBrand} />
