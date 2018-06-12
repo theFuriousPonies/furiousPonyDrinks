@@ -40,8 +40,7 @@ const brands = [
   {
     name: 'Coca-cola',
     description: 'The king of all drinks',
-    imageUrl:
-      'https://yt3.ggpht.com/a-/ACSszfGWvFjr4gb1ocKes4p-QHqowwLMz2loBWddxg=s900-mo-c-c0xffffffff-rj-k-no'
+    imageUrl: '/img/defaultbrand.png'
   },
   {
     name: 'Fiji',

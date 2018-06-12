@@ -1,9 +1,11 @@
 import React from 'react'
 import CartQuantity from './cartQuantity.jsx'
+import { Link } from 'react-router-dom'
 
 const CartItems = ({ drinks, total, handleChange, handleDelete, handleSubmit, show }) => {
   const optionsArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   const number = drinks.reduce((acc, pV) => acc + pV.quantity, 0)
+  const totalAfterTax = Number(Math.round(total * 1.08875 + 'e2') + 'e-2')
   return (
   <div className="cartBox">
     <h3>You have {number} items in your cart</h3>
@@ -32,8 +34,10 @@ const CartItems = ({ drinks, total, handleChange, handleDelete, handleSubmit, sh
     <div className="cartTotal">
     <h5>Subtotal: ${total}</h5>
     <h5>Tax: 8.875%</h5>
-    <h4>Total: ${Number(Math.round(total * 1.08875 + 'e2') + 'e-2')}</h4>
-    <button type="button" value={total} onClick={handleSubmit}>Checkout</button>
+    <h4>Total: ${totalAfterTax}</h4>
+    {/* <Link to="/reviewCart" params={{ drinks, totalAfterTax}} drink={drinks} > */}
+    <button type="button" onClick={() => handleSubmit(event, drinks, totalAfterTax)}>Checkout</button>
+    {/* </Link> */}
     </div>
   </div>
 )}
