@@ -48,7 +48,7 @@ class Cart extends Component {
     event.preventDefault()
     const quantity = eventQuantity ? +eventQuantity : +event.target.value
     if (event.target.value === 'more') {
-      this.setState({ more: true })
+      this.setState({ more: drinkId })
     } else {
       this.setState({ more: false })
       if (this.props.isLoggedIn) {

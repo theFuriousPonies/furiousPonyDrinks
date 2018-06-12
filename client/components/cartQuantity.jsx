@@ -17,7 +17,7 @@ class CartQuantity extends Component {
     let drinkOption = false;
     return (
     <div>
-    {show ? (
+    {show === drink.id ? (
       <form id="quantity" onSubmit={event => {
         handleChange(event, drink.id, this.state.quantity)
         this.setState({ quantity: '' })
