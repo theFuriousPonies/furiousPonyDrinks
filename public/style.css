@@ -33,13 +33,13 @@ div.cartHeader {
 }
 
 .cartHeader div {
-  justify-self: right
+  justify-self: right;
 }
 
 div.cart {
   display: flex;
   flex-direction: row;
-  justify-content: space-around
+  justify-content: space-around;
 }
 
 .cart h4 {
@@ -47,5 +47,5 @@ div.cart {
 }
 
 div.cartTotal {
-  text-align: end
+  text-align: end;
 }
