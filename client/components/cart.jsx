@@ -7,14 +7,15 @@ class Cart extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      guestCart: []
+      // guestCart: [],
+      more: false
     }
   }
 
-  componentDidMount () {
-    const guestCart = this.getGuestCart()
-    this.setState({ guestCart })
-  }
+  // componentDidMount () {
+  //   const guestCart = this.getGuestCart()
+  //   this.setState({ guestCart })
+  // }
 
   getGuestCart = () => {
     return Object.keys(localStorage).slice(1)
@@ -43,23 +44,30 @@ class Cart extends Component {
     return items.reduce((acc, pV) => acc + (pV.price * pV.quantity), 0) / 100
   }
 
-  handleChange = (event, drinkId) => {
-    if (this.props.isLoggedIn) {
-      const item = {
-        drinkId,
-        quantity: +event.target.value,
-        orderId: this.props.order.id
-      }
-      this.props.changeQuantity(item)
+  handleChange = (event, drinkId, eventQuantity = null) => {
+    event.preventDefault()
+    const quantity = eventQuantity ? +eventQuantity : +event.target.value
+    if (event.target.value === 'more') {
+      this.setState({ more: true })
     } else {
-      const item = {
-        drinkId,
-        quantity: +event.target.value
+      this.setState({ more: false })
+      if (this.props.isLoggedIn) {
+        const item = {
+          drinkId,
+          quantity,
+          orderId: this.props.order.id
+        }
+        this.props.changeQuantity(item)
+      } else {
+        const item = {
+          drinkId,
+          quantity
+        }
+        if (!quantity) localStorage.removeItem(`drinkId${drinkId}`)
+        else localStorage.setItem(`drinkId${drinkId}`, JSON.stringify(item))
+        // const guestCart = this.getGuestCart()
+        // this.setState({ guestCart })
       }
-      if (!+event.target.value) localStorage.removeItem(`drinkId${drinkId}`)
-      else localStorage.setItem(`drinkId${drinkId}`, JSON.stringify(item))
-      const guestCart = this.getGuestCart()
-      this.setState({ guestCart })
     }
   }
 
@@ -92,7 +100,7 @@ class Cart extends Component {
     return (
       <div>
         {drinks.length ? (
-          <CartItems drinks={drinks} total={total} handleChange={this.handleChange} handleDelete={this.handleDelete} handleSubmit={this.handleSubmit} />
+          <CartItems drinks={drinks} total={total} handleChange={this.handleChange} handleDelete={this.handleDelete} handleSubmit={this.handleSubmit} show={this.state.more} />
         ) : (
           <h3>Your cart is empty!</h3>
         )}

@@ -1,7 +1,7 @@
 import React from 'react'
 import CartQuantity from './cartQuantity.jsx'
 
-const CartItems = ({ drinks, total, handleChange, handleDelete, handleSubmit }) => {
+const CartItems = ({ drinks, total, handleChange, handleDelete, handleSubmit, show }) => {
   const optionsArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   const number = drinks.reduce((acc, pV) => acc + pV.quantity, 0)
   return (
@@ -21,7 +21,7 @@ const CartItems = ({ drinks, total, handleChange, handleDelete, handleSubmit }) 
         <h4>${drink.price / 100}</h4>
         <div className="cartQuantity">
         <h4>
-          <CartQuantity drink={drink} optionsArr={optionsArr} handleChange={handleChange} />
+          <CartQuantity drink={drink} optionsArr={optionsArr} handleChange={handleChange} show={show} />
         </h4>
         <button type="button" value={drink.id} onClick={handleDelete}>Remove</button>
         </div>
