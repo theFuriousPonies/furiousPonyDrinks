@@ -1,9 +1,8 @@
 import React from 'react'
-import {
-  CardElement,
-  injectStripe
-} from 'react-stripe-elements'
+import { CardElement, injectStripe } from 'react-stripe-elements'
 import { connect } from 'react-redux'
+import { updateOrder } from '../../store/order'
+import { updateDrink } from '../../store/drinks'
 import axios from 'axios'
 
 class SplitForm extends React.Component {
@@ -16,13 +15,25 @@ class SplitForm extends React.Component {
       token: newToken.token.id
     })
     if (newCharge) {
-      //create order on the DB then push
+      if (this.props.isLoggedIn) {
+        const order = {
+          id: this.props.order.id,
+          status: true,
+          total: this.props.total
+        }
+        this.props.completeUserOrder(order)
+        const updatedItems = this.props.items.map( item => {
+          return { id: item.drinkId,
+                   inventory: this.props.drinksTable[item.drinkId].inventory - item.quantity }
+        })
+        console.log(updatedItems)
+      }
       this.props.history.push('./acceptedPayment')
     }
   }
 
   render() {
-    console.log("Holla this.props", this.props)
+    console.log('Holla this.props', this.props)
     return (
       <form onSubmit={this.handleSubmit}>
         <CardElement />
@@ -39,11 +50,14 @@ const mapStateToProps = ({ drinks, order, user, items, drinksTable }) => ({
   drinksTable,
   isLoggedIn: !!user.id
 })
-// const mapDispatchToProps = dispatch => ({
-//   addToCart: item => dispatch(addOneItem(item)),
-//   changeQuantity: item => dispatch(changeOneItem(item)),
-//   deleteItem: item => dispatch(removeItem(item))
-// })
+const mapDispatchToProps = dispatch => ({
+  completeUserOrder: order => dispatch(updateOrder(order)),
+  updateInventory: drink => dispatch(updateDrink(drink))
+})
 
-export default injectStripe(connect(mapStateToProps)(SplitForm))
-
+export default injectStripe(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SplitForm)
+)
