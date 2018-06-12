@@ -76,3 +76,57 @@ svg#coke {
   width: 0px;
   animation: rotation 10s ease-in-out infinite;
 } */
+
+.coke-bubble-containter {
+  position: absolute;
+  overflow: visible;
+  bottom: 100px;
+  right: -100px;
+}
+
+@keyframes cokeup {
+  0% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-1000px);
+    opacity: 1;
+  }
+}
+
+@keyframes cokeside {
+  0% {
+    transform: translateX(0px);
+  }
+
+  5% {
+    transform: translateX(-15px);
+  }
+
+  10% {
+    transform: translateX(-20px);
+  }
+
+  100% {
+    transform: translateX(-15px);
+  }
+}
+
+.coke-up {
+  position: relative;
+  opacity: 0;
+  animation: cokeup 10s linear infinite 9.5s;
+}
+
+.coke-side {
+  position: relative;
+  animation: cokeside 10s linear infinite 9.5s;
+}
+
+.coke-bubble1 {
+  stroke: rgba(0, 0, 0, 0.5);
+  fill: rgba(211, 211, 211, 0.3);
+  stroke-width: 1.5;
+}
