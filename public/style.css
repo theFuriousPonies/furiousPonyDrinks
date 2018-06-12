@@ -35,16 +35,25 @@ div.cartHeader {
 div.cartQuantity {
   display: flex;
   flex-direction: row;
+  padding: 0.2em;
+}
+
+.cartQuantity span {
+  font-size: 0.7em;
+  padding-right: 0.5em;
+  font-style: italic
 }
 
 .cartQuantity button {
   padding: 0.2em;
+  margin-left: 0.2em;
   height: 2em;
-  align-self: center
+  align-self: center;
 }
 
 .cartQuantity button:hover {
-  cursor: pointer
+  cursor: pointer;
+  font-weight: bold
 }
 
 .cartHeader div {
@@ -64,3 +73,4 @@ div.cart {
 div.cartTotal {
   text-align: end
 }
+
