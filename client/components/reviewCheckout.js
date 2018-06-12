@@ -11,7 +11,7 @@ const reviewCheckout = props => {
           {item.quantity}
         </div>
       ))}
-      <Checkout total={total} />
+      <Checkout total={total} cart={cart} />
     </div>
   )
 }
