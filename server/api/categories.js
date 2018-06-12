@@ -13,8 +13,12 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const category = await Category.create(req.body)
-    res.json(category)
+    if (req.user && req.user.isAdmin) {
+      const category = await Category.create(req.body)
+      res.json(category)
+    } else {
+      res.redirect('/')
+    }
   } catch (err) {
     next(err)
   }
@@ -32,13 +36,17 @@ router.get('/:categoryId', async (req, res, next) => {
 
 router.put('/:categoryId', async (req, res, next) => {
   try {
-    const [_, category] = await Category.update(req.body, {
-      returning: true,
-      where: {
-        id: req.params.categoryId
-      }
-    })
-    res.send(category)
+    if (req.user && req.user.isAdmin) {
+      const [_, category] = await Category.update(req.body, {
+        returning: true,
+        where: {
+          id: req.params.categoryId
+        }
+      })
+      res.send(category)
+    } else {
+      res.redirect('/')
+    }
   } catch (err) {
     next(err)
   }
@@ -46,12 +54,16 @@ router.put('/:categoryId', async (req, res, next) => {
 
 router.delete('/:categoryId', async (req, res, next) => {
   try {
-    await Category.destroy({
-      where: {
-        id: req.params.categoryId
-      }
-    })
-    res.status(204).end()
+    if (req.user && req.user.isAdmin) {
+      await Category.destroy({
+        where: {
+          id: req.params.categoryId
+        }
+      })
+      res.status(204).end()
+    } else {
+      res.redirect('/')
+    }
   } catch (err) {
     next(err)
   }
