@@ -112,6 +112,7 @@ form.search i {
   position: absolute;
   /* float: right; */
   left: 14px;
+  z-index: 100;
 }
 
 form.search input[type='text'] {
