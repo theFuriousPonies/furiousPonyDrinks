@@ -41,6 +41,13 @@ class SplitForm extends React.Component {
         quantity: item.quantity
       })
     })
+    const updatedItems = this.props.cart.map(item => ({
+      id: item.id,
+      inventory: this.props.drinksTable[item.id].inventory - item.quantity
+    }))
+    updatedItems.map(item => {
+      return this.props.updateInventory(item)
+    })
     localStorage.clear()
     this.props.history.push('./acceptedPayment')
   }
