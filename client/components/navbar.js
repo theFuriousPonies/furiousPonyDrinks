@@ -6,46 +6,40 @@ import { logout } from '../store/user'
 
 const Navbar = ({ handleClick, isLoggedIn, user }) => (
   <div>
-    <nav>
-      <h1>THE FURIOUS PONIES DRINKS</h1>
-      <div>
-        <div id="navlink-containter">
-          {/* The navbar will show these links before you log in */}
-          <div id="catagories-containter">
-            <Link to="/">
-              <i className="small material-icons">home</i>
-            </Link>
-            <Link to="/brands">Brands</Link>
-            <Link to="/categories">Categories</Link>
-            <Link to="/drinks">Drinks</Link>
-            {user.isAdmin ? <Link to="/users">Users</Link> : <div />}
-          </div>
-          <form className="search">
-            <i className="small material-icons">search</i>
-            {/* <input type="submit" value="Go" /> */}
-            <input type="text" placeholder="Search" />
-          </form>
-          <div id="login-containter">
-            {isLoggedIn ? (
+    <nav className="nav-extended">
+      <div className="nav-wrapper">
+        {/* The navbar will show these links before you log in */}
+        <a href="/" className="brand-logo"><img className="responsive-img" src="/img/404unicorn.png" style={{ width: '50px', height: '50px', marginLeft: '12px', marginTop: '14px' }} /><b style={{ fontFamily: 'Comic Sans MS', fontSize: '35px', verticalAlign: '18%', marginLeft: '12px' }}>Furious Pony Drinks</b></a>
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
+          {isLoggedIn ? (
+            <>
+              <li><a href="/home">Welcome back, {user.name}!</a></li>
+              <li><a href="/" onClick={handleClick}>Logout</a></li>
+            </>
+          ) : (
               <>
-                Welcome, <Link to="/home">{user.name}</Link>
-                <a href="/" onClick={handleClick}>
-                  Logout
-                </a>
-              </>
-            ) : (
-              <>
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Sign Up</Link>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/signup">Sign Up</a></li>
               </>
             )}
-            <Link to="/cart">
-              <i className="small material-icons">shopping_cart</i>
-            </Link>
-          </div>
-        </div>
+          <li><a href="/cart"><i className="small material-icons">shopping_cart</i></a></li>
+        </ul>
       </div>
-      <hr />
+      <div className="nav-content">
+        <ul className="tabs tabs-transparent">
+          <li className="tab"><a href="/brands">Brands</a></li>
+          <li className="tab"><a href="/categories">Categories</a></li>
+          <li className="tab"><a href="/drinks">Drinks</a></li>
+          {user.isAdmin ? <li className="tab"><a href="/users">Users</a></li> : <div/>}
+        </ul>
+        <form>
+          <div className="input-field">
+            <input id="search" type="search" required />
+            <label className="label-icon" for="search"><i className="material-icons">search</i></label>
+            <i className="material-icons">close</i>
+          </div>
+        </form>
+      </div>
     </nav>
   </div>
 )

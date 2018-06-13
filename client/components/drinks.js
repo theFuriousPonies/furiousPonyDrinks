@@ -52,7 +52,7 @@ class Drinks extends Component {
         <div id="drinks-container">
           <FilterByCategory handleChange={this.handleChange} />
           <div id="drinks">
-            <h1>ALL THE DRINKS</h1>
+            <h1>All Drinks</h1>
             {isAdmin && (
               <NavLink to="/drinks/add">
                 <button type="button" id="add-drink-btn">

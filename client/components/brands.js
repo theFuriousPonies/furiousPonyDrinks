@@ -16,7 +16,7 @@ const Brands = ({ brands, user }) => {
       <div className="overflow-scroll">
         {brands &&
           brands.map(brand => (
-            <div key={brand.id}>
+            <div key={brand.id} className="brand">
               <img src={brand.imageUrl} />
               <NavLink to={`/brands/${brand.id}`}>
                 <h2>{brand.name}</h2>

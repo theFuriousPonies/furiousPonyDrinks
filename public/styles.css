@@ -1,0 +1,11 @@
+html, body {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .overflow-scroll {
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
