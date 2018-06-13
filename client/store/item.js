@@ -7,6 +7,7 @@ import { updateDrink } from './drinks'
 const GOT_ITEMS = 'GOT_ITEMS'
 const ONE_ITEM = 'ONE_ITEM'
 const REMOVED_ITEM = 'REMOVE_ITEM'
+const NEW_ORDER = 'NEW_ ORDER'
 
 // INITIAL STATE
 
@@ -75,6 +76,8 @@ const items = (state = initialState, action) => {
       else itemsArr.push(action.item)
       return itemsArr
     }
+    case NEW_ORDER:
+      return initialState
     case REMOVED_ITEM:
       return [...state].filter(item => item.drinkId !== action.item.drinkId)
     default:
