@@ -1,84 +1,63 @@
-svg#coke {
-  overflow: visible;
-  height: 200px;
-  width: 200px;
-  position: absolute;
-  z-index: 100;
-  bottom: 50px;
-  right: 50px;
-  animation: rotation 10s linear infinite;
-}
-
-/* @keyframes x {
-  0%,
-  100% {
-    transform: translateX(-100px);
+@keyframes coke-wobble {
+  0% {
+    transform: translateX(10px);
   }
 
   50% {
-    transform: translateX(100px);
-  }
-} */
-
-/* #coke-x {
-  will-change: transform;
-  animation: x 10s ease-in-out infinite;
-} */
-
-/* @keyframes rotation {
-  0% {
-    transform: rotate(-30deg);
-  }
-  75% {
-    transform: rotate(-30deg);
-  }
-  80% {
-    transform: rotate(-165deg) translate(6px, 8px);
-  }
-  82.5% {
-    transform: rotate(-165deg) translate(28px, -17px);
+    transform: translateX(-10px);
   }
   100% {
-    transform: rotate(-165deg) translate(35px, -22px);
+    transform: translateX(10px);
   }
-} */
+}
 
 @keyframes rotation {
   0% {
     transform: rotateZ(-30deg);
   }
-  75% {
+
+  25% {
     transform: rotate(-30deg);
   }
-  80% {
-    transform: rotate(-60deg);
+  55%,
+  50%,
+  45%,
+  40%,
+  35%,
+  30% {
+    transform: rotate(-40deg);
   }
-  82.5% {
-    transform: rotate(0deg);
+  52.5%,
+  47.5%,
+  42.5%,
+  37.5%,
+  32.5% {
+    transform: rotate(-10deg);
   }
+
+  60% {
+    transform: rotate(-30deg);
+  }
+
   100% {
     transform: rotateZ(-30deg);
     transform-origin: center;
   }
 }
 
-/* #coke-rotation {
-  will-change: transform;
-  height: 0px;
-  width: 0px;
-  animation: rotation 5s linear infinite;
-} */
-/*
-#coke-container {
+svg#coke {
   overflow: visible;
-  will-change: transform;
-  height: 0px;
-  width: 0px;
-  animation: rotation 10s ease-in-out infinite;
-} */
+  height: 200px;
+  width: 200px;
+  position: fixed;
+  z-index: 100;
+  bottom: 50px;
+  right: 50px;
+  animation: rotation 10s linear infinite;
+}
 
 .coke-bubble-containter {
-  position: absolute;
+  position: fixed;
   overflow: visible;
   bottom: 100px;
   right: -100px;
@@ -86,47 +65,135 @@ svg#coke {
 
 @keyframes cokeup {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0px) translateX(0px);
+    opacity: 0;
+  }
+
+  22% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0;
+  }
+  22.25% {
     opacity: 1;
+    transform: translateY(-1px) translateX(-1px);
   }
 
   100% {
-    transform: translateY(-1000px);
+    transform: translateY(-1000px) translateX(-35px);
     opacity: 1;
   }
 }
-
+/* THIS IS IMPORTANT */
 @keyframes cokeside {
   0% {
     transform: translateX(0px);
   }
 
-  5% {
-    transform: translateX(-15px);
+  50% {
+    transform: translateX(0px);
   }
 
-  10% {
-    transform: translateX(-20px);
+  60% {
+    transform: translateX(-35px);
   }
 
   100% {
-    transform: translateX(-15px);
+    transform: translateX(-35px);
   }
 }
 
 .coke-up {
-  position: relative;
+  position: fixed;
+  /* change this to 0 */
   opacity: 0;
-  animation: cokeup 10s linear infinite 9.5s;
+  /* IMPORTANT */
+  animation: cokeup 10s ease-in infinite 1.4s;
 }
 
-.coke-side {
-  position: relative;
-  animation: cokeside 10s linear infinite 9.5s;
+.coke-up2 {
+  position: fixed;
+  /* change this to 0 */
+  opacity: 0;
+  /* IMPORTANT */
+  animation: cokeup 10s linear infinite 1.2s;
 }
 
-.coke-bubble1 {
-  stroke: rgba(0, 0, 0, 0.5);
-  fill: rgba(211, 211, 211, 0.3);
+.coke-up3 {
+  position: fixed;
+  /* change this to 0 */
+  opacity: 0;
+  /* IMPORTANT */
+  animation: cokeup 10s ease-out infinite 1.6s;
+}
+
+.coke-up4 {
+  position: fixed;
+  /* change this to 0 */
+  opacity: 0;
+  /* IMPORTANT */
+  animation: cokeup 10s ease-in-out infinite 1.85s;
+}
+
+.coke-up5 {
+  position: fixed;
+  /* change this to 0 */
+  opacity: 0;
+  /* IMPORTANT */
+  animation: cokeup 10s ease infinite 3.3s;
+}
+
+.coke-up6 {
+  position: fixed;
+  /* change this to 0 */
+  opacity: 0;
+  /* IMPORTANT */
+  animation: cokeup 10s linear infinite 7s;
+}
+
+.coke-1 {
+  position: fixed;
+  stroke: rgba(0, 0, 0, 0.7);
+  fill: rgba(211, 211, 211, 0.1);
   stroke-width: 1.5;
+  animation: coke-wobble 0.45s ease-in infinite;
+}
+
+.coke-2 {
+  position: fixed;
+  stroke: rgba(0, 0, 0, 0.7);
+  fill: rgba(211, 211, 211, 0.1);
+  stroke-width: 1.5;
+  animation: coke-wobble 0.55s linear infinite;
+}
+
+.coke-3 {
+  position: fixed;
+  stroke: rgba(0, 0, 0, 0.7);
+  fill: rgba(211, 211, 211, 0.1);
+  stroke-width: 1.5;
+  animation: coke-wobble 0.59s ease-out infinite;
+}
+
+.coke-4 {
+  position: fixed;
+  stroke: rgba(0, 0, 0, 0.7);
+  fill: rgba(211, 211, 211, 0.1);
+  stroke-width: 1.5;
+  animation: coke-wobble 0.6s ease-in-out infinite;
+}
+
+.coke-5 {
+  position: fixed;
+  stroke: rgba(0, 0, 0, 0.7);
+  fill: rgba(211, 211, 211, 0.1);
+  stroke-width: 1.5;
+  animation: coke-wobble 0.48s linear infinite;
+}
+
+.coke-6 {
+  position: fixed;
+  stroke: rgba(0, 0, 0, 0.7);
+  fill: rgba(211, 211, 211, 0.1);
+  stroke-width: 1.5;
+  animation: coke-wobble 0.53s ease infinite;
 }
