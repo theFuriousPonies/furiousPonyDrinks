@@ -33,17 +33,13 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:drinkId', async (req, res, next) => {
   try {
-    if (req.user && req.user.isAdmin) {
-      const [_, drink] = await Drink.update(req.body, {
-        returning: true,
-        where: {
-          id: req.params.drinkId
-        }
-      })
-      res.send(drink[0].dataValues)
-    } else {
-      next(errorNaughty)
-    }
+    const [_, drink] = await Drink.update(req.body, {
+      returning: true,
+      where: {
+        id: req.params.drinkId
+      }
+    })
+    res.send(drink[0].dataValues)
   } catch (error) {
     next(error)
   }
