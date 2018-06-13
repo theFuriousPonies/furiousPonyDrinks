@@ -30,8 +30,8 @@ class CartQuantity extends Component {
       <select onChange={event => handleChange(event, drink.id)} name="quantity" value={drink.quantity}>
       {optionsArr.map(option => {
         if (option === drink.quantity) drinkOption = true;
-        if (option === 10) {
-          return <option key={option} value="more">{option}+</option>
+        if (option === '10+') {
+          return <option key={option} value="more">{option}</option>
         }
         else {
           return <option key={option} value={option}>{option}</option>

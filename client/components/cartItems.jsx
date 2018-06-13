@@ -3,7 +3,7 @@ import CartQuantity from './cartQuantity.jsx'
 import { Link } from 'react-router-dom'
 
 const CartItems = ({ drinks, total, handleChange, handleDelete, handleSubmit, show }) => {
-  const optionsArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  const optionsArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '10+']
   const number = drinks.reduce((acc, pV) => acc + pV.quantity, 0)
   const totalAfterTax = Number(Math.round(total * 1.08875 + 'e2') + 'e-2')
   return (
