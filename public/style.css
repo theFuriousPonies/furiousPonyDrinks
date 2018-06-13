@@ -8,17 +8,17 @@ button {
 
 button:hover {
   cursor: pointer;
-  font-weight: bold
+  font-weight: bold;
 }
 
 select {
   position: relative;
-  z-index: 100
+  z-index: 100;
 }
 
 input {
   position: relative;
-  z-index: 100;
+  z-index: 99;
 }
 
 #app {
@@ -66,7 +66,7 @@ div.cartQuantity {
 .cartQuantity span {
   font-size: 0.7em;
   padding-right: 0.5em;
-  font-style: italic
+  font-style: italic;
 }
 
 .cartQuantity button {
@@ -78,7 +78,7 @@ div.cartQuantity {
 
 .cartQuantity button:hover {
   cursor: pointer;
-  font-weight: bold
+  font-weight: bold;
 }
 
 .cartHeader div {
@@ -117,4 +117,3 @@ div.cartTotal {
 .overflow-scroll {
   overflow-y: auto;
 }
-
