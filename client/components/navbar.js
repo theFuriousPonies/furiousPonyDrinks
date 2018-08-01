@@ -1,82 +1,74 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { logout } from '../store/user'
+import { withStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import MenuItem from '@material-ui/core/MenuItem'
 
-const Navbar = ({ handleClick, isLoggedIn, user }) => (
-  <div>
-    <nav>
-      <h1>THE FURIOUS PONIES DRINKS</h1>
-      <div>
-        <div id="navlink-containter">
-          {/* The navbar will show these links before you log in */}
-          <div id="catagories-containter">
-            <Link to="/">
-              <i className="small material-icons">home</i>
-            </Link>
-            <Link to="/brands">Brands</Link>
-            <Link to="/categories">Categories</Link>
-            <Link to="/drinks">Drinks</Link>
-            {user.isAdmin ? <Link to="/users">Users</Link> : <div />}
-          </div>
-          <form className="search">
-            <i className="small material-icons">search</i>
-            {/* <input type="submit" value="Go" /> */}
-            <input type="text" placeholder="Search" />
-          </form>
-          <div id="login-containter">
-            {isLoggedIn ? (
-              <>
-                Welcome, <Link to="/home">{user.name}</Link>
-                <a href="/" onClick={handleClick}>
-                  Logout
-                </a>
-              </>
-            ) : (
-              <>
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Sign Up</Link>
-              </>
-            )}
-            <Link to="/cart">
-              <i className="small material-icons">shopping_cart</i>
-            </Link>
-          </div>
-        </div>
-      </div>
-      <hr />
-    </nav>
-  </div>
-)
+const styles = theme => ({
+  root: {
+    marginTop: theme.spacing.unit * 3,
+    width: '100%'
+  },
+  flex: {
+    flex: 1
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20
+  }
+})
 
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    isLoggedIn: !!state.user.id,
-    user: state.user
+class Navbar extends Component {
+  state = {
+    anchorEl: null
+  }
+
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget })
+  }
+
+  handleClose = () => {
+    this.setState({ anchorEl: null })
+  }
+
+  render() {
+    const { classes } = this.props
+
+    return (
+      <AppBar position="static" elevation={0}>
+        <Toolbar>
+          <IconButton
+            className={classes.menuButton}
+            color="contrast"
+            onClick={this.props.toggleDrawer}
+          >
+            <MenuIcon>
+              <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+              <MenuItem onClick={this.handleClose}>My account</MenuItem>
+              <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+            </MenuIcon>
+          </IconButton>
+          <Typography className={classes.flex} type="title" color="inherit">
+            Furious Pony Drinks
+          </Typography>
+          <div>
+            <IconButton color="contrast" onClick={this.props.login}>
+              <AccountCircle />
+            </IconButton>
+          </div>
+        </Toolbar>
+      </AppBar>
+    )
   }
 }
 
-const mapDispatch = dispatch => {
-  return {
-    handleClick() {
-      dispatch(logout())
-    }
-  }
-}
-
-export default connect(
-  mapState,
-  mapDispatch
-)(Navbar)
-
-/**
- * PROP TYPES
- */
 Navbar.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  classes: PropTypes.object.isRequired
 }
+
+export default withStyles(styles)(Navbar)

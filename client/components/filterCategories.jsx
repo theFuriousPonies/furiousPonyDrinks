@@ -21,7 +21,6 @@ class FilterByCategory extends Component {
                   />
                   <div className="checkmark" content="">
                     <div>YOU MUST BUILD THE CART!!</div>
-                    <img src="connor.png" />
                     <i className="big material-icons">shopping_cart</i>
                   </div>
                   {category.name}
