@@ -1,6 +1,7 @@
-/* body {
-  font-family: sans-serif;
+body {
+  margin: 0px
 }
+/*
 button {
   position: relative;
   z-index: 100;
@@ -116,4 +117,4 @@ div.cartTotal {
 
 .overflow-scroll {
   overflow-y: auto;
-} */
+}*/
