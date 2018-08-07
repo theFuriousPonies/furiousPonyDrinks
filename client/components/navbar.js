@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -59,13 +60,17 @@ class Navbar extends Component {
             open={Boolean(anchorEl)}
             onClose={this.handleClose}
           >
-            <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-            <MenuItem onClick={this.handleClose}>My account</MenuItem>
+            <MenuItem onClick={this.handleClose}>
+              <Link to="/drinks/">Drinks</Link>
+            </MenuItem>
+            <MenuItem onClick={this.handleClose}>
+              <Link to="/brands">Brands</Link>
+            </MenuItem>
             <MenuItem onClick={this.handleClose}>Logout</MenuItem>
           </Menu>
           {/* </MenuIcon> */}
           <Typography className={classes.flex} type="title" color="inherit">
-            Furious Pony Drinks
+            <Link to="/">Furious Pony Drinks</Link>
           </Typography>
           <div>
             <IconButton color="contrast" onClick={this.props.login}>
