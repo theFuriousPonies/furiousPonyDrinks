@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
+import Menu from '@material-ui/core/Menu'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import MenuItem from '@material-ui/core/MenuItem'
 
@@ -38,6 +39,7 @@ class Navbar extends Component {
 
   render() {
     const { classes } = this.props
+    const { anchorEl } = this.state
 
     return (
       <AppBar position="static" elevation={0}>
@@ -45,14 +47,23 @@ class Navbar extends Component {
           <IconButton
             className={classes.menuButton}
             color="contrast"
-            onClick={this.props.toggleDrawer}
+            aria-owns={anchorEl ? 'navbar' : null}
+            aria-haspopup="true"
+            onClick={this.handleClick}
           >
-            <MenuIcon>
-              <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-              <MenuItem onClick={this.handleClose}>My account</MenuItem>
-              <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-            </MenuIcon>
+            <MenuIcon />
           </IconButton>
+          <Menu
+            id="navbar"
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={this.handleClose}
+          >
+            <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+            <MenuItem onClick={this.handleClose}>My account</MenuItem>
+            <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+          </Menu>
+          {/* </MenuIcon> */}
           <Typography className={classes.flex} type="title" color="inherit">
             Furious Pony Drinks
           </Typography>
